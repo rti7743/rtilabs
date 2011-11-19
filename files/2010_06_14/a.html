@@ -1,0 +1,357 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>CSS3 vs IE5.5(filter)のテスト</title>
+	<script src="jquery-1.4.2.js" ></script>
+	<script>
+/*
+ *オブジェクトを dump します。
+ *@param	x	obecjt	解析したいオブジェクト
+*/
+function var_dump(x)
+{
+	var handle = window.open("","dump","");
+	handle.document.write("<html><head><title>解析懐石</title></head><body>\n");
+	var_dumpSub( x ,  "" , handle);
+	handle.document.write("\n</body></html>");
+}
+
+/*
+ *var_dumpALL のサブルーチン、直接呼ぶと呪われます。
+ *@param	x		obecjt	解析したいオブジェクト
+ *@param	nest	string	ツリー構造にするために、づらす文字列(手抜き)
+ *@param	handle	obecjt	結果を表示するウィンドウハンドル
+*/
+function var_dumpSub(x , nest , handle)
+{
+	//あんまり、深くしすぎると IE が固まって、それ以上やるとクラッシュします (w 
+	//現在だと 3改装までネスト表示します。  *3 は 1改装進むたびに "　　　"  を加えているから(w 
+	if (nest.length >= 3 * 3)
+	{	
+		handle.document.write( nest + "ネストが深すぎるので省略されます<br>\n" );
+		return ;
+	}
+
+	//ダンプ開始...
+	for(i in x)
+	{
+		try
+		{
+			handle.document.write( nest + i + "　　" + x[i] + "<br>\n" );
+			if (x[i] == "[object]")
+			{	//オブジェクトだったら、さらにもぐります.
+				var_dumpSub(x[i] , nest + "　　　" , handle);
+			}
+		}
+		catch(e)
+		{	//見てはいけないところを見てしまったらしい... ちなみに try catch  IE5 からしか動かないらしい.
+			handle.document.write( nest + i + "　　ERROR! desc:" + e.description  + "　　num:" + e.number + "<br>\n" );
+		}
+	}
+}
+
+//↓こっからライブラリ。そのうちまとめる。
+//コピペして使ってください。
+(function ($) {
+
+	//cssスタイルに対するパッチ
+	//http://github.com/zachstronaut/jquery-css-transform/blob/master/jquery-css-transform.js より
+    // 2009 Zachary Johnson www.zachstronaut.com 改変して利用しています。
+    var proxied = $.fn.css;
+    $.fn.css = function (arg)
+    {
+    	//cssの特定の要素へのスキャンを横取りします.
+    	var css_hijack = function(arg,name,patchFunc)
+    	{
+    		if
+	        (
+	            typeof $.props[name] == 'undefined'
+	            &&
+	            (
+	                arg == name
+	                ||
+	                (
+	                    typeof arg == 'object'
+	                    && typeof arg[name] != 'undefined'
+	                )
+	            )
+	        )
+	        {
+	            $.props[name] = patchFunc();
+	        }
+
+			if (arg == name)
+			{
+				return $.props[name];
+			}
+			return arg;
+    	};
+    	//クロスブラウザ対応のスタイル検索機
+    	var findstyle = function(styleObject , propertiesArray)
+    	{
+    		var def = propertiesArray[0];
+	        var p;
+	        while (p = propertiesArray.shift())
+	        {
+	            if (typeof styleObject[p] != 'undefined')
+	            {
+	                return p;
+	            }
+	        }
+	        return def;
+    	};
+		var styleObject = this.get(0).style;
+		arg = css_hijack(arg , 'transform' , function(){
+			var r =  findstyle(styleObject , ['transform', 'WebkitTransform', 'MozTransform', 'OTransform'] );
+			if (r == 'OTransform')
+			{
+				//なぜか Opera は OTransform に対して読み書きすると問題が発生する、、、
+				return '-o-transform';
+			}
+			return r;
+		});
+
+        return proxied.apply(this, arguments);
+    };
+
+	//大回転 エッケザックスもびっくりの回転をあなたに!
+	jQuery.fn.rotate  = function(val) 
+	{
+		//取得
+		if (typeof val == 'undefined')
+		{
+			if (jQuery.browser.msie)
+			{
+				//コレの逆算が一番大変だった、、、
+				var r = this.css('filter').match(/progid:DXImageTransform\.Microsoft\.Matrix\(M11=(.*?),M12=(.*?),/);
+				if ( r && r[1] && r[2])
+				{
+					var deg = Math.round( Math.atan2(parseFloat(r[2] * -1),parseFloat(r[1]))  * 180 / Math.PI);
+					deg = (deg < 0) ? deg + 360 : deg;
+					return deg;
+				}
+				return 0;
+			}
+			else
+			{
+				if (jQuery.browser.opera)
+				{
+					//operaだけradで入っている 例: rotate(0.17rad) 
+					var r = this.css('transform').match(/rotate\((.*?)\)/);
+					return  ( r && r[1])	?
+						Math.round(parseFloat(r[1]) * 180 / Math.PI)		:		0;
+				}
+				else
+				{
+					var r = this.css('transform').match(/rotate\((.*?)\)/);
+					return  ( r && r[1])	?	parseInt(r[1])	:	0;
+				}
+			}
+		}
+
+		//IEとあわせるために 0～360度の範囲で求める.
+		val = val % 360;
+		if (val < 0)
+		{
+			val = 360 + val;
+		}
+
+		//セット
+		if (jQuery.browser.msie)
+		{
+			var radian= val * Math.PI / 180;
+			var cosX =Math.cos(radian);
+			var sinY =Math.sin(radian);
+			
+			var halfWidth = this.width() / 2;
+			var halfHeight = this.height() / 2;
+
+			//軸の補正
+			var dx = - ((halfWidth * cosX) - (halfHeight * sinY) - halfWidth);
+			var dy = - ((halfWidth * sinY) + (halfHeight * cosX) - halfHeight);
+
+			this.css('filter',  this.css('filter').replace(/progid:DXImageTransform\.Microsoft\.Matrix\([^)]*\)/, "" ) +
+				("progid:DXImageTransform.Microsoft.Matrix(M11=" + cosX + ",M12=" + (-sinY) + ",M21=" + sinY + ",M22=" + cosX + ",Dx=" + dx + ",Dy=" + dy + ",FilterType='bilinear',sizingMethod='auto expand')") );
+		}
+		else 
+		{
+			this.css('transform',
+				this.css('transform').replace(/none|rotate\(.*?\)/, '') + 'rotate(' + val + 'deg)');
+		}
+		
+		
+		return this;
+	};
+	jQuery.fn.scale  = function(val) 
+	{
+		//取得
+		if (typeof val == 'undefined')
+		{
+			if (jQuery.browser.msie)
+			{
+				var r = this.css('zoom');
+				if (r == 'normal')
+				{
+					return 1;
+				}
+				return parseFloat(r);
+			}
+			else
+			{
+				var r = this.css('transform').match(/scale\((.*?)\)/);
+				return  ( r && r[1])	?	parseFloat(r[1])	:	1;
+			}
+		}
+
+		//セット
+		if (jQuery.browser.msie)
+		{
+			this.css('zoom' , val);
+		}
+		else 
+		{
+			this.css('transform',
+				this.css('transform').replace(/none|scale\(.*?\)/, '') + 'scale(' + val + ')');
+		}
+		return this;
+	};
+
+	jQuery.fn.shadow  = function(color) 
+	{
+		//取得
+		if (typeof color == 'undefined')
+		{
+			var r = undefined;
+			if (jQuery.browser.msie)
+			{
+				r = this.css('filter').match(/shadow\(color=#(.*?),/);
+			}
+			else if (jQuery.browser.mozilla)
+			{
+				r = this.css('-moz-box-shadow').match(/.*? .*? .*? #(.*?)/);
+			}
+			else if (jQuery.browser.webkit)
+			{
+				r = this.css('-webkit-box-shadow').match(/.*? .*? .*? #(.*?)/);
+			}
+			else 
+			{
+				r = this.css('box-shadow').match(/.*? .*? .*? #(.*?)/);
+				this.css('', '5px 5px 10px ' + color);
+			}
+			return  ( r && r[1])	?	r	:	"";
+		}
+
+		//セット
+		if (jQuery.browser.msie)
+		{
+			this.css('filter',  this.css('filter').replace(/shadow\(.*?\)/, "" ) +
+				("shadow(color=#" + color + ",direction=135,strength=20)") );
+		}
+		else if (jQuery.browser.mozilla)
+		{
+			this.css('-moz-box-shadow', '5px 5px 10px #' + color);
+			
+		}
+		else if (jQuery.browser.webkit)
+		{
+			this.css('-webkit-box-shadow', '5px 5px 10px #' + color);
+		}
+		else
+		{
+			this.css('box-shadow', '5px 5px 10px #' + color);
+		}
+		return this;
+	};
+
+	jQuery.fn.gradient  = function(startRGBColor , endRGBColor ) 
+	{
+		if (jQuery.browser.msie)
+		{
+			this.css('background', '#' + startRGBColor);
+			this.css('filter',  this.css('filter').replace(/progid:DXImageTransform\.Microsoft\.gradient\(.*?\)/, "" ) +
+				("progid:DXImageTransform.Microsoft.gradient(startcolorstr=#00" + startRGBColor + ", endcolorstr=#FF" + endRGBColor + ", gradienttype=0)") );
+		}
+		else if (jQuery.browser.mozilla)
+		{
+			this.css('background', '-moz-linear-gradient(top, #' + startRGBColor + ', #' + endRGBColor + ')');
+		}
+		else if (jQuery.browser.webkit)
+		{
+			this.css('background', '-webkit-gradient(linear , left top, left bottom, from(#' + startRGBColor + '), to(#' + endRGBColor + '))');
+		}
+		else if (jQuery.browser.opera)
+		{
+		}
+		return this;
+	};
+
+	jQuery.fx.step.rotate  = function(fx) {
+		if ( fx.state == 0 ) {
+			fx.start = $(fx.elem).rotate();
+//			fx.end =   fx.end;
+			fx.now = fx.start;
+		}
+		$(fx.elem).rotate(fx.now);
+	};
+	jQuery.fx.step.scale  = function(fx) {
+		if ( fx.state == 0 ) {
+			fx.start = $(fx.elem).scale();
+//			fx.end =   fx.end;
+			fx.now = fx.start;
+		}
+		$(fx.elem).scale(fx.now);
+	};
+
+})(jQuery);
+	</script>
+</head>
+<body bgcolor="#FFFFFF" color="#000000">
+<h1>CSS3 vs IE5.5(filter)のテスト</h1>
+IEが10年前から実装している機能を最近のモダンなブラウザがやっと実装し始めたのでw<br>
+相互呼び出しをかねて、jQueryのプラグインを作ってみるでござるの巻。<br>
+<p style="font-size:small">(普段disられるIEなんで、いいところは褒めてあげないとダメだぜ)</p>
+<br>
+<br>
+<br>
+<br>
+<center>
+	<div id="target" style="background-color: #AAEEDD; width: 100px; height: 100px;">
+		テストテスト<br>
+		あいうえお<br>
+	</div>
+</center>
+
+<h3>コントロールパネル</h3>
+<a href="#" onclick="$('#target').rotate( $('#target').rotate() + 10);" >+10度回転させる</a><br>
+<a href="#" onclick="$('#target').rotate( $('#target').rotate() - 10);" >-10度回転させる</a><br>
+<a href="#" onclick="$('#target').animate({rotate: 360});" >一回転</a><br>
+<br>
+<a href="#" onclick="$('#target').scale( $('#target').scale() + 0.2);" >+0.2でかくする</a><br>
+<a href="#" onclick="$('#target').scale( $('#target').scale() - 0.2);" >-0.2でかくする</a><br>
+<a href="#" onclick="$('#target').animate({scale: 2}).animate({scale: 1});" >びよーん</a><br>
+<br>
+<!--
+IEで回転させていないと影が描画されないので保留。
+<a href="#" onclick="$('#target').shadow('000000');" >黒影</a><br>
+<a href="#" onclick="$('#target').shadow('0000FF');" >青影</a><br>
+<a href="#" onclick="$('#target').shadow('00FF00');" >緑影</a><br>
+-->
+<br>
+<a href="#" onclick="$('#target').gradient('FF0000','0000FF');" >グラデーション 赤→青</a><br>
+<a href="#" onclick="$('#target').gradient('0000FF','00FF00');" >グラデーション 青→緑</a><br>
+<br>
+<a href="#" onclick="$('#target').gradient('000000','FFFFFF'); $('#target').rotate(10);  $('#target').scale(2); " >まとめてドン</a><br>
+<br>
+<a href="a.html" >リセット</a><br>
+<br>
+<br>
+<h3>その他</h3>
+そのうちきれいにまとめたい。<br>
+http://github.com/zachstronaut/jquery-css-transform/blob/master/jquery-css-transform.js のソースコードの一部を使用しています。<br>
+このソースコードは、ライセンスは MIT ライセンス または、GPLでご自由にどうぞ。<br>
+動作確認ブラウザ: IE 8/Opera 10.53(グラデーション未対応w)/FF 3.5/googleChrome 5.0.375.70/iphone Safari<br>
+IE6とかIE5.5どっかにないかなぁ。。。<br>
+<br>
+</body>
+</html>

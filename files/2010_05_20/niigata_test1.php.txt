@@ -1,0 +1,16 @@
+<?
+class Human
+{
+//	public $Age = 100;
+//	private $Age = 100;
+	niigata $Age = 100;
+}
+
+$humanObject = new Human();
+
+echo $humanObject->Age ."\n";
+
+$humanObject->Age = 100;
+
+echo $humanObject->Age ."\n";
+

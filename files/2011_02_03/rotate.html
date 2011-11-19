@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>クロスブラウザな回転!</title>
+	<script src="jquery-1.5.js" ></script>
+	<script src="rotate.js" ></script>
+</head>
+<body bgcolor="#FFFFFF" color="#000000">
+<H1>クロスブラウザな回転, fix jquery 1.4.4 over!</H1>
+<br>
+<br>
+<br>
+<center>
+	<div id="target" style="background-color: #AAEEDD; top: 0px; left: 0px; width: 200px; height: 200px;">
+		<img src="unyu.png">
+		へこむ話やね<br>
+
+	</div>
+</center>
+<pre>
+//デモを見栄えよく見せるために適当に回転したりする.
+setInterval(function(){
+				var deg = Math.floor( Math.random() * 1000 )
+				$('#target').animate({rotate: deg});
+			}
+		,
+		3000
+		);
+</pre>
+<script>
+//デモを見栄えよく見せるために適当に回転したりする.
+setInterval(function(){
+				var deg = Math.floor( Math.random() * 1000 )
+				$('#target').animate({rotate: deg});
+			}
+		,
+		3000
+		);
+</script>
+
+<br>
+<br>
+<br>
+
+<h3>3つの指定方式(どれでもOK)</h3>
+<br>
+<center>
+	<div id="target1" style="background-color: #AAEEDD; top: 0px; left: 0px; width: 100px; height: 100px;">
+		テストテスト<br>
+		あいうえお<br>
+
+	</div>
+</center>
+<pre>$('#target1').rotate(45);</pre>
+<a href="#" onclick="$('#target1').rotate(45); return false;" >45度回転 (rotate命令) </a><br><br>
+
+<pre>$('#target1').css({rotate: '72deg' });</pre>
+<a href="#" onclick="$('#target1').css({rotate: '72deg' }); return false;" >72度回転 (cssのオレオレプロパティ )</a><br><br>
+
+
+<pre>$('#target1').css({transform: 'rotate(256deg)'});</pre>
+<a href="#" onclick="$('#target1').css({transform: 'rotate(256deg)'}); return false;" >256度回転 (transform)</a><br><br>
+<br>
+<br>
+
+<h3>ぐるぐる</h3>
+<br>
+<center>
+	<div id="target2" style="background-color: #AAEEDD; top: 0px; left: 0px; width: 100px; height: 100px;">
+		テストテスト<br>
+		あいうえお<br>
+
+	</div>
+</center>
+
+<pre>$('#target2').rotate( $('#target2').rotate() + 10);</pre>
+<a href="#" onclick="$('#target2').rotate( $('#target2').rotate() + 10); return false;" >+10度回転させる</a><br><br>
+
+<pre>$('#target2').rotate( $('#target2').rotate() - 10);</pre>
+<a href="#" onclick="$('#target2').rotate( $('#target2').rotate() - 10); return false;" >-10度回転させる</a><br><br>
+
+<pre>$('#target2').rotate(0); $('#target2').animate({rotate: 360});</pre>
+<a href="#" onclick="$('#target2').rotate(0); $('#target2').animate({rotate: 360}); return false;" >一回転</a><br><br>
+<br>
+
+<h3>拡大縮小</h3>
+<br>
+<center>
+	<div id="target3" style="background-color: #AAEEDD; top: 0px; left: 0px; width: 100px; height: 100px;">
+		テストテスト<br>
+		あいうえお<br>
+
+	</div>
+</center>
+
+<pre>$('#target3').scale( $('#target3').scale() + 0.2);</pre>
+<a href="#" onclick="$('#target3').scale( $('#target3').scale() + 0.2); return false;" >+0.2でかくする</a><br><br>
+
+<pre>$('#target3').scale( $('#target3').scale() - 0.2);</pre>
+<a href="#" onclick="$('#target3').scale( $('#target3').scale() - 0.2); return false;" >-0.2でかくする</a><br><br>
+
+<pre>$('#target3').animate({scale: 2}).animate({scale: 1});</pre>
+<a href="#" onclick="$('#target3').animate({scale: 2}).animate({scale: 1}); return false;" >びよーん</a><br><br>
+<br>
+<br>
+<br>
+
+<h3>いろいろ</h3>
+<a href="http://p2b.jp/200912-CSS3-Transform-for-IE8">http://p2b.jp/200912-CSS3-Transform-for-IE8</a> の計算式を参考にさせてもらっています。<br>
+<a href="rotate.zip">ソースコード一式をzipでダウンロード</a><br>
+<br>
+<br>
+<br>
+IEはブラウザとして軸がずれている。←これがいいたかっただけ<br>
+</body>
+</html>

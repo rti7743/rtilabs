@@ -1,0 +1,631 @@
+From c46210c4f609f4f1d2e1a5e155064f518446e885 Mon Sep 17 00:00:00 2001
+From: rti <super.rti@gmail.com>
+Date: Sat, 14 May 2011 04:57:54 +0900
+Subject: [PATCH] 1)
+ check_plaintext_auth function not implement.
+ I implemented check_plaintext_auth function referring to samba3 ntlm_auth.
+
+2)
+local_pw_check_specified function not work.
+E_md4hash(opt_password, nt_pw.hash) function is crash!. opt_password is NULL.
+I re-implemented local_pw_check_specified function referring to samba3
+ntlm_auth.
+
+3)
+"require-membership-of" option not implement.
+I implemented this option referring to samba3 ntlm_auth and samba4
+wbinfo.(Supplement later)
+
+4)
+verification of helper-protocol (ntlm-server-1 , squid-2.5-ntlmssp)
+and verified.
+I implemented "require-membership-of" option on squid-2.5-ntlmssp protocol.
+
+I checked helper-protocol = ntlm-server-1  on  pptpd.
+I checked helper-protocol = squid-2.5-ntlmssp on apache mod_auth_ntlm_winbind.
+---
+ source4/utils/ntlm_auth.c |  450 ++++++++++++++++++++++++++++++++++++---------
+ 1 files changed, 362 insertions(+), 88 deletions(-)
+
+diff --git a/source4/utils/ntlm_auth.c b/source4/utils/ntlm_auth.c
+index 24c5764..e694b7d 100644
+--- a/source4/utils/ntlm_auth.c
++++ b/source4/utils/ntlm_auth.c
+@@ -6,6 +6,7 @@
+    Copyright (C) Tim Potter      2000-2003
+    Copyright (C) Andrew Bartlett <abartlet@samba.org> 2003-2004
+    Copyright (C) Francesco Chemolli <kinkie@kame.usr.dsi.unimi.it> 2000 
++   Copyright (C) rti(hiroyuki fujie) <super.rti@gmail.com> <http://twitter.com/#!/super_rti> 2011 
+ 
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+@@ -37,6 +38,10 @@
+ #include "lib/messaging/irpc.h"
+ #include "auth/ntlmssp/ntlmssp.h"
+ #include "param/param.h"
++#include "winbind_client.h"
++#include "libwbclient/wbclient.h"
++
++
+ 
+ #define INITIAL_BUFFER_SIZE 300
+ #define MAX_BUFFER_SIZE 63000
+@@ -103,6 +108,7 @@ static const char *opt_workstation;
+ static const char *opt_password;
+ static int opt_multiplex;
+ static int use_cached_creds;
++static const char *opt_require_membership_of;
+ 
+ 
+ static void mux_printf(unsigned int mux_id, const char *format, ...) PRINTF_ATTRIBUTE(2, 3);
+@@ -143,80 +149,328 @@ static bool parse_ntlm_auth_domain_user(const char *domuser, char **domain,
+ }
+ 
+ 
+-/* Authenticate a user with a plaintext password */
++/*
++
++request.data.auth.require_membership_of_sid be ignored.
++This is a bug in samba4.
++samba4 but should fix itself, because the bigger story, now to fix here.
++If, samba4 is fixed when the routine is not necessary.
+ 
+-static bool check_plaintext_auth(const char *user, const char *pass, 
+-				 bool stdout_diagnostics)
++*/
++bool is_require_membership_of_sid_samba4bugfix(
++						 const char * domain_name
++						,const char * account_name 
++						,bool stdout_diagnostics)
+ {
+-        return (strcmp(pass, opt_password) == 0);
++	enum wbcSidType type;
++	struct wbcDomainSid  user_sid;
++	struct wbcDomainSid* user_has_group_sids;
++	wbcErr wbc_status = WBC_ERR_UNKNOWN_FAILURE;
++	uint32_t num_sids;
++	int i;
++	bool found_group_sid = false;
++	char sid_to_string_buffer[WBC_SID_STRING_BUFLEN];
++
++	if (!opt_require_membership_of){
++		/* no  opt_require_membership_of */
++		if (stdout_diagnostics){
++			DEBUG(3,("no opt_require_membership_of\n"));
++		}
++		return true;
++	}
++
++	/* username to sid */
++	wbc_status = wbcLookupName(domain_name, account_name,
++				   &user_sid, &type);
++	if (!WBC_ERROR_IS_OK(wbc_status)) {
++		if (stdout_diagnostics){
++			DEBUG(0,("failed to call wbcLookupName: %s\n",
++				  wbcErrorString(wbc_status)));
++		}
++		return false;
++	}
++	/* debug out...*/
++	if (stdout_diagnostics){
++		wbcSidToStringBuf(&user_sid, sid_to_string_buffer, sizeof(sid_to_string_buffer));
++		DEBUG(3,("domain (%s) user (%s) -> sid (%s) \n" ,domain_name, account_name, sid_to_string_buffer));
++	}
++
++	/* match reuest_group_sid */
++	wbc_status = wbcLookupUserSids(&user_sid, false, &num_sids, &user_has_group_sids);
++	if (!WBC_ERROR_IS_OK(wbc_status)) {
++		if (stdout_diagnostics){
++			DEBUG(0,("failed to call wbcLookupUserSids: %s\n", wbcErrorString(wbc_status)));
++		}
++		return false;
++	}
++	for (i = 0; i < num_sids; i++) {
++
++		wbcSidToStringBuf(&user_has_group_sids[i], sid_to_string_buffer, sizeof(sid_to_string_buffer));
++		if (stdout_diagnostics){
++			DEBUG(3,("sid check reqsid(%s) vs groupsid (%s) \n" ,opt_require_membership_of, sid_to_string_buffer));
++		}
++
++		if (0 == strcmp(opt_require_membership_of , sid_to_string_buffer) )
++		{
++			found_group_sid = true;
++			break;
++		}
++	}
++	wbcFreeMemory(user_has_group_sids);
++
++	/* judge! */
++	if (found_group_sid)
++	{
++		if (stdout_diagnostics){
++			DEBUG(3,("match! sid! \n"));
++		}
++		return true;
++	}
++	else
++	{
++		if (stdout_diagnostics){
++			DEBUG(3,("can not match!!: \n"));
++		}
++		return false;
++	}
+ }
+ 
+-/* authenticate a user with an encrypted username/password */
++/* require_membership_sid convert group sid */
++static const char* get_require_membership_sid(struct loadparm_context *lp_ctx , const char * require_group, char * sid_buffer ,unsigned int sid_buffer_len) {
++
++	enum wbcSidType type;
++	struct wbcDomainSid  group_sid;
++	char* domain_name = NULL;
++	char* group_name = NULL;
++	wbcErr wbc_status = WBC_ERR_UNKNOWN_FAILURE;
++
++	/* IS SID format ? */
++	if (strncasecmp("S-", require_group, 2) == 0) {
++		return strncpy(sid_buffer,require_group,sid_buffer_len);
++	}
++
++	/* convert SID */
++	if (! parse_ntlm_auth_domain_user(require_group,&domain_name , &group_name 
++						,*lpcfg_winbind_separator(lp_ctx)  ) ) {
++		domain_name = smb_xstrdup(lpcfg_workgroup(lp_ctx));
++		group_name = smb_xstrdup(require_group);
++	}
++	wbc_status = wbcLookupName( domain_name , group_name, &group_sid, &type);
++	SAFE_FREE(domain_name);
++	SAFE_FREE(group_name);
+ 
+-static NTSTATUS local_pw_check_specified(struct loadparm_context *lp_ctx,
+-					 const char *username, 
+-					 const char *domain, 
+-					 const char *workstation,
+-					 const DATA_BLOB *challenge, 
+-					 const DATA_BLOB *lm_response, 
+-					 const DATA_BLOB *nt_response, 
+-					 uint32_t flags, 
+-					 DATA_BLOB *lm_session_key, 
+-					 DATA_BLOB *user_session_key, 
+-					 char **error_string, 
+-					 char **unix_name) 
++	if (!WBC_ERROR_IS_OK(wbc_status)) {
++		return strncpy(sid_buffer,"",sid_buffer_len);
++	}
++
++	wbcSidToStringBuf(&group_sid, sid_buffer , sid_buffer_len);
++	return sid_buffer;
++}
++
++/* Authenticate a user with a plaintext password */
++static bool check_plaintext_auth(struct loadparm_context *lp_ctx,
++				const char *user, const char *pass, 
++				bool stdout_diagnostics)
+ {
+-	NTSTATUS nt_status;
+-	struct samr_Password lm_pw, nt_pw;
+-	struct samr_Password *lm_pwd, *nt_pwd;
+-	TALLOC_CTX *mem_ctx = talloc_init("local_pw_check_specified");
+-	if (!mem_ctx) {
+-		nt_status = NT_STATUS_NO_MEMORY;
++	struct winbindd_request request;
++	struct winbindd_response response;
++	NSS_STATUS result;
++	
++
++	/* Send off request */
++	ZERO_STRUCT(request);
++	ZERO_STRUCT(response);
++
++	fstrcpy(request.data.auth.user, user);
++	fstrcpy(request.data.auth.pass, pass);
++/*
++	require_membership_of_sid no implement om samba4.
++	
++	if (opt_require_membership_of) {
++		strlcpy(request.data.auth.opt_require_membership_of,
++			opt_require_membership_of,
++			sizeof(request.data.auth.opt_require_membership_of));
++	}
++*/
++	result = winbindd_request_response(WINBINDD_PAM_AUTH, &request, &response);
++
++	/*
++
++	request.data.auth.require_membership_of_sid be ignored.
++	This is a bug in samba4.
++	samba4 but should fix itself, because the bigger story, now to fix here.
++	If, samba4 is fixed when the routine is not necessary.
++
++	*/
++	if (result == NSS_STATUS_SUCCESS) {
++
++		char* domain_name;
++		char* account_name;
++		if (! parse_ntlm_auth_domain_user(user,&domain_name , &account_name 
++							,*lpcfg_winbind_separator(lp_ctx)  ) ) {
++			domain_name  = smb_xstrdup(lpcfg_workgroup(lp_ctx));
++			account_name = smb_xstrdup(user);
++		}
++
++		if (! is_require_membership_of_sid_samba4bugfix(domain_name , account_name , stdout_diagnostics) ) {
++			/* require_membership_of_sid error  emulation */
++			result = NSS_STATUS_NOTFOUND;
++			fstrcpy(response.data.auth.nt_status_string , "NT_STATUS_LOGON_FAILURE");
++			fstrcpy(response.data.auth.error_string , "Logon failure");
++			response.data.auth.nt_status = 0x6d;
++		}
++		SAFE_FREE(domain_name);
++		SAFE_FREE(account_name);
++	}
++
++	/* Display response */
++
++	if (stdout_diagnostics) {
++		if ((result != NSS_STATUS_SUCCESS) && (response.data.auth.nt_status == 0)) {
++			d_printf("Reading winbind reply failed! (0x01)\n");
++		}
++
++		d_printf("%s: %s (0x%x)\n",
++			 response.data.auth.nt_status_string,
++			 response.data.auth.error_string,
++			 response.data.auth.nt_status);
+ 	} else {
+-		
+-		E_md4hash(opt_password, nt_pw.hash);
+-		if (E_deshash(opt_password, lm_pw.hash)) {
+-			lm_pwd = &lm_pw;
+-		} else {
+-			lm_pwd = NULL;
++		if ((result != NSS_STATUS_SUCCESS) && (response.data.auth.nt_status == 0)) {
++			DEBUG(1, ("Reading winbind reply failed! (0x01)\n"));
+ 		}
+-		nt_pwd = &nt_pw;
+-		
+-		
+-		nt_status = ntlm_password_check(mem_ctx, 
+-						lpcfg_lanman_auth(lp_ctx),
+-						lpcfg_ntlm_auth(lp_ctx),
+-						MSV1_0_ALLOW_SERVER_TRUST_ACCOUNT |
+-						MSV1_0_ALLOW_WORKSTATION_TRUST_ACCOUNT,
+-						challenge,
+-						lm_response,
+-						nt_response,
+-						username,
+-						username,
+-						domain,
+-						lm_pwd, nt_pwd, user_session_key, lm_session_key);
+-		
+-		if (NT_STATUS_IS_OK(nt_status)) {
+-			if (unix_name) {
+-				if (asprintf(unix_name, "%s%c%s", domain,
+-					     *lpcfg_winbind_separator(lp_ctx),
+-					     username) < 0) {
+-					nt_status = NT_STATUS_NO_MEMORY;
+-				}
++
++		DEBUG(3, ("%s: %s (0x%x)\n",
++			  response.data.auth.nt_status_string,
++			  response.data.auth.error_string,
++			  response.data.auth.nt_status));
++	}
++
++	return (result == NSS_STATUS_SUCCESS);
++}
++
++
++/* authenticate a user with an encrypted username/password */
++NTSTATUS contact_winbind_auth_crap(struct loadparm_context *lp_ctx,
++				   const char *username,
++				   const char *domain,
++				   const char *workstation,
++				   const DATA_BLOB *challenge,
++				   const DATA_BLOB *lm_response,
++				   const DATA_BLOB *nt_response,
++				   uint32_t flags,
++				   uint8_t lm_key[8],
++				   uint8_t user_session_key[16],
++				   char **error_string,
++				   char **unix_name)
++{
++	NTSTATUS nt_status;
++        NSS_STATUS result;
++	struct winbindd_request request;
++	struct winbindd_response response;
++
++	ZERO_STRUCT(request);
++	ZERO_STRUCT(response);
++
++	request.flags = flags;
++
++	request.data.auth_crap.logon_parameters = MSV1_0_ALLOW_WORKSTATION_TRUST_ACCOUNT | MSV1_0_ALLOW_SERVER_TRUST_ACCOUNT;
++/*
++	if (require_membership_of_sid)
++		fstrcpy(request.data.auth_crap.require_membership_of_sid, require_membership_of_sid);
++*/
++
++        fstrcpy(request.data.auth_crap.user, username);
++	fstrcpy(request.data.auth_crap.domain, domain);
++
++	fstrcpy(request.data.auth_crap.workstation, 
++		workstation);
++	memcpy(request.data.auth_crap.chal, challenge->data, MIN(challenge->length, 8));
++
++	if (lm_response && lm_response->length) {
++		memcpy(request.data.auth_crap.lm_resp, 
++		       lm_response->data, 
++		       MIN(lm_response->length, sizeof(request.data.auth_crap.lm_resp)));
++		request.data.auth_crap.lm_resp_len = lm_response->length;
++	}
++
++	if (nt_response && nt_response->length) {
++		if (nt_response->length > sizeof(request.data.auth_crap.nt_resp)) {
++			request.flags = request.flags | WBFLAG_BIG_NTLMV2_BLOB;
++			request.extra_len = nt_response->length;
++
++			request.extra_data.data = (char*)malloc_array(sizeof(char), request.extra_len);
++			if (request.extra_data.data == NULL) {
++				return NT_STATUS_NO_MEMORY;
+ 			}
++			memcpy(request.extra_data.data, nt_response->data,
++			       nt_response->length);
++
+ 		} else {
+-			DEBUG(3, ("Login for user [%s]\\[%s]@[%s] failed due to [%s]\n", 
+-				  domain, username, workstation, 
+-				  nt_errstr(nt_status)));
++			memcpy(request.data.auth_crap.nt_resp,
++			       nt_response->data, nt_response->length);
+ 		}
+-		talloc_free(mem_ctx);
+-	}
+-	if (error_string) {
+-		*error_string = strdup(nt_errstr(nt_status));
++                request.data.auth_crap.nt_resp_len = nt_response->length;
+ 	}
+-	return nt_status;
+ 	
++	result = winbindd_request_response(WINBINDD_PAM_AUTH_CRAP, &request, &response);
++	SAFE_FREE(request.extra_data.data);
++
++	/*
++
++	request.data.auth.require_membership_of_sid be ignored.
++	This is a bug in samba4.
++	samba4 but should fix itself, because the bigger story, now to fix here.
++	If, samba4 is fixed when the routine is not necessary.
++
++	*/
++	if (result == NSS_STATUS_SUCCESS) {
++		if (! is_require_membership_of_sid_samba4bugfix(domain , username , false ) ) {
++			/* require_membership_of_sid error  emulation */
++			result = NSS_STATUS_NOTFOUND;
++			fstrcpy(response.data.auth.nt_status_string , "NT_STATUS_LOGON_FAILURE");
++			fstrcpy(response.data.auth.error_string , "Logon failure");
++			response.data.auth.nt_status = 0x6d;
++		}
++	}
++
++
++	/* Display response */
++
++	if ((result != NSS_STATUS_SUCCESS) && (response.data.auth.nt_status == 0)) {
++		nt_status = NT_STATUS_UNSUCCESSFUL;
++		if (error_string)
++			*error_string = smb_xstrdup("Reading winbind reply failed!");
++		winbindd_free_response(&response);
++		return nt_status;
++	}
+ 	
++	nt_status = (NT_STATUS(response.data.auth.nt_status));
++	if (!NT_STATUS_IS_OK(nt_status)) {
++		if (error_string) 
++			*error_string = smb_xstrdup(response.data.auth.error_string);
++		winbindd_free_response(&response);
++		return nt_status;
++	}
++
++	if ((flags & WBFLAG_PAM_LMKEY) && lm_key) {
++		memcpy(lm_key, response.data.auth.first_8_lm_hash, 
++		       sizeof(response.data.auth.first_8_lm_hash));
++	}
++	if ((flags & WBFLAG_PAM_USER_SESSION_KEY) && user_session_key) {
++		memcpy(user_session_key, response.data.auth.user_session_key, 
++			sizeof(response.data.auth.user_session_key));
++	}
++
++	if (flags & WBFLAG_PAM_UNIX_NAME) {
++		*unix_name = smb_xstrdup(response.data.auth.unix_username);
++		if (!*unix_name) {
++			winbindd_free_response(&response);
++			return NT_STATUS_NO_MEMORY;
++		}
++	}
++
++	winbindd_free_response(&response);
++	return nt_status;
+ }
+ 
+ static void manage_squid_basic_request(enum stdio_helper_mode stdio_helper_mode, 
+@@ -241,7 +495,7 @@ static void manage_squid_basic_request(enum stdio_helper_mode stdio_helper_mode,
+ 		rfc1738_unescape(pass);
+ 	}
+ 	
+-	if (check_plaintext_auth(user, pass, false)) {
++	if (check_plaintext_auth(lp_ctx, user, pass, false)) {
+ 		mux_printf(mux_id, "OK\n");
+ 	} else {
+ 		mux_printf(mux_id, "ERR\n");
+@@ -677,11 +931,22 @@ static void manage_gensec_request(enum stdio_helper_mode stdio_helper_mode,
+ 			reply_arg = nt_errstr(nt_status);
+ 			DEBUG(1, ("GENSEC failed to retrieve the session info: %s\n", nt_errstr(nt_status)));
+ 		} else {
++			/* condition require_membership_of_sid !!!! */
++			if (! is_require_membership_of_sid_samba4bugfix(
++									 session_info->info->domain_name
++									,session_info->info->account_name 
++									,false ) ) {
++				nt_status = NT_STATUS_LOGON_FAILURE;
++				reply_code = "BH NT_STATUS_LOGON_FAILURE";
++				reply_arg = nt_errstr(nt_status);
++				DEBUG(1, ("GENSEC login failed condition require_membership_of_sid: %s\n", nt_errstr(nt_status)));
+ 
+-			reply_code = "AF";
+-			reply_arg = talloc_asprintf(state->gensec_state, 
+-						    "%s%s%s", session_info->info->domain_name,
+-						    lpcfg_winbind_separator(lp_ctx), session_info->info->account_name);
++			} else {
++				reply_code = "AF";
++				reply_arg = talloc_asprintf(state->gensec_state, 
++							    "%s%s%s", session_info->info->domain_name,
++							    lpcfg_winbind_separator(lp_ctx), session_info->info->account_name);
++			}
+ 			talloc_free(session_info);
+ 		}
+ 	} else if (state->gensec_state->gensec_role == GENSEC_CLIENT) {
+@@ -727,6 +992,7 @@ static void manage_ntlm_server_1_request(enum stdio_helper_mode stdio_helper_mod
+ 	static bool ntlm_server_1_user_session_key;
+ 	static bool ntlm_server_1_lm_session_key;
+ 	
++	
+ 	if (strequal(buf, ".")) {
+ 		if (!full_username && !username) {	
+ 			mux_printf(mux_id, "Error: No username supplied!\n");
+@@ -738,7 +1004,7 @@ static void manage_ntlm_server_1_request(enum stdio_helper_mode stdio_helper_mod
+ 					return;
+ 				}
+ 			}
+-			if (check_plaintext_auth(full_username, plaintext_password, false)) {
++			if (check_plaintext_auth(lp_ctx, full_username, plaintext_password, false)) {
+ 				mux_printf(mux_id, "Authenticated: Yes\n");
+ 			} else {
+ 				mux_printf(mux_id, "Authenticated: No\n");
+@@ -749,8 +1015,9 @@ static void manage_ntlm_server_1_request(enum stdio_helper_mode stdio_helper_mod
+ 			mux_printf(mux_id, "Error: No lanman-challenge supplied!\n");
+ 		} else {
+ 			char *error_string = NULL;
+-			DATA_BLOB lm_key;
+-			DATA_BLOB user_session_key;
++			unsigned char lm_key[8];
++			unsigned char user_session_key[16];
++			
+ 			uint32_t flags = 0;
+ 
+ 			if (full_username && !username) {
+@@ -775,16 +1042,16 @@ static void manage_ntlm_server_1_request(enum stdio_helper_mode stdio_helper_mod
+ 				flags |= NTLM_AUTH_FLAG_USER_SESSION_KEY;
+ 
+ 			if (!NT_STATUS_IS_OK(
+-				    local_pw_check_specified(lp_ctx,
+-							     username, 
++				    contact_winbind_auth_crap(lp_ctx,
++							      username, 
+ 							      domain, 
+ 							      lpcfg_netbios_name(lp_ctx),
+ 							      &challenge, 
+ 							      &lm_response, 
+ 							      &nt_response, 
+ 							      flags, 
+-							      &lm_key, 
+-							      &user_session_key,
++							      lm_key, 
++							      user_session_key,
+ 							      &error_string,
+ 							      NULL))) {
+ 
+@@ -799,25 +1066,23 @@ static void manage_ntlm_server_1_request(enum stdio_helper_mode stdio_helper_mod
+ 				mux_printf(mux_id, "Authenticated: Yes\n");
+ 
+ 				if (ntlm_server_1_lm_session_key 
+-				    && lm_key.length 
+-				    && (memcmp(zeros, lm_key.data, 
+-								lm_key.length) != 0)) {
+-					hex_encode(lm_key.data,
+-						   lm_key.length,
+-						   &hex_lm_key);
++				    && (memcmp(zeros, lm_key, 
++					       sizeof(lm_key)) != 0)) {
++					hex_lm_key = hex_encode_talloc(NULL,
++								(const unsigned char *)lm_key,
++								sizeof(lm_key));
+ 					mux_printf(mux_id, "LANMAN-Session-Key: %s\n", hex_lm_key);
+-					SAFE_FREE(hex_lm_key);
++					TALLOC_FREE(hex_lm_key);
+ 				}
+ 
+ 				if (ntlm_server_1_user_session_key 
+-				    && user_session_key.length 
+-				    && (memcmp(zeros, user_session_key.data, 
+-					       user_session_key.length) != 0)) {
+-					hex_encode(user_session_key.data, 
+-						   user_session_key.length, 
+-						   &hex_user_session_key);
++				    && (memcmp(zeros, user_session_key, 
++					       sizeof(user_session_key)) != 0)) {
++					hex_user_session_key = hex_encode_talloc(NULL,
++									  (const unsigned char *)user_session_key, 
++									  sizeof(user_session_key));
+ 					mux_printf(mux_id, "User-Session-Key: %s\n", hex_user_session_key);
+-					SAFE_FREE(hex_user_session_key);
++					TALLOC_FREE(hex_user_session_key);
+ 				}
+ 			}
+ 		}
+@@ -906,6 +1171,7 @@ static void manage_ntlm_server_1_request(enum stdio_helper_mode stdio_helper_mod
+ 	}
+ }
+ 
++
+ static void manage_squid_request(struct loadparm_context *lp_ctx, enum stdio_helper_mode helper_mode,
+ 				 stdio_helper_function fn, void **private2) 
+ {
+@@ -1048,6 +1314,7 @@ int main(int argc, const char **argv)
+ {
+ 	static const char *helper_protocol;
+ 	int opt;
++	char buffer_require_membership_of[WBC_SID_STRING_BUFLEN];
+ 
+ 	poptContext pc;
+ 
+@@ -1068,6 +1335,7 @@ int main(int argc, const char **argv)
+ 		{ "password", 0, POPT_ARG_STRING, &opt_password, OPT_PASSWORD, "User's plaintext password"},		
+ 		{ "multiplex", 0, POPT_ARG_NONE, &opt_multiplex, OPT_MULTIPLEX, "Multiplex Mode"},
+ 		{ "use-cached-creds", 0, POPT_ARG_NONE, &use_cached_creds, OPT_USE_CACHED_CREDS, "silently ignored for compatibility reasons"},
++		{ "require-membership-of", 0, POPT_ARG_STRING, &opt_require_membership_of, OPT_REQUIRE_MEMBERSHIP, "Require that a user be a member of this group (either name or SID) for authentication to succeed" },
+ 		POPT_COMMON_SAMBA
+ 		POPT_COMMON_VERSION
+ 		{ NULL }
+@@ -1109,6 +1377,12 @@ int main(int argc, const char **argv)
+ 		opt_domain = lpcfg_workgroup(cmdline_lp_ctx);
+ 	}
+ 
++	/* require group. */
++	if (opt_require_membership_of != NULL) {
++		opt_require_membership_of = get_require_membership_sid(cmdline_lp_ctx 
++			, opt_require_membership_of , buffer_require_membership_of , sizeof(buffer_require_membership_of) );
++	}
++
+ 	if (helper_protocol) {
+ 		int i;
+ 		for (i=0; i<NUM_HELPER_MODES; i++) {
+@@ -1137,7 +1411,7 @@ int main(int argc, const char **argv)
+ 	}
+ 
+ 	if (!opt_password) {
+-		opt_password = getpass("password: ");
++		opt_password = getpass("password: "); 
+ 	}
+ 
+ 	{
+@@ -1148,7 +1422,7 @@ int main(int argc, const char **argv)
+ 			     opt_username) < 0) {
+ 			return 1;
+ 		}
+-		if (!check_plaintext_auth(user, opt_password, true)) {
++		if (!check_plaintext_auth(cmdline_lp_ctx , user, opt_password, true)) {
+ 			return 1;
+ 		}
+ 	}
+-- 
+1.7.3.4
+

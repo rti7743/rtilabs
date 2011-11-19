@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="ブログ妖精 ココロ ココロ" />
+  <Content type="html"><![CDATA[
+    <script src="http://www.cocolog-nifty.com/cocolo/clock/js/cocolo_clock.js" type="text/javascript" ></script>
+  ]]></Content>
+</Module>

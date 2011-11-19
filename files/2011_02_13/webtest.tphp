@@ -1,0 +1,36 @@
+<?php
+//tokyo tyrant ‚ð—˜—p‚·‚é
+ini_set('session.save_handler', 'mytest');
+ini_set('session.save_path', '/tmp');
+
+session_start();
+
+if ( isset ( $_GET['renew'] ) )
+{
+	$old_session_id = session_id();
+	$result_session_regenerate_id = session_regenerate_id(TRUE);
+	$new_session_id = session_id();
+
+	echo "REGENERATE!!<br>\r\n";
+	echo "old_session_id:{$old_session_id}<br>\r\n";
+	echo "new_session_id:{$new_session_id}<br>\r\n";
+	echo "session_regenerate_id return :{$result_session_regenerate_id}<br>\r\n";
+	echo "<br>\r\n";
+}
+else
+{
+	$new_session_id = session_id();
+}
+
+$a = (int)@$_SESSION['a'];
+@$_SESSION['a'] = $a + 1;
+
+echo "Count : {$a}<br>\r\n";
+echo "Session : {$new_session_id}<br>\r\n";
+?>
+<br>
+<br>
+<br>
+<a href="?">countup : reload or click</a><br>
+<a href="?renew">session_regenerate_id</a><br>
+<br>

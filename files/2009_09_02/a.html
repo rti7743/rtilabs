@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/dialog.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<script type="text/javascript">
+	function onClick2()
+	{
+		document.myform.submit();
+	}
+</script>
+<form action="b.html" method="get" name="myform">
+<h1>selenium ide 検証ページ</h1>
+次の4つのボタンを押したときにselenium ideに記録されるイベントを見てください。<br>
+<br>
+2番目のボタン以外はすべて submit されます。<br>
+<br>
+<table border="1">
+	<tr>
+		<th></th><td>1ボタン</td><td>2ボタン</td><td>3ボタン</td><td>4ボタン</td>
+	</tr>
+	<tr>
+		<th>理想</th><td>clickAndWait</td><td>click</td><td>clickAndWait</td><td>clickAndWait</td>
+	</tr>
+</table>
+<br>
+<br>
+<br>
+↓1.このボタンは type="submit"です。 selenium ideには、clickAndWaitが記録されるはずです。<br>
+<input type="submit" name="sub" value="これはsubmitされるボタンです"><br>
+<br>
+↓2.このボタンは type="button"です。 selenium ideには、clickイベントが記録されるはずです。<br>
+<input type="button" name="click" value="これはただのボタンです" onclick="$('#clicked').show('slow').hide(3000)"><br>
+<div id="clicked" style="display: none;">clickされました...</div><br>
+<br>
+↓3.このボタンは type="button"ですが、 onclickの中でthis.form.submit();を直接呼出し submitされます。selenium ideには、clickAndWaitイベントが記録されるはずです。<br>
+<input type="button" name="clickAndDirectMove" value="これはただのボタンてすがonclick内で直接ページ遷移します" onclick="this.form.submit();"><br>
+<br>
+↓4.このボタンは type="button"ですが、 onclickで関数を呼び出しその中でsubmitされます。 selenium ideには、clickAndWaitイベントが記録されるはずです。<br>
+<input type="button" name="clickAndFunctionMove" value="これはただのボタンてすがonclick内の関数でページ遷移します" onclick="onClick2();"><br>
+<br>
+<br>
+<br>
+<a href="http://d.hatena.ne.jp/rti7743/20090929">元記事に戻る</a><br>
+</form>
+
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+</body>
+</html>

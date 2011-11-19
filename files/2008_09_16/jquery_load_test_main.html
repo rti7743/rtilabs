@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/dialog.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>
+//通常のロード
+function OnRunButtonClick()
+{
+	$('#program').load('jquery_load_test_script.html');
+}
+//改造版のロード
+function OnRunButtonClick2()
+{
+	$('#program').super_load('jquery_load_test_script.html');
+}
+</script>
+</head>
+<body>
+jquery.load で持ってきたコンテンツ内に含まれる javascript 関数が実行できるかテストするよ!<br>
+innerHTMLで持ってきたjavascript関数が呼べるかって!ってことね。<br>
+実際の仕様はどうなんだろう<br>
+<br>
+<input type="button" onclick="OnRunButtonClick()" value="標準load で読み込んでみる">
+<input type="button" onclick="OnRunButtonClick2()" value="改造版のsuper_load で読み込んでみる">
+<br>
+<div id="program">↑のボタンをクリックすると、ここにコンテンツをloadで持ってくるときに javascript 関数も持ってきます</div><br>
+<br>
+<br>
+<br>
+IE7 、 FF 、 windows safari だと動作します。<br>
+それ以外のブラウザ、 IE6 、 mac safari 、 Chrome だと何も表示されません。<br>
+<br>
+あなたのブラウザだとどうですか?<br>
+<br>
+<a href="jquery_load_test_script.html">ロードしているコンテンツを直接みたい!人はこっち</a><br>
+<br>
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+<script type="text/javascript" src="superload.js"></script>
+</body>
+</html>

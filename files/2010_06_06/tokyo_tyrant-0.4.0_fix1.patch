@@ -1,0 +1,69 @@
+36a37
+> 	bool is_session_regenerate = false;
+41c42
+< 	
+---
+> 
+50,56c51,64
+< 		/* Use old values unless regeneration is forced */
+< 		if (session->remap == 0) {
+< 			idx          = session->idx;
+< 			pk           = estrdup(session->pk);
+< 			current_rand = estrdup(session->sess_rand);
+< 		} else {
+< 			session->remap = 0;
+---
+> 		/* check session parameter */
+> 		if (!session) {
+> 			/* call session_regenerate_id. The session will be set again later.  */
+> 			is_session_regenerate = true;
+> 		}
+> 		else {
+> 			/* Use old values unless regeneration is forced */
+> 			if (session->remap == 0) {
+> 				idx          = session->idx;
+> 				pk           = estrdup(session->pk);
+> 				current_rand = estrdup(session->sess_rand);
+> 			} else {
+> 				session->remap = 0;
+> 			}
+98a107,110
+> 		/* check pk param */
+> 		if (!pk) {
+> 			php_error_docref(NULL TSRMLS_CC, E_ERROR, "Can not Create PK. Please confirm your tokyo tyrant run mode is tct mode. (defualt tch mode)");
+> 		}
+111,112c123,153
+< 	php_tt_conn_deinit(conn TSRMLS_CC);
+< 	php_tt_pool_deinit(pool TSRMLS_CC);
+---
+> 	/* session regenerate!!! */
+> 	if (is_session_regenerate)
+> 	{
+> 		php_tt_session *session = php_tt_session_init(TSRMLS_C);
+> 		if (!session) {
+> 			php_error_docref(NULL TSRMLS_CC, E_ERROR, "Can not init session (for session_regenerate).");
+> 		}
+> 
+> 		/* Try to tokenize session id */
+> 		if (!php_tt_tokenize((char *)sid, &(session->sess_rand), &(session->checksum), &(session->idx), &(session->pk) TSRMLS_CC)) {
+> 			php_error_docref(NULL TSRMLS_CC, E_ERROR, "Can not tt_tokenize (for session_regenerate).");
+> 		}
+> 		
+> 		/* Set additional data */
+> 		session->sess_rand_len = strlen(session->sess_rand);
+> 		session->checksum_len  = strlen(session->checksum);
+> 		session->pk_len        = strlen(session->pk);
+> 		session->remap = 0;
+> 
+> 		/* keep , pool and conn */
+> 		session->conn = conn;
+> 		session->pool = pool;
+> 		
+> 		PS_SET_MOD_DATA(session);
+> 	}
+> 	else
+> 	{
+> 		php_tt_conn_deinit(conn TSRMLS_CC);
+> 		php_tt_pool_deinit(pool TSRMLS_CC);
+> 	}
+> 

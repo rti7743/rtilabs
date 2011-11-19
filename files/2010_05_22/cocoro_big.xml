@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="ブログ妖精 ココロ 全部入り(でっかく) hacked by rti" />
+  <Content type="html"><![CDATA[
+      <div id="demo1" class="demo1" style="-webkit-transform: scale(1.5) translate(208px,20px); -moz-transform: scale(1.5) translate(208px,20px);" width="120" height="240">
+      	    <script src="cocoro_proxy.js" type="text/javascript" ></script>
+      </div>
+  ]]></Content>
+</Module>

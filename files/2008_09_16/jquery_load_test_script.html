@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/dialog.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>
+function OnMessageChangeButtonClick()
+{
+	$('#msg').html("あらほらさっさー<br>これが見えていたら成功です!");
+}
+</script>
+</head>
+<body>
+このコンテンツは ajaxで持ってきたやつです。<br>
+<input type="button" onclick="OnMessageChangeButtonClick()" value="ぽちっとな">←のぽちっとなを押すとコンテンツが書き換わるでしょうか!<br>
+<br>
+<div id="msg" style="background-color: #ff0000;">ここが書き換わったら成功</div><br>
+<br>
+<br>
+もう一度試すときには、F5でリロードしてか試してください。<br>
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+</body>
+</html>
