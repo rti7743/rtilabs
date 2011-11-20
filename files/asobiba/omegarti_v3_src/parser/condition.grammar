@@ -1,0 +1,44 @@
+%header%
+
+GRAMMARTYPE = "LL"
+
+DESCRIPTION = "Predications for stock analysis"
+
+VERSION     = "1.0"
+
+%tokens%
+
+LEFT_PAREN                   = "("
+RIGHT_PAREN                  = ")"
+LEFT_PAREN_M                 = "{"
+RIGHT_PAREN_M                = "}"
+PREDICATION_OP               = ":="
+//MINUS                        = "-"
+COMMA                        = ","
+LOGICAL_OP                   = <<&&|\|\||and|or>>
+DEF_MARK                     = "def"
+COMP_OP                      = <<>|>=|<|<=|==|!=>>
+ARITH1_OP                    = <<\+|\->>
+ARITH2_OP                    = <<\*|\/>>
+NUMBER                       = <<\-?[0-9]+(\.[0-9]+)?>>
+IDENTIFIER                   = <<[a-zA-Z][a-zA-Z0-9_]*>>
+WHITESPACE                   = <<[ \t\n\r]+>> %ignore%
+SINGLE_LINE_COMMENT          = <<//.*>> %ignore%
+MULTI_LINE_COMMENT           = <</\*([^*]|\*[^/])*\*/>> %ignore%
+
+%productions%
+
+root = expr;
+
+expr = l_expr (LOGICAL_OP l_expr)*;
+l_expr = v_expr (COMP_OP  v_expr)?;   //logical
+v_expr = t_expr (ARITH1_OP  t_expr)*; //value
+t_expr = f_expr (ARITH2_OP  f_expr)*; //term
+f_expr = "(" expr ")" | term;       //factor
+
+term   = function | constant | parameter;
+function = IDENTIFIER "(" l_expr_list? ")";
+l_expr_list = l_expr ("," l_expr_list)?;
+constant = NUMBER;
+parameter = "{" NUMBER "}";
+

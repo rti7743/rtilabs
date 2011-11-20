@@ -1,0 +1,317 @@
+
+リティライブラリ 全体図解.
+
+
+ディレクトリは C:\Program Files\DevStudio\rti_Lib
+
+.              <DIR>        00-01-17  12:56 .
+..             <DIR>        00-01-17  12:56 ..
+GRAPHICS       <DIR>        00-01-17  12:56 Graphics			グラフィックスライブラリ
+AI             <DIR>        00-01-17  12:56 AI				人工知能ライブラリ
+BASE           <DIR>        00-01-17  12:56 Base			現在どのカテゴリにも属さんやつら
+GAME           <DIR>        00-01-17  12:56 Game			ゲーム関係で使うかもしれないライブラリ
+3D             <DIR>        00-01-17  12:56 3D				3Dライブラリ.
+MUSIC          <DIR>        00-01-17  12:56 MUSIC			音楽ライブラリ
+VCL            <DIR>        00-01-17  12:56 VCL				Windowコントロール制御ライブラリ 疑似自作VCL
+COMM           <DIR>        00-01-17  13:51 Comm			GDI DirectX などの規格の違いを機種集する
+RTI_DE~1 H             451  00-01-14  10:13 rti_define.h		全体で多く使われるデータ型
+RTI_LIB  H           6,710  00-01-10  15:46 rti_lib.h			このライブラリのヘッダ集
+STARTW~1 H           2,314  00-01-10  15:50 StartWithExeFile.h		魂の座
+
+ディレクトリは C:\Program Files\DevStudio\rti_Lib\3D
+
+.              <DIR>        00-01-17  12:56 .
+..             <DIR>        00-01-17  12:56 ..
+RTI_NE~1 CPP         2,525  00-01-11  12:51 rti_New3D.cpp
+RTI_NE~1 H           1,398  00-01-11   3:40 rti_New3D.h
+RTI_NE~2 CPP         2,944  00-01-11   3:38 rti_New3DDraw.cpp
+RTI_NE~2 H             601  00-01-11   3:38 rti_New3DDraw.h
+RTI_NE~3 H             464  00-01-10  14:04 rti_New3DFileRead.h
+RTI_NE~3 CPP         3,699  00-01-10  14:04 rti_New3DFileRead.cpp
+RTI_NE~4 CPP         3,316  00-01-10  14:05 rti_New3DMake.cpp
+RTI_NE~4 H           1,167  99-12-01   5:40 rti_New3DMake.h
+RTI_NE~5 CPP         1,154  00-01-11  13:07 rti_New3DModel.cpp
+RTI_NE~5 H             545  00-01-10  14:05 rti_New3DModel.h
+RTI_NE~6 CPP            40  00-01-10  14:34 rti_New3DMortion.cpp
+RTI_NE~6 H           1,200  00-01-10  14:06 rti_New3DMortion.h
+RTI_NE~7 CPP         1,673  00-01-11  12:39 rti_New3DPoint.cpp
+RTI_NE~7 H           1,129  00-01-11  12:40 rti_New3DPoint.h
+RTI_NE~8 CPP         2,654  00-01-10  14:06 rti_New3DPoly.cpp
+RTI_NE~8 H           1,908  00-01-11   3:36 rti_New3DPoly.h
+RTI_NE~9 H             791  00-01-10  14:07 rti_New3DPolyBase.h
+RTI_NE~9 CPP         2,653  00-01-10  14:07 rti_New3DPolyBase.cpp
+RTI_N~10 H             331  00-01-10  14:07 rti_New3DTexterBank.h
+RTI_SR~1 CPP         2,559  00-01-10  14:08 rti_SrcPoint.cpp
+RTI_SR~1 H             987  00-01-10  14:54 rti_SrcPoint.h
+RTI_3D~1 CPP         4,200  00-01-10  13:58 rti_3DGraphics.cpp
+RTI_3D~1 H             864  00-01-10  13:57 rti_3DGraphics.h
+RTI_N~10 CPP         1,198  00-01-11   3:41 rti_New3DMenSort.cpp
+RTI_N~11 H           1,376  00-01-11   3:40 rti_New3DMenSort.h
+        25 個             41,376 バイトのファイルがあります.
+
+ディレクトリは C:\Program Files\DevStudio\rti_Lib\AI
+
+.              <DIR>        00-01-17  12:56 .
+..             <DIR>        00-01-17  12:56 ..
+RTI_AI~1 CPP         7,176  00-01-10  14:09 rti_AI_Zonde.cpp		ゾンデ法による文字認識.
+RTI_AI~1 H           1,780  00-01-10  14:09 rti_AI_Zonde.h
+         2 個              8,956 バイトのファイルがあります.
+
+
+ディレクトリは C:\Program Files\DevStudio\rti_Lib\Base
+
+.              <DIR>        00-01-17  12:56 .
+..             <DIR>        00-01-17  12:56 ..
+RTI_SY~1 CPP           679  00-01-10  14:34 rti_systeminfo.cpp		システム情報の取得.
+RTI_SY~1 H             228  99-11-29   4:23 rti_systeminfo.h
+RTI_TI~1 CPP         2,801  00-01-10  15:03 rti_time_action.cpp		時限爆弾 指定した回数実行されると登録していたイベントがおきる
+RTI_TI~1 H           1,164  00-01-10  14:14 rti_time_action.h
+RTI_RGN  CPP         3,554  00-01-10  15:34 rti_rgn.cpp			リージョン
+RTI_RGN  H             715  00-01-10  14:13 rti_rgn.h
+RTI_RI~1 CPP            33  00-01-10  14:13 rti_ring_qeue.cpp		リングキュー(テンプレートだよん)
+RTI_RI~1 H           1,216  00-01-07  10:13 rti_ring_qeue.h
+RTI_NE~1 H             523  00-01-11  12:41 rti_NewMatrix.h		マトリックス
+RTI_NE~1 CPP        12,974  00-01-11  12:42 rti_NewMatrix.cpp
+RTI_IME  CPP           203  99-10-07  20:15 rti_ime.cpp			IME 制御
+RTI_IME  H              45  99-10-07  20:09 rti_ime.h
+RTI_JO~1 CPP         2,579  00-01-10  14:12 rti_joystick.cpp		ジョイスティック制御
+RTI_JO~1 H           2,061  00-01-10  14:12 rti_joystick.h
+RTI_KEY  H           3,085  99-12-23  11:23 rti_key.h			キーちゃん(謎)	キー入力関係. 歌いません.
+RTI_KEY  CPP         1,173  00-01-10  14:12 rti_key.cpp
+RTI_GL~1 CPP        13,180  00-01-10  14:11 rti_glookup.cpp		Lookup関係、固定小数点など.
+RTI_GL~1 H           3,667  00-01-10  14:11 rti_glookup.h
+RTI_CH~1 CPP         4,811  00-01-10  14:34 rti_ChangeDisplay.cpp	GDI によるディスプレイ解像度切り替え
+RTI_CH~1 H             413  99-09-24   2:20 rti_ChangeDisplay.h
+RTI_DA~1 H             195  00-01-01  19:02 rti_data_list.h
+RTI_DA~1 CPP           545  00-01-10  14:09 rti_data_list.cpp		char** の配列より文字列の検索.
+RTI_DE~1 CPP           949  00-01-10  14:09 rti_debug.cpp		偉大なるデバックモジュール
+RTI_DE~1 H             202  00-01-10  14:09 rti_debug.h
+RTI_DI~1 CPP         3,391  00-01-10  14:34 rti_dialog.cpp		開くなどのダイアログ
+RTI_DI~1 H             458  00-01-10  14:34 rti_dialog.h
+RTI_ER~1 H             665  00-01-17  13:11 rti_error_message.h		エラーメッセージを簡単にだすぞよ.
+RTI_ER~1 CPP           878  00-01-10  14:10 rti_error_message.cpp
+        28 個             62,387 バイトのファイルがあります.
+
+ディレクトリは C:\Program Files\DevStudio\rti_Lib\Comm
+
+.              <DIR>        00-01-17  13:51 .
+..             <DIR>        00-01-17  13:51 ..
+RTI_GDI  H              24  00-01-17  14:13 rti_GDI.h
+RTI_DI~1 H              44  00-01-17  13:48 rti_DirectX.h
+RTI_COMM H              24  00-01-17  14:13 rti_comm.h
+RTI_GDI  CPP             0  00-01-17  14:11 rti_GDI.cpp
+RTI_DI~1 CPP         1,597  00-01-17  14:27 rti_DirectX.cpp
+         5 個              1,689 バイトのファイルがあります.
+
+ディレクトリは C:\Program Files\DevStudio\rti_Lib\Game
+
+.              <DIR>        00-01-17  12:56 .
+..             <DIR>        00-01-17  12:56 ..
+RTI_RI~1 H           2,332  00-01-10  15:34 rti_ring_menu.h		リングメニュー
+RTI_RI~1 CPP         8,044  00-01-10  15:34 rti_ring_menu.cpp
+RTI_LI~1 H             619  00-01-10  14:20 rti_list_menu.h		Doom や FF などのメニューみたいなアレ.
+RTI_LI~1 CPP         3,013  00-01-10  14:34 rti_list_menu.cpp
+RTI_MAP  CPP         6,843  00-01-10  15:04 rti_map.cpp			マップ
+RTI_MAP  H           3,035  00-01-10  15:03 rti_map.h
+RTI_HI~1 H           1,981  00-01-10  14:20 rti_high_ring_menues.h	複数のリングメニュー
+RTI_HI~1 CPP         6,392  00-01-10  14:19 rti_high_ring_menues.cpp
+RTI_GA~1 H             603  00-01-10  15:15 rti_Game_AnimeBank.h	アニメーション管理.
+RTI_GA~1 CPP         1,515  00-01-10  14:34 rti_Game_AnimeBank.cpp
+RTI_GA~2 CPP         3,821  00-01-10  15:16 rti_Game_AnimeBankForFile.cppアニメーションデータ管理 データはファイルより読む
+RTI_GA~2 H             505  00-01-10  15:15 rti_Game_AnimeBankForFile.h
+RTI_GA~3 H           2,977  00-01-10  14:16 rti_Game_Char.h		ゲームキャラクターの構造
+RTI_GA~3 CPP            35  00-01-10  14:34 rti_Game_Char.cpp
+RTI_GA~4 CPP        11,535  00-01-10  14:17 rti_Game_Scripte_Comple.cpp	スクリプトコンパイル
+RTI_GA~4 H           2,212  00-01-10  14:17 rti_Game_Scripte_Comple.h
+RTI_GA~5 CPP         7,862  00-01-10  14:17 rti_Game_Scripte_Run.cpp	スクリプト実行
+RTI_GE~1 H             971  00-01-10  14:19 rti_geaji.h
+RTI_MA~1 CPP         6,382  00-01-10  15:03 rti_map_3D.cpp		3Dのマップ
+RTI_MA~1 H           3,242  00-01-10  14:21 rti_map_3D.h
+RTI_MA~2 CPP         3,933  00-01-10  14:34 rti_map_rotate.cpp		円筒スクロールのマップ
+RTI_GA~6 CPP        13,977  00-01-10  14:34 rti_Game_Scripte_RevPorland.cpp	スクリプトコンパイル時の計算式の解析.
+RTI_GA~5 H           3,223  00-01-10  14:34 rti_Game_Scripte_RevPorland.h
+RTI_GA~6 H           3,842  00-01-08  15:15 rti_Game_Scripte_Run.h
+RTI_GA~7 CPP         1,099  00-01-10  14:34 rti_Game_Scripte_String.cpp		スクリプト解析時の文字列について.
+RTI_GA~7 H             351  00-01-10  14:34 rti_Game_Scripte_String.h
+RTI_MA~2 H           1,383  00-01-10  14:34 rti_map_rotate.h
+RTI_CO~1 H             801  00-01-10  14:14 rti_command_combo.h		格闘などで使われるコマンド認識.
+RTI_CO~1 CPP         1,980  00-01-10  14:14 rti_command_combo.cpp
+RTI_GA~8 H             120  00-01-10  14:52 rti_Game_Master.h
+RTI_BA~1 CPP             0  99-12-06  15:30 rti_BasicDefines.cpp
+RTI_GAME H             423  00-01-10  15:15 rti_Game.h			ゲームのボス.
+RTI_GE~1 CPP         2,977  00-01-10  14:18 rti_geaji.cpp		ゲージ.
+        34 個            109,794 バイトのファイルがあります.
+
+ディレクトリは C:\Program Files\DevStudio\rti_Lib\Graphics
+
+.              <DIR>        00-01-17  12:56 .
+..             <DIR>        00-01-17  12:56 ..
+EFFECT         <DIR>        00-01-17  12:56 Effect
+RTI_AN~1 CPP         3,333  00-01-10  14:34 rti_anime_ex.cpp		アニメーション管理
+RTI_AN~1 H           1,822  00-01-10  14:34 rti_anime_ex.h
+RTI_AVI  H             997  00-01-10  14:34 rti_avi.h			AVI再生(まだ、音でません(T_T) )
+RTI_AVI  CPP         3,105  00-01-17  16:02 rti_avi.cpp
+RTI_BA~1 H             672  00-01-17  15:32 rti_backsurface.h		裏画面
+RTI_BA~1 CPP         2,647  00-01-17  15:31 rti_backsurface.cpp
+RTI_NO~1 H             450  00-01-10  14:27 rti_nomal_gdi_bitmap.h	謎
+RTI_NO~1 CPP         1,752  00-01-10  14:34 rti_nomal_gdi_bitmap.cpp
+RTI_GR~1 H           4,974  00-01-17  18:53 rti_graphics.h		グラフィックスの中枢.
+RTI_GR~1 CPP        77,878  00-01-17  15:26 rti_graphics.cpp
+RTI_GR~2 CPP             0  99-12-19   2:44 rti_graphics_inlines.cpp	グラフィックスで inline 宣言がほしい奴等
+RTI_GR~2 H           5,288  00-01-10  14:34 rti_graphics_inlines.h
+RTI_GR~3 CPP        28,115  00-01-17  19:57 rti_graphics_resize.cpp	自由絵画
+RTI_GR~3 H           3,130  00-01-13   2:19 rti_graphics_resize.h
+RTI_DR~1 H             859  00-01-10  14:34 rti_DrawCanvaus.h		ペイントブラシみたいに自由にかける領域を作る
+RTI_DR~1 CPP           673  00-01-10  14:26 rti_DrawCanvaus.cpp
+RTI_FO~1 CPP        12,332  00-01-17  15:29 rti_fontuse.cpp		Windows のフォントを利用する.
+RTI_FO~1 H           1,509  00-01-17  15:27 rti_fontuse.h
+RTI_BI~1 H             769  00-01-10  14:25 rti_bitmaplib.h		Bitmap を読み取る.
+RTI_BI~1 CPP         6,220  00-01-17  15:24 rti_bitmaplib.cpp
+        20 個            156,525 バイトのファイルがあります.
+
+ディレクトリは C:\Program Files\DevStudio\rti_Lib\Graphics\Effect
+
+.              <DIR>        00-01-17  12:56 .
+..             <DIR>        00-01-17  12:56 ..
+RTI_BA~1 H           1,146  00-01-10  14:28 rti_barst_effect.h		画像を爆発、破片からの復帰をさせる.
+RTI_BA~1 CPP         4,715  00-01-10  14:35 rti_barst_effect.cpp
+RTI_BL~1 H             871  00-01-10  14:34 rti_blined_effect.h		ブラインドのように絵画
+RTI_BL~1 CPP         2,287  00-01-10  14:31 rti_blined_effect.cpp
+RTI_BO~1 H           1,015  00-01-10  14:34 rti_box_effect.h		
+RTI_BO~1 CPP         3,734  00-01-10  14:52 rti_box_effect.cpp
+RTI_CR~1 CPP         5,854  00-01-10  15:37 rti_crash_effect.cpp	ゆらす
+RTI_CR~1 H             824  00-01-10  14:34 rti_crash_effect.h
+RTI_FA~1 CPP         4,774  00-01-10  14:52 rti_fall_tile_effect.cpp	タイルが崩れるように
+RTI_FA~1 H           1,241  00-01-10  14:34 rti_fall_tile_effect.h
+RTI_FE~1 CPP         2,342  00-01-10  14:52 rti_feade_effect.cpp	目的の色に近づける
+RTI_FE~1 H             787  00-01-10  14:34 rti_feade_effect.h
+RTI_FL~1 H           1,014  00-01-10  14:34 rti_flowt.h			ぶつを降らす
+RTI_FL~1 CPP         2,939  00-01-10  14:52 rti_flowt.cpp
+RTI_LA~1 H             823  00-01-10  14:34 rti_lay_effect.h		光線のように絵画
+RTI_LI~1 CPP         2,733  00-01-10  14:52 rti_light_effect.cpp	ライト
+RTI_LI~1 H             634  00-01-10  14:34 rti_light_effect.h
+RTI_PO~1 H           1,127  00-01-10  14:34 rti_power_effect.h		Pow
+RTI_PO~1 CPP         3,966  00-01-10  14:52 rti_power_effect.cpp
+RTI_SC~1 H             689  00-01-10  14:34 rti_scroll_effect.h		スクロール
+RTI_SC~1 CPP         1,449  00-01-10  14:52 rti_scroll_effect.cpp
+RTI_SL~1 CPP         2,115  00-01-10  14:52 rti_slow_effect.cpp		ゆっくり絵画
+RTI_SL~1 H             754  00-01-10  14:34 rti_slow_effect.h
+RTI_SP~1 H             715  00-01-10  14:34 rti_sphere_effect.h		極座標
+RTI_SP~1 CPP         2,513  00-01-10  14:52 rti_sphere_effect.cpp
+RTI_TO~1 CPP         7,026  00-01-10  14:34 rti_tonneru.cpp		トンネル
+RTI_TO~1 H           1,223  00-01-10  14:34 rti_tonneru.h
+RTI_WA~1 H             790  00-01-10  14:29 rti_wave_effect.h		ゆらす
+RTI_WA~1 CPP         3,748  00-01-10  14:33 rti_wave_effect.cpp
+RTI_EF~1 CPP         2,083  00-01-10  15:04 rti_effect.cpp		エフェクトのボス
+RTI_EF~1 H             850  99-09-24   2:20 rti_effect.h
+RTI_WA~2 CPP         2,406  00-01-10  15:33 rti_waterfall_effect.cpp	滝のように
+RTI_WA~2 H             777  00-01-10  14:34 rti_waterfall_effect.h
+RTI_LA~1 CPP         5,046  00-01-10  15:39 rti_lay_effect.cpp
+        34 個             75,010 バイトのファイルがあります.
+
+ディレクトリは C:\Program Files\DevStudio\rti_Lib\MUSIC
+
+.              <DIR>        00-01-17  12:56 .
+..             <DIR>        00-01-17  12:56 ..
+RTI_CD   H           1,693  99-10-16   0:36 rti_cd.h			CD再生
+RTI_CD   CPP        13,398  00-01-10  14:35 rti_cd.cpp
+RTI_MIDI CPP        10,416  00-01-10  14:36 rti_midi.cpp		謎のMIDI再生
+RTI_MIDI H           2,247  99-09-24   2:20 rti_midi.h
+RTI_MU~1 CPP         2,836  00-01-10  14:36 rti_music.cpp		MIDI再生
+RTI_MU~1 H             527  99-10-16   0:36 rti_music.h
+RTI_WAVE H             565  99-10-19  14:39 rti_wave.h			WAVE再生
+RTI_WAVE CPP         5,190  00-01-10  14:36 rti_wave.cpp
+RTI_WA~1 H           1,545  00-01-10  14:37 rti_wave_player.h		WAVE再生
+RTI_WA~1 CPP         9,447  00-01-10  14:37 rti_wave_player.cpp
+        10 個             47,864 バイトのファイルがあります.
+
+ディレクトリは C:\Program Files\DevStudio\rti_Lib\VCL
+
+.              <DIR>        00-01-17  12:56 .
+..             <DIR>        00-01-17  12:56 ..
+RTI_VC~1 CPP         2,960  00-01-10  15:05 rti_vcl_apprication.cpp
+RTI_VC~1 H           2,332  00-01-10  14:38 rti_vcl_apprication.h
+RTI_VC~2 H           2,500  00-01-10  15:04 rti_vcl_base.h
+RTI_VC~2 CPP         7,054  00-01-10  15:07 rti_vcl_base.cpp
+RTI_VC~3 CPP         1,107  00-01-10  14:39 rti_vcl_button.cpp
+RTI_VC~3 H             665  00-01-10  14:39 rti_vcl_button.h
+RTI_VC~4 H           1,301  00-01-10  14:52 rti_vcl_button_event.h
+RTI_VC~4 CPP         1,375  00-01-10  14:41 rti_vcl_button_event.cpp
+RTI_VC~5 H             713  00-01-10  14:41 rti_vcl_checkbotton.h
+RTI_VC~5 CPP         1,174  00-01-10  14:52 rti_vcl_checkbotton.cpp
+RTI_VC~6 CPP         3,041  00-01-10  14:42 rti_vcl_checkbox.cpp
+RTI_VC~6 H             914  00-01-10  14:42 rti_vcl_checkbox.h
+RTI_VC~7 CPP         1,280  00-01-10  14:42 rti_vcl_comb.cpp
+RTI_VC~7 H             715  00-01-10  14:42 rti_vcl_comb.h
+RTI_VC~8 CPP         2,330  00-01-10  14:42 rti_vcl_comb_event.cpp
+RTI_VC~8 H           1,880  00-01-10  14:52 rti_vcl_comb_event.h
+RTI_VC~9 H           2,873  00-01-10  14:43 rti_vcl_edit_event.h
+RTI_V~10 H             625  00-01-10  14:44 rti_vcl_form.h
+RTI_V~11 H             613  00-01-10  14:52 rti_vcl_edit.h
+RTI_VC~9 CPP         1,110  00-01-10  14:52 rti_vcl_edit.cpp
+RTI_V~10 CPP         2,011  00-01-10  14:52 rti_vcl_edit_event.cpp
+RTI_V~11 CPP         1,678  00-01-10  14:44 rti_vcl_form.cpp
+RTI_V~12 CPP         4,172  00-01-10  15:41 rti_vcl_form_event.cpp
+RTI_V~12 H           1,201  00-01-10  14:45 rti_vcl_form_event.h
+RTI_V~13 H             249  00-01-10  14:45 rti_vcl_grid.h
+RTI_V~14 H             627  00-01-10  14:45 rti_vcl_groupbox.h
+RTI_V~15 H             633  00-01-10  14:46 rti_vcl_list.h
+RTI_V~13 CPP         3,008  00-01-10  14:47 rti_vcl_picturebox.cpp
+RTI_V~16 H             814  00-01-10  14:47 rti_vcl_picturebox.h
+RTI_V~14 CPP           271  00-01-10  14:52 rti_vcl_grid.cpp
+RTI_V~15 CPP         1,152  00-01-10  14:52 rti_vcl_groupbox.cpp
+RTI_V~17 H             680  00-01-10  14:47 rti_vcl_progress.h
+RTI_V~18 H             460  99-09-24   2:18 rti_vcl_hook.h
+RTI_V~16 CPP         1,139  00-01-10  14:52 rti_vcl_list.cpp
+RTI_V~19 H           1,151  00-01-10  14:47 rti_vcl_progress_event.h
+RTI_V~20 H           2,000  00-01-10  14:52 rti_vcl_list_event.h
+RTI_V~17 CPP         1,107  00-01-10  14:52 rti_vcl_list_event.cpp
+RTI_V~18 CPP         4,228  00-01-10  15:44 rti_vcl_menu.cpp
+RTI_V~21 H           1,028  00-01-10  14:52 rti_vcl_menu.h
+RTI_V~19 CPP         2,454  00-01-10  14:52 rti_vcl_object.cpp
+RTI_V~22 H           4,323  00-01-09   0:27 rti_vcl_object.h
+RTI_V~20 CPP         4,238  00-01-10  15:49 rti_vcl_radiobox.cpp
+RTI_V~23 H           1,149  00-01-10  14:48 rti_vcl_radiobox.h
+RTI_V~21 CPP         1,204  00-01-10  14:52 rti_vcl_progress.cpp
+RTI_V~24 H             714  00-01-10  14:48 rti_vcl_radiobutton.h
+RTI_V~22 CPP           718  00-01-10  14:52 rti_vcl_progress_event.cpp
+RTI_V~25 H             702  00-01-10  14:48 rti_vcl_scroll.h
+RTI_V~23 CPP           711  00-01-10  14:48 rti_vcl_scroll_event.cpp
+RTI_V~26 H             582  00-01-10  14:49 rti_vcl_scroll_event.h
+RTI_V~24 CPP         1,181  00-01-10  14:52 rti_vcl_radiobutton.cpp
+RTI_V~27 H             647  00-01-10  14:49 rti_vcl_static.h
+RTI_V~25 CPP         1,134  00-01-10  14:52 rti_vcl_scroll.cpp
+RTI_V~28 H             860  00-01-10  15:45 rti_vcl_toolbar.h
+RTI_V~29 H             886  00-01-10  14:51 rti_vcl_toolbar_event.h
+RTI_V~30 H           1,362  00-01-10  14:52 rti_vcl_windowobject.h
+RTI_V~26 CPP         1,137  00-01-10  14:52 rti_vcl_static.cpp
+RTI_V~27 CPP           712  00-01-10  14:52 rti_vcl_static_event.cpp
+RTI_V~31 H             577  00-01-10  14:52 rti_vcl_static_event.h
+RTI_V~32 H             643  00-01-10  14:52 rti_vcl_status.h
+RTI_V~28 CPP         1,132  00-01-10  14:52 rti_vcl_status.cpp
+RTI_V~29 CPP           708  00-01-10  14:52 rti_vcl_status_event.cpp
+RTI_V~33 H             579  00-01-10  14:52 rti_vcl_status_event.h
+RTI_V~30 CPP         2,706  00-01-10  15:44 rti_vcl_tabcontrol.cpp
+RTI_V~31 CPP             0  99-09-07   4:33 rti_vcl_tabbox.cpp
+RTI_V~34 H               0  99-09-07   4:33 rti_vcl_tabbox.h
+RTI_V~35 H             823  00-01-10  14:52 rti_vcl_tabcontrol.h
+RTI_V~36 H             723  00-01-10  14:52 rti_vcl_tabcontrol_event.h
+RTI_V~32 CPP         1,620  00-01-10  14:52 rti_vcl_thread.cpp
+RTI_V~33 CPP           732  00-01-10  14:52 rti_vcl_tabcontrol_event.cpp
+RTI_V~34 CPP         3,433  00-01-10  15:45 rti_vcl_toolbar.cpp
+RTI_V~37 H             501  99-09-24   2:20 rti_vcl_thread.h
+RTI_V~35 CPP         1,767  00-01-10  14:52 rti_vcl_toolbar_event.cpp
+RTI_V~36 CPP         4,274  00-01-10  14:52 rti_vcl_windowobject.cpp
+RTI_US~1 CPP         2,237  00-01-10  14:37 rti_use_scrollbar.cpp
+RTI_US~1 H             493  99-09-24   2:20 rti_use_scrollbar.h
+        75 個            111,833 バイトのファイルがあります.
+
+一覧のファイル総数:
+       262 個            707,211 バイトのファイルがあります.
+        32 ﾃﾞｨﾚｸﾄﾘ 1,541,152,768 バイトの空きがあります.
+
+このライブラリのプログラム原則
+
+　プログラムはなるべく再利用できるように、汎用性がるようにつくるべし.
+　各種インターフェースには統一性をもたせ、利用者を混乱させないようにするべし.
+　主要な機能にはすべてガページコレクション機能を持たせ、メモリリークの発生を最小におさえるべし.

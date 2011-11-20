@@ -1,0 +1,612 @@
+
+<body bgcolor="#000000" text="#FFFFFF">
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/11f859ca.jpg" WIDTH=246 HEIGHT=346 BORDER=0 alt="ばななみるく"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      	    <P>ばななみるくは、<BR>
+        国土地理院の提供している 25000,2500, 街区レベル位置参照情報を使い、 <BR>
+        日本全国の地図を表示することができます。 <BR>
+        日本全国の地図のサイズは <B>300MB </B><B>程度の高圧縮</B> を実現しました。 <br>
+		</P>
+	</TD>
+  </TR>
+</TABLE>
+<H4>ダウンロード</H4>
+<dl class="catalog">
+<dt>バイナリWindows</dt>
+<dd>ばななみるく1.0</dd>
+<dt>バイナリWindows マップ製作機能付き</dt>
+<dd>ばななみるく1.0</dd>
+<dt>バイナリWinCE</dt>
+<dd>ばななみるく1.0</dd>
+<dt>ソース</dt>
+<dd>ばななみるく1.0</dd>
+</dl>
+<H4>ライセンス</H4>
+<dl class="catalog">
+    <dt>GPL</dt>
+    <dd>このソフトウェアにふくまれるものはみーんな GPL なんだよ、お兄ちゃん。 <br>
+  GPLを守らないとキモイ信者にぬっころされますわよ(反社会的用語対策ずみ)ですよー。<br>
+  <br>
+  GPLの名の下に自由に winny や winmx 
+  にばら撒いてもいいんだよー、というかそっち推奨。</dd>
+    <dt>無保証</dt>
+    <dd>このソフトウェアを使用した結果、いかなる事態になったとしても作者は一切の責任を負いません。</dd>
+</dl>
+<H4>動作環境</H4>
+<dl class="catalog">
+    <dt>OS</dt>
+    <dd>Windows95以上(検証は2000 , XP でしかやってません)<br>
+	WindowsCE(検証は PocketPC2003 (mio と genioと ipaq) でしかやってません)</dd>
+    <dt>ハード</dt>
+    <dd>ぼろいハードでもそこそこ動くはず</dd>
+    <dt>GPS</dt>
+    <dd>動作検証は <a href="http://www.iodata.jp/products/peripheral/2002/cfgps2/index.htm">CFGPS2</a> で行っています。</dd>
+    <dt>必須ライブラリ</dt>
+    <dd>動作には、 <a href="http://gnuwin32.sourceforge.net/packages/zlib.htm">zlib</a>/<a href="http://www.tenik.co.jp/%7Eadachi/wince/zlibce/index_j.html">zlibce</a>が必要です。<br>
+           ただ、ライセンス的に再配布できるらしいので、ばななみるくパッケージに含まれています。<br>
+	   これでママも安心ですね。
+   </dd>
+</dl>
+<H4>注意</H4>
+<dl class="catalog">
+    <dt>地図の精度について</dt>
+    <dd>地図の精度は、10cm 単位の保証になります。</dd>
+    <dt>計算ミスについて</dt>
+    <dd>計算式は気合と根性で算出しています。、<br>
+          合言葉は、足してダメなら引いてみろ、かけてもダメなら割ってみろという、<br>
+          考えるな感じるんだ状態なんで、ミスは大量にあると思います。</dd>
+</dl>
+<H4>地図データの作成方法</H4>
+<H5>地図データのダウンロード</H5>
+<table border=0 cellpadding=2 cellspacing=2>
+    <tr> 
+        <td width=350> 
+      	    <p><br clear=LEFT>
+        <img src="http://blog.livedoor.jp/fprogram/a60dfa9d.png" width=221 height=332 border=0 alt="海"><br>
+      </p>
+	</td>
+	<td nowrap> 
+      	    <p>まず、地図を格納するディレクトリを作成します。<br>
+		(この場合は、 c:\map)
+	  </p>
+	</td>
+    </tr>
+    <tr>
+	<td width=350><img src="http://blog.livedoor.jp/fprogram/ceefb40f.png" width=221 height=332 border=0 alt="海"></td>
+	<td nowrap>
+	    <p>さらに、 25000 2500 address というディレクトリを作成します。<br>
+	  このディレクトリの中に、<br>
+		作成に必要なデータを格納します。<br>
+		<br>
+		25000 は、 1/25000 の地図<br>
+		2500 は、 1/2500 の地図
+<br>
+		address は、街区レベル位置参照情報<br>
+	  </p>
+	</td>
+    </tr>
+</table>
+<table border=0 cellpadding=2 cellspacing=2>
+  <tr> 
+    <td width=350> 
+      	    <p><img src="http://blog.livedoor.jp/fprogram/ca2132cb.png" width=435 height=243 border=0 alt="海"><br clear=LEFT>
+        <br>
+      </p>
+	</td>
+	<td nowrap> 
+      <p>国土地理院より、<br>
+		<a href="http://sdf.gsi.go.jp/search.html">25000 2500 の地図をダウンロード</a>してきてください。<br>
+		<br>
+		<a href="http://weather.is.kochi-u.ac.jp/winwget.html">wget</a> や iria などで連続して落とす場合、<br>
+		国土地理院に過剰な負荷をかけないように、sleepをいれて<br>
+		落としてあげるのが配慮というものです。<br>
+		<br>
+		<font color="#FF0000">注意:</font><br>
+		地図データの基礎となる部分は 25000から取得しています。<br>
+		これは、25000 のデータがないと、地図が作成できないということです。<br>
+		<br>
+		たとえば、 北海道の 2500 と address を取得してきたとしても、<br>
+		<b>北海道の 25000 がないと、地図は作成できません。</b><br>
+		25000は神様です。</p>
+	</td>
+  </tr>
+</table>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/50f26ed6.png" WIDTH=221 HEIGHT=332 BORDER=0 alt="設定"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD nowrap> 
+      <P>ダウンロードしたデータを解凍し、<br>
+		1/25000の地図の場合は、 map\25000 に、<br>
+		<br>
+		<br>
+		</P>
+	</TD>
+  </TR>
+</TABLE>
+<table border=0 cellpadding=2 cellspacing=2>
+  <tr> 
+    <td width=350> 
+      	    <p><img src="http://blog.livedoor.jp/fprogram/1ff30fde.png" width=221 height=332 border=0 alt="設定"><br clear=LEFT>
+        <br>
+      </p>
+	</td>
+	<td nowrap> 
+      	    <p>1/2500 の地図の場合は、map\2500 に、<br>
+		それぞれ格納してください。<br>
+		<br>
+		一度にたくさんのファイルを解凍するときには、<br>
+		<a href="http://www.digipop.ne.jp/%7Egsk/GSK/Soft/MGunEx/index.htm">MachinGun Extractor</a> 等のソフトを使うと便利だと思います。</p>
+	</td>
+  </tr>
+</table>
+<table border=0 cellpadding=2 cellspacing=2>
+  <tr> 
+    <td width=350> 
+      	    <p><img src="http://blog.livedoor.jp/fprogram/08852e78.png" width=435 height=243 border=0 alt="設定"><br clear=LEFT>
+        <br>
+      </p>
+	</td>
+	<td nowrap> 
+      <p>次に、街区レベル位置参照情報より、<br>
+		<a href="http://nlftp.mlit.go.jp/isj/">住所検索に必要なデータをダウンロード</a>します。<br>
+		<br>
+		このとき、<br>
+		版数 1.1a<br>
+		世界測地系 <br>
+		をダウンロードするようにしてください。<br>
+		<br>
+		版数 2.0 にはまだ未対応です。</p>
+	</td>
+  </tr>
+</table>
+<table border=0 cellpadding=2 cellspacing=2>
+  <tr> 
+    <td width=350> 
+      <p><br clear=LEFT>
+        <br>
+		<img src="http://blog.livedoor.jp/fprogram/74bd80bf.png" width=221 height=332 border=0 alt="設定">
+      </p>
+	</td>
+	<td nowrap> 
+      <p>ダウンロードしたデータを解凍し、<br>
+		*.csv ファイルを<br>
+		map\address に格納します。</p>
+	</td>
+  </tr>
+</table>
+<P><BR>
+<H5>地図データの作成</H5>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/55ab1080.png" WIDTH=224 HEIGHT=332 BORDER=0 alt="移動"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD nowrap> 
+      <P>ばななみるくの、「マップ作成機能つき」を<a href="/www/project/banana/download/">ダウンロード</a>してきてください。<br>
+		Milk.exe を実行してください。</P>
+	</TD>
+  </TR>
+</TABLE>
+<table border=0 cellpadding=2 cellspacing=2>
+  <tr> 
+    <td width=350> 
+      	    <p><img src="http://blog.livedoor.jp/fprogram/648962bd.png" width=739 height=470 border=0 alt="移動"><br clear=LEFT>
+        <br>
+      </p>
+	</td>
+	<td nowrap> 
+      <p>MapMaker というダイアログが表示されます。</p>
+	</td>
+  </tr>
+</table>
+<table border=0 cellpadding=2 cellspacing=2 width="491">
+  <tr> 
+    <td width=350> 
+      	    <p><img src="http://blog.livedoor.jp/fprogram/45b47891.png" width=739 height=470 border=0 alt="移動"><br clear=LEFT>
+        <br>
+      </p>
+	</td>
+	<td nowrap> 
+      <p>(2)のソースのところに、<br>
+		作成した map ディレクトリを指定します。</p>
+	</td>
+  </tr>
+</table>
+<table border=0 cellpadding=2 cellspacing=2 width="491">
+  <tr> 
+    <td width=350> 
+      	    <p><img src="http://blog.livedoor.jp/fprogram/628bd584.png" width=739 height=470 border=0 alt="移動"><br clear=LEFT>
+        <br>
+      </p>
+	</td>
+	<td nowrap> 
+      <p>そして、その横にある Scanボタンをクリックし、<br>
+		(3)のリストボックスにデータを読み込ませます。<br>
+		<br>
+		Scanには、しばらく時間がかかります。<br>
+		このScanにひっかかるのは、<br>
+		25000の地図だけです。<br>
+		前にも述べたとおり、<br>
+		地図データの基礎となる部分は<br>
+		 25000から取得しているからです。
+
+		</p>
+	</td>
+  </tr>
+</table>
+<table border=0 cellpadding=2 cellspacing=2 width="491">
+  <tr> 
+    <td width=350> 
+      	    <p><img src="http://blog.livedoor.jp/fprogram/e50ac19a.png" width=739 height=470 border=0 alt="移動"><br clear=LEFT>
+        <br>
+      </p>
+	</td>
+	<td nowrap> 
+      <p>(3)のエリアから、<br>
+		地図を作成するエリアを選択してください。</p>
+	  </td>
+  </tr>
+</table>
+<table border=0 cellpadding=2 cellspacing=2 width="491">
+  <tr> 
+    <td width=350> 
+      	    <p><img src="http://blog.livedoor.jp/fprogram/64b5be8b.png" width=739 height=474 border=0 alt="移動"><br clear=LEFT>
+        <br>
+      </p>
+	</td>
+	<td nowrap> 
+      	    <p>次に、<br>
+		(4)の作業ディレクトリを設定します。<br>
+		この領域には<font color="#FF0000">大量の読み書き</font>が発生するため、<br>
+		なるべく早い領域が望ましいと思われます。<br>
+		ただ、 容量はかなり消費するため<br>
+		(日本全国を作成しようとすると600MB以上は必要)<br>
+		注意してください。<br>
+		</p>
+	    </td>
+  </tr>
+</table>
+<table border=0 cellpadding=2 cellspacing=2 width="491">
+  <tr> 
+    <td width=350> 
+      	    <p><img src="http://blog.livedoor.jp/fprogram/19fa5864.png" width=739 height=474 border=0 alt="移動"><br clear=LEFT>
+        <br>
+      </p>
+	</td>
+	<td nowrap> 
+      <p>(5)作成するmap ファイルを保存する場所を指定します。<br>
+		日本全国で 300MB程度の容量です。</p>
+	</td>
+  </tr>
+</table>
+<table border=0 cellpadding=2 cellspacing=2 width="491">
+  <tr> 
+    <td width=350> 
+      	    <p><img src="http://blog.livedoor.jp/fprogram/5f4ef113.png" width=739 height=474 border=0 alt="移動"><br clear=LEFT>
+        <br>
+      </p>
+	</td>
+	<td nowrap> 
+      <p>さあ、すべての準備が整いました。<br>
+		地図を作成するために Make ボタンを押しましょう。</p>
+	</td>
+  </tr>
+</table>
+<table border=0 cellpadding=2 cellspacing=2 width="491">
+  <tr> 
+    <td width=350> 
+      	    <p><img src="http://blog.livedoor.jp/fprogram/5739f675.png" width=668 height=481 border=0 alt="移動"><br clear=LEFT>
+        <br>
+      </p>
+	</td>
+	<td nowrap>ダイアログが消え、<br>
+	  DOS窓で地図の作成が始まりました。<br>
+	  <br>
+	  日本全国の地図を作成するのに、<br>
+	  Pen4 2.4GHz で、<br>
+	  3時間ぐらいかかります。<br>
+	  <br>
+	  マターリ、お茶でも飲むか、<br>
+	  エロ同人誌でハァハァしたり、<br>
+	  たまっているアニメを鑑賞したりするとよいでしょう。</td>
+  </tr>
+</table>
+<table border=0 cellpadding=2 cellspacing=2 width="491">
+  <tr> 
+    <td width=350> 
+      	    <p><img src="http://blog.livedoor.jp/fprogram/b8db9b0b.png" width=254 height=350 border=0 alt="移動"><br clear=LEFT>
+        <br>
+      </p>
+	</td>
+	<td nowrap>すべての作業が問題なく終了すると、<br>
+	  作成したマップファイルを読み込んだ、ばななみるくが起動します。<br>
+	  <br>
+	  <font color="#FF0000">注意:</font><br>
+	  ディフォルトが美瑛駅なんで、今回作成したマップは海の中です、<br>
+	  メニューの検索→駅で、「さっぽろ」と入れて、検索してください。<br>
+	  さっぽろ駅が出てくるはずです。<br>
+	    <br>
+	    <font color="#FF0000">注意:<br>
+	    </font>作成した地図データを国土地理院の許可なく、<br>
+	    転載などを行うと法律に違反するらしいので、<br>
+	    個人利用にとどめてくださいね。<br>
+	    もし、許可をとって配布したいという奇特な方は、<br>
+	    がんばってください。応援します。</td>
+  </tr>
+</table>
+<table border=0 cellpadding=2 cellspacing=2 width="491">
+  <tr> 
+    <td width=350> 
+      	    <p><img src="http://blog.livedoor.jp/fprogram/cf2c7abb.png" width=374 height=114 border=0 alt="移動"><br clear=LEFT>
+        <br>
+      </p>
+	</td>
+	<td nowrap>途中でエラーが発生すると、エラーメッセージが表示されます。<br>
+	  ご愁傷様です。</td>
+  </tr>
+</table>
+<H4>遊び方</H4>
+<H5>地図を読み込んでみよう</H5>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/fce5e83e.jpg" WIDTH=246 HEIGHT=346 BORDER=0 alt="海"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      <P>ばななみるくを最初に起動すると、ひたすら青い海が広がっています。<BR>
+        これは、地図が読み込まれていないためです。 <BR>
+        メニューより<B>「地図」→「開く」</B> を選択してください。</P>
+	</TD>
+  </TR>
+</TABLE>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/61c1d0ce.jpg" WIDTH=260 HEIGHT=306 BORDER=0 alt="設定"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      <P>地図データと、ユーザデータを保存する場所を指定します。<BR>
+        地図データは、 .map ファイルを、 <BR>
+        ユーザデータは、ディレクトリを指定してください。 </P>
+	</TD>
+  </TR>
+</TABLE>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/11f859ca.jpg" WIDTH=246 HEIGHT=346 BORDER=0 alt="読み込み"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      <P>地図が読み込まれたら成功です。 </P>
+	</TD>
+  </TR>
+</TABLE>
+<H5>地図を移動してみよう</H5>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/1679d3f5.jpg" WIDTH=246 HEIGHT=346 BORDER=0 alt="移動"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      <P>地図の任意の場所をクリックしてみてください。<BR>
+        クリックされた場所にフォーカスが移動するはずです。</P>
+	</TD>
+  </TR>
+</TABLE>
+<H5>回転してみよう</H5>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/0b86863a.jpg" WIDTH=246 HEIGHT=346 BORDER=0 alt="回転"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      <P>地図上で左クリックを押したまま移動 ( ドラッグ ) 
+        してみましょう。<BR>
+        真ん中を中心として回転するはずです。 <BR>
+        ( <FONT COLOR="#ff0000">注意 : 
+        </FONT>広範囲を描画しているときに回転処理が重くなることがあります。男なら我慢してください。by <a href="http://accident.ddo.jp/top.html">150クォリティ</a>)  
+      </P>
+	</TD>
+  </TR>
+</TABLE>
+<H5>拡大縮小してみよう</H5>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/593247de.jpg" WIDTH=246 HEIGHT=346 BORDER=0 alt="拡大縮小"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      	    <P>マウスのホイールをまわしてみましょう。<BR>
+        地図が拡大、縮小するはずです。 <BR>
+        ( <FONT COLOR="#ff0000">注意 : 
+        </FONT>広範囲を描画すると処理に時間がかかるときがあります。男なら我慢してください。by <a href="http://accident.ddo.jp/top.html">150クォリティ</a> ) <BR>
+        <BR>
+        もし、マウスホイールがない場合は、メニューの<B>「地図」</B>より、拡大、縮小が行えます。 </P>
+	</TD>
+  </TR>
+</TABLE>
+<H5>検索してみよう</H5>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/dc0c9425.jpg" WIDTH=221 HEIGHT=189 BORDER=0 alt="検索"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      <P>ばななみるくには、全国の鉄道の情報が入っています。 <BR>
+        ( <FONT COLOR="#ff0000">注意 : 
+        </FONT>元にしている地図が 25000 なので、ローカルな路面電車の駅などは省略されている場合があります。 
+        ) <BR>
+        メニューより、<B>「検索」→「駅検索」</B>を選択してください。 <BR>
+        <BR>
+        検索したい駅名を「ひらがな」で入力すると、検索結果がリストボックスに表示されます。<BR>
+        そして、検索結果をダブルクリックすると、その駅にフォーカスが移動します。 <BR>
+        この検索は、前方一致検索を行います。<BR>
+        つまり、「とうきょう」という駅を検索するのに、「とう」では引っかかるけど、「きょう」ではひっかからないということです。</P>
+
+	</TD>
+  </TR>
+</TABLE>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/84d11f4b.jpg" WIDTH=221 HEIGHT=189 BORDER=0 alt="住所検索"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      <P>ばななみるくには、街区レベル位置参照情報を使い、全国の住所の番地レベルまでの検索ができます。 <BR>
+        ( <FONT COLOR="#ff0000">注意 : 
+        </FONT>街区レベル位置参照情報を利用しているため超度田舎のデータはありません。 ) <BR>
+        メニューより、<B>「検索」→「住所検索」</B>を選択してください。 <BR>
+        <BR>
+        検索したい住所を入力すると、検索結果がリストボックスに表示されます。<BR>
+        そして、検索結果をダブルクリックすると、その場所にフォーカスが移動します。 <BR>
+        この検索も、前方一致検索を行います。</P>
+	</TD>
+  </TR>
+</TABLE>
+<H5>GPSを使ってみよう</H5>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/3af09f4a.jpg" WIDTH=260 HEIGHT=315 BORDER=0 alt="GPS"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      <P>GPS を利用することにより、現在の位置を正確に知ることができます。 <BR>
+        メニューの<B>「 </B><B>GPS </B><B>」→「設定」</B>を選択してください。 
+        <BR>
+        接続をクリックすると、 GPS との交信を開始します。</P>
+	</TD>
+  </TR>
+</TABLE>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/dd189912.jpg" WIDTH=262 HEIGHT=315 BORDER=0 alt="交信確認"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      <P>GPS との交信状態を確認するには、 <BR>
+        メニューより、<B>「 </B><B>GPS </B><B>」→「交信確認」</B>を選択してください。 
+        <BR>
+        <BR>
+        <BR>
+        衛星の位置と、 NMEA0183 の生ログが表示されます。<BR>
+        この画面は、 GPS 設定で設定した「チェック間隔」で更新されます。 
+      </P>
+	</TD>
+  </TR>
+</TABLE>
+<H5>ユーザ定義情報を追加しよう</H5>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/bb1e2ac4.jpg" WIDTH=276 HEIGHT=336 BORDER=0 alt="拠点"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      <P>国土地理院の地図データは、コンビニや飲食店、観光地などのデータが収録されていません。<BR>
+        そこを補うのが、ユーザ定義情報です。 <BR>
+        メニューから<B>「拠点」→「追加」</B>を選択してください。 <BR>
+        現在のフォーカスのいる場所に、任意の情報を書き込むことができます。 </P>
+	</TD>
+  </TR>
+</TABLE>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/12e45328.jpg" WIDTH=253 HEIGHT=174 BORDER=0 alt="アイコン"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      	    <P>また、ばななみるくには、地図記号 ( 私の自信作 ( 
+        w  も、収録されており、 <BR>
+        情報にアイコンを添えることができます。 </P>
+	</TD>
+  </TR>
+</TABLE>
+<H5>地図に書き込みをしてみよう</H5>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+  <TR> 
+    <TD WIDTH=350> 
+      	    <P><IMG SRC="http://blog.livedoor.jp/fprogram/fdbaaa37.jpg" WIDTH=246 HEIGHT=346 BORDER=0 alt="ペン"><BR CLEAR=LEFT>
+        <BR>
+      </P>
+	</TD>
+	<TD> 
+      <P>地図に、自由に線を引くことができます。<BR>
+        メニューより、<B>「ペン」→「ペン」→「色 </B><B>1 </B><B>」</B>を選択してください。<BR>
+        そして、地図上をドラッグすると、線が描画されます。<BR>
+        ペン入力をやめて、通常動作 ( 移動や回転 ) 
+        を行う場合は、<BR>
+        メニューより、<B>「ペン」→「やめる」</B>を選択してください。 <BR>
+        <BR>
+        描いた線を保存するには、メニューより、<B>「ペン」→「保存」</B>を選択し、<BR>
+        ファイルに保存してください。 </P>
+	</TD>
+  </TR>
+</TABLE>
+<h4>ハッキング</h4>
+ここから先は、ばななみるくをハッキングしたい人向けの情報です。
+<h5>大まかな構成</h5>
+<p>Debug / Release は、 ReleaseMakeMap と同じ構成です。<br>
+	  違いは、テストルーチンを実行するということです。<br>
+	  babana/test ディレクトリがないとクラッシュします。</p>
+<p>ReleaseViewOnly は、地図を作成する部分とテストルーチンを含みません。<br>
+	  ダウンロードページで落とせる「バイナリWindows」は、これでビルドしています</p>
+<p>ReleaseMakeMap は、地図を作成する部分を含み、テストルーチンを含みません。<br>
+	  ダウンロードページで落とせる「バイナリ Windows マップ作成機能つき」は、これでビルドしています</p>
+<h5>BBanaan.Create() からすべて始まると思ってもらってOKです
+。</h5>
+<p>B*Dlg のクラスはダイアログです。</p>
+<p>B からはじまるクラスは、ばななみるく固有のクラスです。</p>
+<h5>RGISSmall からはじまるクラスは、地図を表示するクラスです。</h5>
+<p>RGISSmallMaster が親玉です。</p>
+<p>RGISSmallParent が、道路や川、建物などの情報をすべて管轄しています。</p>
+<p>RGISSmallFileRead で地図情報を読み込みます。</p>
+<p>例外として、 RGISGPS と RGISNMEA0183 , RGISMath,RGISMathAlgorithmがあります。<br>
+	  これらは、地図表示でも使っています。 ごめんちゃい。</p>
+<h5>RGIS からはじまるクラスは、地図をばななみるく形式に変換するクラスです。</h5>
+<p>RGISが親玉です。</p>
+<p>RGIS2500 は 1/2500 の地図を管理しています。</p>
+<p>RGIS25000 は 1/25000 の地図を管理しています。</p>
+<p>RGISAddress は 街区レベル位置参照情報を管理しています。</p>
+<p>RGISCvCut は、地図情報を 65535x65535 のブロックに切り裂きます。</p>
+<p>RGISJoin は、RGISCvCutでバラバラにされた地図を map 形式に結合します。</p>
+<h5>コンパイル環境</h5>
+<p>開発は VC++6 sp5 or eVC++4 sp2 で行っています。</p>
+<p>VisualC++ 2005 beta1 でも、コンパイルがとおるようにはしてあります。<br>
+	  warning はきまくりは、面倒なので無視してます(w<br>
+	  VisualC++ 2005 beta1 の方がコンパイラはかしこいです。</p>
+<p>　</p>

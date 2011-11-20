@@ -1,0 +1,453 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resrc1.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "commctrl.h"
+#include "resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_BANANA_DIALOG DIALOG DISCARDABLE  0, 0, 386, 499
+STYLE WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | 
+    WS_THICKFRAME
+CAPTION "ばななみるく"
+MENU IDR_MENU1
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+END
+
+IDD_ADDRESS_FIND_DIALOG DIALOG DISCARDABLE  0, 0, 123, 109
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "住所検索"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    EDITTEXT        IDC_WORD_EDIT,0,1,121,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "検索",IDOK,0,17,30,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,30,17,26,14
+    CONTROL         "List1",IDC_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,2,31,121,71
+END
+
+IDD_USERDATAEDIT_DIALOG DIALOG DISCARDABLE  0, 0, 135, 138
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "拠点の情報"
+FONT 9, "System"
+BEGIN
+    EDITTEXT        IDC_NAME_EDIT,26,7,102,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_CATEGO_COMBO,26,21,102,66,CBS_DROPDOWN | 
+                    CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_SUBCATEGO_COMBO,26,37,102,66,CBS_DROPDOWN | 
+                    CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_COMMENT_EDIT,26,52,102,52,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_WANTRETURN
+    PUSHBUTTON      "OK",IDOK,101,121,27,9
+    LTEXT           "名前",IDC_STATIC,7,7,17,8
+    LTEXT           "説明",IDC_STATIC,7,52,17,8
+    LTEXT           "種類",IDC_STATIC,7,21,17,8
+    LTEXT           "詳細",IDC_STATIC,7,36,17,8
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,81,121,25,9
+    PUSHBUTTON      "削除",ID_DEL,102,111,26,9
+    LTEXT           "画像",IDC_STATIC,7,107,17,8
+    PUSHBUTTON      "..",IDC_CHANGE_ICON_BUTTON,48,107,15,7
+    LTEXT           "",IDC_USERDATA_ICON,28,106,15,12,NOT WS_VISIBLE
+END
+
+IDD_GPS_STATE_DIALOG DIALOG DISCARDABLE  0, 0, 128, 129
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "GPS通信状況"
+FONT 9, "System"
+BEGIN
+    EDITTEXT        IDC_LOG_EDIT,7,62,114,60,ES_MULTILINE | ES_READONLY | 
+                    ES_WANTRETURN | WS_VSCROLL
+    EDITTEXT        IDC_SATELLITES_EDIT,62,7,59,52,ES_MULTILINE | 
+                    ES_READONLY | ES_WANTRETURN | WS_VSCROLL
+    EDITTEXT        IDC_STEPIC_STATIC,7,7,55,50,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE | WS_DISABLED
+END
+
+IDD_EKI_FIND_DIALOG DIALOG DISCARDABLE  0, 0, 123, 109
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "駅検索"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    EDITTEXT        IDC_WORD_EDIT,0,1,121,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "検索",IDOK,0,17,30,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,30,17,26,14
+    CONTROL         "List1",IDC_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,2,31,121,71
+END
+
+IDD_USERDATAICON_DIALOG DIALOG DISCARDABLE  0, 0, 141, 99
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "アイコン選択"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,103,79,31,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,74,79,28,14
+    SCROLLBAR       IDC_ICON_SCROLLBAR,7,24,127,10
+    EDITTEXT        IDC_ICON_MESSAGE_EDIT,7,39,127,34,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN
+    PUSHBUTTON      "自動推測",IDC_AUTO_BUTTON,7,79,41,14
+    LTEXT           "Static",IDC_ICON_PALLET,7,7,127,12,NOT WS_VISIBLE
+END
+
+IDD_GPS_DIALOG DIALOG DISCARDABLE  0, 0, 145, 193
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "GPS"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,88,167,50,14
+    LTEXT           "ポート",IDC_STATIC,7,17,35,8
+    COMBOBOX        IDC_PORT_COMBO,64,15,74,57,CBS_DROPDOWN | 
+                    CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "測地系",IDC_STATIC,8,58,38,8
+    COMBOBOX        IDC_TYPE_COMBO,63,57,74,76,CBS_DROPDOWN | 
+                    CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "チェック間隔",IDC_STATIC,7,82,50,8
+    EDITTEXT        IDC_CHECKTIME_EDIT,63,82,56,14,ES_AUTOHSCROLL
+    LTEXT           "秒",IDC_STATIC,128,84,8,8
+    LTEXT           "ログ",IDC_STATIC,7,102,26,8
+    COMBOBOX        IDC_LOGTYPE_COMBO,62,100,65,62,CBS_DROPDOWN | 
+                    CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "接続",IDC_CONNECT_BUTTON,7,167,33,14
+    PUSHBUTTON      "切断",IDC_DIS_CONNECT_BUTTON,46,167,34,14
+    LTEXT           "速度",IDC_STATIC,7,35,31,8
+    COMBOBOX        IDC_SPEED_COMBO,64,34,73,63,CBS_DROPDOWN | 
+                    CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "ログディレクトリ",IDC_STATIC,7,122,54,8
+    EDITTEXT        IDC_LOGDIR_EDIT,63,120,69,14,ES_AUTOHSCROLL
+    LTEXT           "トラックログ",IDC_STATIC,7,141,41,8
+    COMBOBOX        IDC_TRACKLOG_COMBO,63,141,65,62,CBS_DROPDOWN | 
+                    CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_CONFIG_DIALOG DIALOG DISCARDABLE  0, 0, 145, 187
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "地図を開く"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,88,165,50,14
+    PUSHBUTTON      "OK",IDOK,50,165,34,14
+    LTEXT           "地図",IDC_STATIC,7,15,15,8
+    EDITTEXT        IDC_BANANAMAP_EDIT,36,13,86,14,ES_AUTOHSCROLL
+    LTEXT           "ユーザ\nデータ",IDC_STATIC,7,33,21,21
+    EDITTEXT        IDC_BANANAUSERDIR_EDIT,36,32,86,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "..",IDC_BANANAMAP_BUTTON,124,13,13,14
+    PUSHBUTTON      "..",IDC_BANANAUSERDIR_BUTTON,124,32,13,14
+    LTEXT           "回転処理を行う",IDC_STATIC,7,67,49,9
+    COMBOBOX        IDC_NOROTATE_COMBO,81,65,48,49,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_MAKE DIALOG DISCARDABLE  0, 0, 419, 299
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "MapMaker"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,363,278,50,14
+    PUSHBUTTON      "Scan",IDC_AREASRC_SCAN,378,24,28,14
+    LTEXT           "ソース",IDC_STATIC,179,26,20,8
+    EDITTEXT        IDC_AREASRC_EDIT,205,24,152,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "..",IDC_AREASRC_BUTTON,360,23,13,14
+    CONTROL         "List1",IDC_AREALIST,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,184,59,191,
+                    107
+    LTEXT           "3.地図を作成するエリアを選択してください。",IDC_STATIC,
+                    180,50,186,9
+    LTEXT           "2.構築するデータが入ってるディレクトリを指定し、 Scanボタンを押してください",
+                    IDC_STATIC,179,7,234,8
+    PUSHBUTTON      "Make",IDC_MAKE_BUTTON,180,278,50,14
+    LTEXT           "5.作成した .map ファイル名",IDC_STATIC,182,212,186,8
+    LTEXT           "4.作業用のディレクトリを指定してください。",IDC_STATIC,
+                    182,176,205,10
+    LTEXT           "作業エリア",IDC_STATIC,183,191,32,8
+    EDITTEXT        IDC_TEMP_EDIT,222,188,135,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "..",IDC_TEMP_BUTTON,358,188,13,14
+    LTEXT           ".map",IDC_STATIC,183,226,14,8
+    EDITTEXT        IDC_MAP_EDIT,222,225,135,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "..",IDC_MAP_BUTTON,359,225,13,14
+    LTEXT           "6.make ボタンを押してください。 \n作成にはすごーーーーく時間がかかります。",
+                    IDC_STATIC,183,246,227,17
+    EDITTEXT        IDC_EXAMPLE_EDIT,7,39,165,253,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN
+    LTEXT           "1.国土地理院からデータをダウンロードし、\n次のように格納してください",
+                    IDC_STATIC,7,6,154,23
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resrc1.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""commctrl.h""\r\n"
+    "#include ""resource.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    "IDD_BANANA_DIALOG", DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 379
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 492
+    END
+
+    "IDD_ADDRESS_FIND_DIALOG", DIALOG
+    BEGIN
+        BOTTOMMARGIN, 102
+    END
+
+    "IDD_USERDATAEDIT_DIALOG", DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 128
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 130
+    END
+
+    "IDD_GPS_STATE_DIALOG", DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 121
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 122
+    END
+
+    "IDD_EKI_FIND_DIALOG", DIALOG
+    BEGIN
+        BOTTOMMARGIN, 102
+    END
+
+    "IDD_USERDATAICON_DIALOG", DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 134
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 92
+    END
+
+    "IDD_GPS_DIALOG", DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 138
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 186
+    END
+
+    "IDD_CONFIG_DIALOG", DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 138
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 180
+    END
+
+    "IDD_MAKE", DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 412
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 292
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_BANANA_ICON         ICON    DISCARDABLE     "icon1.ico"
+IDI_BANANA_ICON_SMALL   ICON    DISCARDABLE     "ico00001.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU DISCARDABLE 
+BEGIN
+    POPUP "地図"
+    BEGIN
+        MENUITEM "開く",                        ID_MENU_CONFIG
+        MENUITEM SEPARATOR
+        MENUITEM "拡大",                        ID_MENU_BIG
+        MENUITEM "縮小",                        ID_MENU_SMALL
+        MENUITEM SEPARATOR
+        MENUITEM "終了",                        ID_MENU_END
+    END
+    POPUP "検索"
+    BEGIN
+        MENUITEM "駅",                          ID_MENU_EKI
+        MENUITEM "住所",                        ID_MENU_ADDRESS
+    END
+    POPUP "GPS"
+    BEGIN
+        MENUITEM "設定",                        ID_MENU_GPSSETTING
+        MENUITEM "交信確認",                    ID_MENU_GPSSTATE
+    END
+    POPUP "拠点"
+    BEGIN
+        MENUITEM "追加",                        ID_MENU_USERDATA_APPEND
+    END
+    POPUP "ペン"
+    BEGIN
+        POPUP "ペン"
+        BEGIN
+            MENUITEM "色1",                         ID_MENU_PEN1
+            MENUITEM "色2",                         ID_MENU_PEN2
+            MENUITEM "色3",                         ID_MENU_PEN3
+            MENUITEM "色4",                         ID_MENU_PEN4
+            MENUITEM "色5",                         ID_MENU_PEN5
+            MENUITEM "色6",                         ID_MENU_PEN6
+            MENUITEM "消しゴム",                    ID_MENU_ERASE
+        END
+        MENUITEM "やめる",                      ID_MENU_PENEND
+        MENUITEM SEPARATOR
+        MENUITEM "読み込み",                    ID_MENU_PEN_LOAD
+        MENUITEM "保存",                        ID_MENU_PEN_SAVE
+    END
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", " \0"
+            VALUE "FileDescription", "Banana\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "Banana\0"
+            VALUE "LegalCopyright", "Copyright (C) 2004\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "Banana.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "  Banana\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_GPS_DIALOG DLGINIT
+BEGIN
+    IDC_LOGTYPE_COMBO, 0x403, 11, 0
+0xe68e, 0xbe93, 0xb582, 0xc882, 0xa282, "\000" 
+    IDC_LOGTYPE_COMBO, 0x403, 8, 0
+0x4d4e, 0x3041, 0x3831, 0x0033, 
+    IDC_TRACKLOG_COMBO, 0x403, 11, 0
+0xe68e, 0xbe93, 0xb582, 0xc882, 0xa282, "\000" 
+    IDC_TRACKLOG_COMBO, 0x403, 8, 0
+0x4d4e, 0x3041, 0x3831, 0x0033, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// CEUX
+//
+
+HI_RES_AWARE            CEUX    DISCARDABLE     "ceux1.bin"
+#endif    // 日本語 resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

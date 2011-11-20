@@ -1,0 +1,440 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4E5C819F-CA68-4F7C-924F-8D861648C959}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zanetti</RootNamespace>
+    <AssemblyName>OmegaChart</AssemblyName>
+    <StartupObject>Zanetti.Env</StartupObject>
+    <ApplicationIcon>omegachart.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;_RTI_ONLY</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;_RTI_ONLY</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetMagic2005, Version=4.1.0.0, Culture=neutral, PublicKeyToken=6cf6edec59e036ec, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\DotNetMagic2005.dll</HintPath>
+    </Reference>
+    <Reference Include="grammatica-1.4, Version=0.0.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\grammatica-1.4.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccumulativeVolume.cs" />
+    <Compile Include="archiver.cs" />
+    <Compile Include="ArithmeticLibrary.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AutoTrading.cs" />
+    <Compile Include="AutoTradingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoTradingResultPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AutoTradingSummaryDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base64.cs" />
+    <Compile Include="BigInteger.cs" />
+    <Compile Include="Bookmark.cs" />
+    <Compile Include="BookmarkPane.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Brand.cs" />
+    <Compile Include="BrandListPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ButtonEx.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChartCanvas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChartDrawing.cs" />
+    <Compile Include="ChartTitle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CodeBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CodeExtendData.cs" />
+    <Compile Include="CodeInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ColPickerComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Command.cs" />
+    <Compile Include="CommandLine.cs" />
+    <Compile Include="CustomComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomizeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Data.cs" />
+    <Compile Include="DataSource.cs" />
+    <Compile Include="DateRangeChecker.cs" />
+    <Compile Include="dde.cs" />
+    <Compile Include="DisplayKitTemplateDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Download.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DownloadOrder.cs" />
+    <Compile Include="DreamVisor.cs" />
+    <Compile Include="EnumDescription.cs" />
+    <Compile Include="Env.cs" />
+    <Compile Include="EnvironmentDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnvironmentDialog.Designer.cs">
+      <DependentUpon>EnvironmentDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Eval.cs" />
+    <Compile Include="Export.cs" />
+    <Compile Include="ExportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportDialog.Designer.cs">
+      <DependentUpon>ExportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExpressionConstructor.cs" />
+    <Compile Include="Expressions.cs" />
+    <Compile Include="ExtensionKit.cs" />
+    <Compile Include="ExtensionKitList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FreeLine.cs" />
+    <Compile Include="Graphics.cs" />
+    <Compile Include="Hahaha.cs" />
+    <Compile Include="hdatelier.cs" />
+    <Compile Include="History.cs" />
+    <Compile Include="HotKey.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HTTPConnection.cs" />
+    <Compile Include="ImageListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Indicator.cs" />
+    <Compile Include="IndicatorSchema.cs" />
+    <Compile Include="IndicatorSet.cs" />
+    <Compile Include="InitializeData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KenMille.cs" />
+    <Compile Include="KeyConfig.cs" />
+    <Compile Include="KeyConfigDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KitTestDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MoneyPlanning.cs" />
+    <Compile Include="Mujinzou.cs" />
+    <Compile Include="NotClickableButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Options.cs" />
+    <Compile Include="PanRolling.cs" />
+    <Compile Include="parser\ZPredicationAnalyzer.cs" />
+    <Compile Include="parser\ZPredicationConstants.cs" />
+    <Compile Include="parser\ZPredicationParser.cs" />
+    <Compile Include="parser\ZPredicationTokenizer.cs" />
+    <Compile Include="PKIBase.cs" />
+    <Compile Include="Prediction.cs" />
+    <Compile Include="PredictionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PredictionResultPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Preference.cs" />
+    <Compile Include="Print.cs" />
+    <Compile Include="PromptContribution.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoTradingDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AutoTradingDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoTradingResultPane.resx">
+      <DependentUpon>AutoTradingResultPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoTradingSummaryDialog.resx">
+      <DependentUpon>AutoTradingSummaryDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BookmarkPane.resx">
+      <DependentUpon>BookmarkPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ButtonEx.resx">
+      <DependentUpon>ButtonEx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChartCanvas.resx">
+      <DependentUpon>ChartCanvas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CodeInput.resx">
+      <DependentUpon>CodeInput.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomizeDialog.resx">
+      <DependentUpon>CustomizeDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisplayKitTemplateDialog.resx">
+      <DependentUpon>DisplayKitTemplateDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Download.resx">
+      <DependentUpon>Download.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ExportDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionKitList.resx">
+      <DependentUpon>ExtensionKitList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageListForm.resx">
+      <DependentUpon>ImageListForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InitializeData.resx">
+      <DependentUpon>InitializeData.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KeyConfigDialog.resx">
+      <DependentUpon>KeyConfigDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KitTestDialog.resx">
+      <DependentUpon>KitTestDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFrame.resx">
+      <DependentUpon>MainFrame.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PredictionDialog.resx">
+      <DependentUpon>PredictionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PredictionResultPane.resx">
+      <DependentUpon>PredictionResultPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PromptContribution.resx">
+      <DependentUpon>PromptContribution.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registration.resx">
+      <DependentUpon>Registration.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScreeningDialog.resx">
+      <DependentUpon>ScreeningDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScreeningResultPane.resx">
+      <DependentUpon>ScreeningResultPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchBrandDialog.resx">
+      <DependentUpon>SearchBrandDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectBookmarkFolder.resx">
+      <DependentUpon>SelectBookmarkFolder.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityLibrary\Menus\MenuItemEx.resx">
+      <DependentUpon>MenuItemEx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityLibrary\WinControls\ColorListBox.resx">
+      <DependentUpon>ColorListBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityLibrary\WinControls\ColorPickerDropDown.resx">
+      <DependentUpon>ColorPickerDropDown.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityLibrary\WinControls\CustomColorDlg.resx">
+      <DependentUpon>CustomColorDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UtilityLibrary\WinControls\NumericTextBox.resx">
+      <DependentUpon>NumericTextBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="PublicKey.cs" />
+    <Compile Include="realtimeupdate.cs" />
+    <Compile Include="Registration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RSA.cs" />
+    <Compile Include="Screening.cs" />
+    <Compile Include="ScreeningDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScreeningResultPane.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SearchBrandDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectBookmarkFolder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SimpleSign.cs" />
+    <Compile Include="SortableListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StaticGrouping.cs" />
+    <Compile Include="Statistics.cs" />
+    <Compile Include="StorageNode.cs" />
+    <Compile Include="StreamWithSignature.cs" />
+    <Compile Include="SystemTrading.cs" />
+    <Compile Include="TextUtil.cs" />
+    <Compile Include="TimeSeries.cs" />
+    <Compile Include="ToggleButtonEx.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Util.cs" />
+    <Compile Include="UtilityLibrary\General\ColorUtil.cs" />
+    <Compile Include="UtilityLibrary\General\GDIUtil.cs" />
+    <Compile Include="UtilityLibrary\Menus\ColorGroup.cs" />
+    <Compile Include="UtilityLibrary\Menus\MenuItemEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UtilityLibrary\Win32\Enums.cs" />
+    <Compile Include="UtilityLibrary\Win32\Functions.cs" />
+    <Compile Include="UtilityLibrary\Win32\Structs.cs" />
+    <Compile Include="UtilityLibrary\WinControls\ColorListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UtilityLibrary\WinControls\ColorPickerDropDown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityLibrary\WinControls\CustomColorDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UtilityLibrary\WinControls\NumericTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Visitor.cs" />
+    <Compile Include="Weekly.cs" />
+    <Compile Include="Win32.cs" />
+    <Compile Include="XmlStorageRW.cs" />
+    <Compile Include="XmlUtil.cs" />
+    <Compile Include="YahooTable.cs" />
+    <Compile Include="ZMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="omegachart.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="parser\c.sh" />
+    <None Include="parser\condition.grammar" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows インストーラ 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

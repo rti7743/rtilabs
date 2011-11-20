@@ -1,0 +1,22 @@
+// RHTTPHeaderAttributeRange.cpp: RHTTPHeaderAttributeRange クラスのインプリメンテーション
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "RHTTPHeaderAttributeRange.h"
+
+//////////////////////////////////////////////////////////////////////
+// 構築/消滅
+//////////////////////////////////////////////////////////////////////
+
+RHTTPHeaderAttributeRange::RHTTPHeaderAttributeRange()
+{
+			Start = 0;
+			End = INT_MAX;
+			Enable = false;
+}
+
+RHTTPHeaderAttributeRange::~RHTTPHeaderAttributeRange()
+{
+
+}
+

@@ -1,0 +1,1337 @@
+# Microsoft eMbedded Visual Tools Project File - Name="slitCE" - Package Owner=<4>
+# Microsoft eMbedded Visual Tools Generated Build File, Format Version 6.02
+# ** 編集しないでください **
+
+# TARGTYPE "Win32 (WCE ARMV4) Application" 0xa301
+
+CFG=slitCE - Win32 (WCE ARMV4) Release
+!MESSAGE これは有効なメイクファイルではありません。このプロジェクトをビルドするためには NMAKE を使用してください。
+!MESSAGE [メイクファイルのエクスポート] コマンドを使用して実行してください
+!MESSAGE 
+!MESSAGE NMAKE /f "slitCE.vcn".
+!MESSAGE 
+!MESSAGE NMAKE の実行時に構成を指定できます
+!MESSAGE コマンド ライン上でマクロの設定を定義します。例 :
+!MESSAGE 
+!MESSAGE NMAKE /f "slitCE.vcn" CFG="slitCE - Win32 (WCE ARMV4) Release"
+!MESSAGE 
+!MESSAGE 選択可能なビルド モード :
+!MESSAGE 
+!MESSAGE "slitCE - Win32 (WCE ARMV4) Release" ("Win32 (WCE ARMV4) Application" 用)
+!MESSAGE "slitCE - Win32 (WCE ARMV4) Debug" ("Win32 (WCE ARMV4) Application" 用)
+!MESSAGE 
+
+# Begin Project
+# PROP AllowPerConfigDependencies 0
+# PROP Scc_ProjName ""
+# PROP Scc_LocalPath ""
+# PROP ATL_Project 2
+CPP=clarm.exe
+MTL=midl.exe
+RSC=rc.exe
+
+!IF  "$(CFG)" == "slitCE - Win32 (WCE ARMV4) Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "ARMV4Rel"
+# PROP BASE Intermediate_Dir "ARMV4Rel"
+# PROP BASE CPU_ID "{ECBEA43D-CD7B-4852-AD55-D4227B5D624B}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "ARMV4Rel"
+# PROP Intermediate_Dir "ARMV4Rel"
+# PROP CPU_ID "{ECBEA43D-CD7B-4852-AD55-D4227B5D624B}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+# ADD BASE RSC /l 0x411 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "NDEBUG" /d "UNICODE" /d "_UNICODE" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /d "ARMV4" /r
+# ADD RSC /l 0x411 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "NDEBUG" /d "UNICODE" /d "_UNICODE" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /d "ARMV4" /r
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /YX /O2 /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /GX /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /FR /YX /O2 /M$(CECrtMT) /c
+# ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32=link.exe
+# ADD BASE LINK32 commctrl.lib coredll.lib aygshell.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+# ADD LINK32 commctrl.lib coredll.lib aygshell.lib Ccrtrtti.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+
+!ELSEIF  "$(CFG)" == "slitCE - Win32 (WCE ARMV4) Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "ARMV4Dbg"
+# PROP BASE Intermediate_Dir "ARMV4Dbg"
+# PROP BASE CPU_ID "{ECBEA43D-CD7B-4852-AD55-D4227B5D624B}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "ARMV4Dbg"
+# PROP Intermediate_Dir "ARMV4Dbg"
+# PROP CPU_ID "{ECBEA43D-CD7B-4852-AD55-D4227B5D624B}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+# ADD BASE RSC /l 0x411 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "DEBUG" /d "UNICODE" /d "_UNICODE" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /d "ARMV4" /r
+# ADD RSC /l 0x411 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "DEBUG" /d "UNICODE" /d "_UNICODE" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /d "ARMV4" /r
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /YX /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /GX /Zi /Od /D "DEBUG" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /YX /M$(CECrtMTDebug) /c
+# ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32=link.exe
+# ADD BASE LINK32 commctrl.lib coredll.lib aygshell.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+# ADD LINK32 commctrl.lib coredll.lib aygshell.lib Ccrtrtti.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+
+!ENDIF 
+
+# Begin Target
+
+# Name "slitCE - Win32 (WCE ARMV4) Release"
+# Name "slitCE - Win32 (WCE ARMV4) Debug"
+# Begin Group "Source Files"
+
+# PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+# Begin Source File
+
+SOURCE=.\comm.cpp
+DEP_CPP_COMM_=\
+	".\stdafx.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\main.cpp
+DEP_CPP_MAIN_=\
+	".\comm.h"\
+	".\imgdecmp.h"\
+	".\imgrendr.h"\
+	".\MVConfig.h"\
+	".\MVControl.h"\
+	".\MVFileList.h"\
+	".\MVImagePreConvert.h"\
+	".\MVMain.h"\
+	".\MVPageData.h"\
+	".\MVReaderThread.h"\
+	".\MVSettingDialog.h"\
+	".\MVThreadManager.h"\
+	".\RAutoLibraryWithException.h"\
+	".\RComboBox.h"\
+	".\RConferException.h"\
+	".\RDialog.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RImage.h"\
+	".\RImgdecmp.h"\
+	".\RIOCannotOpenException.h"\
+	".\RIOCannotReadException.h"\
+	".\RIOCannotWriteException.h"\
+	".\RIOException.h"\
+	".\RMessageBox.h"\
+	".\RNotSupportException.h"\
+	".\RStdioFile.h"\
+	".\RThread.h"\
+	".\RWaitCursor.h"\
+	".\RWin32Exception.h"\
+	".\RWindowBase.h"\
+	".\WindowsMain.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_MAIN_=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVConfig.cpp
+DEP_CPP_MVCON=\
+	".\comm.h"\
+	".\MVConfig.h"\
+	".\RConfigFile.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_MVCON=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVControl.cpp
+DEP_CPP_MVCONT=\
+	".\comm.h"\
+	".\imgdecmp.h"\
+	".\imgrendr.h"\
+	".\MVConfig.h"\
+	".\MVControl.h"\
+	".\MVFileList.h"\
+	".\MVImagePreConvert.h"\
+	".\MVPageData.h"\
+	".\MVReaderThread.h"\
+	".\MVThreadManager.h"\
+	".\RAutoLibraryWithException.h"\
+	".\RConferException.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RImage.h"\
+	".\RImgdecmp.h"\
+	".\RIOCannotOpenException.h"\
+	".\RIOCannotReadException.h"\
+	".\RIOCannotWriteException.h"\
+	".\RIOException.h"\
+	".\RMessageBox.h"\
+	".\RNotSupportException.h"\
+	".\RStdioFile.h"\
+	".\RThread.h"\
+	".\RWaitCursor.h"\
+	".\RWin32Exception.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_MVCONT=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVFileList.cpp
+DEP_CPP_MVFIL=\
+	".\comm.h"\
+	".\MVFileList.h"\
+	".\RException.h"\
+	".\RIOCannotOpenException.h"\
+	".\RIOCannotReadException.h"\
+	".\RIOCannotWriteException.h"\
+	".\RIOException.h"\
+	".\RMessageBox.h"\
+	".\RStdioFile.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_MVFIL=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVImage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVImagePreConvert.cpp
+DEP_CPP_MVIMA=\
+	".\comm.h"\
+	".\MVConfig.h"\
+	".\MVImagePreConvert.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_MVIMA=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVInputData.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVMain.cpp
+DEP_CPP_MVMAI=\
+	".\comm.h"\
+	".\imgdecmp.h"\
+	".\imgrendr.h"\
+	".\MVConfig.h"\
+	".\MVControl.h"\
+	".\MVFileList.h"\
+	".\MVImagePreConvert.h"\
+	".\MVMain.h"\
+	".\MVPageData.h"\
+	".\MVReaderThread.h"\
+	".\MVSettingDialog.h"\
+	".\MVThreadManager.h"\
+	".\RAutoLibraryWithException.h"\
+	".\RComboBox.h"\
+	".\RConferException.h"\
+	".\RDialog.h"\
+	".\RDialogUtil.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RImage.h"\
+	".\RImgdecmp.h"\
+	".\RIOCannotOpenException.h"\
+	".\RIOCannotReadException.h"\
+	".\RIOCannotWriteException.h"\
+	".\RIOException.h"\
+	".\RMessageBox.h"\
+	".\RNotSupportException.h"\
+	".\RStdioFile.h"\
+	".\RThread.h"\
+	".\RWaitCursor.h"\
+	".\RWin32Exception.h"\
+	".\RWindowBase.h"\
+	".\WindowsMain.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_MVMAI=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVPageData.cpp
+DEP_CPP_MVPAG=\
+	".\comm.h"\
+	".\imgdecmp.h"\
+	".\imgrendr.h"\
+	".\MVPageData.h"\
+	".\RAutoLibraryWithException.h"\
+	".\RConferException.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RImage.h"\
+	".\RImgdecmp.h"\
+	".\RNotSupportException.h"\
+	".\RWin32Exception.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_MVPAG=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVReaderThread.cpp
+DEP_CPP_MVREA=\
+	".\comm.h"\
+	".\imgdecmp.h"\
+	".\imgrendr.h"\
+	".\MVConfig.h"\
+	".\MVImage.h"\
+	".\MVImagePreConvert.h"\
+	".\MVPageData.h"\
+	".\MVReaderThread.h"\
+	".\MVStaticZLib.h"\
+	".\RAutoLibraryWithException.h"\
+	".\RConferException.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RImage.h"\
+	".\RImgdecmp.h"\
+	".\RNotSupportException.h"\
+	".\RThread.h"\
+	".\RWin32Exception.h"\
+	".\stdafx.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_MVREA=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVSettingDialog.cpp
+DEP_CPP_MVSET=\
+	".\comm.h"\
+	".\imgdecmp.h"\
+	".\imgrendr.h"\
+	".\MVConfig.h"\
+	".\MVControl.h"\
+	".\MVFileList.h"\
+	".\MVImagePreConvert.h"\
+	".\MVMain.h"\
+	".\MVPageData.h"\
+	".\MVReaderThread.h"\
+	".\MVSettingDialog.h"\
+	".\MVThreadManager.h"\
+	".\RAutoLibraryWithException.h"\
+	".\RComboBox.h"\
+	".\RConferException.h"\
+	".\RDialog.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RImage.h"\
+	".\RImgdecmp.h"\
+	".\RIOCannotOpenException.h"\
+	".\RIOCannotReadException.h"\
+	".\RIOCannotWriteException.h"\
+	".\RIOException.h"\
+	".\RMessageBox.h"\
+	".\RNotSupportException.h"\
+	".\RStdioFile.h"\
+	".\RThread.h"\
+	".\RWaitCursor.h"\
+	".\RWin32Exception.h"\
+	".\RWindowBase.h"\
+	".\stdafx.h"\
+	".\WindowsMain.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_MVSET=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVStaticZLib.cpp
+DEP_CPP_MVSTA=\
+	".\comm.h"\
+	".\MVStaticZLib.h"\
+	".\RAutoLibraryWithException.h"\
+	".\RConferException.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RNotSupportException.h"\
+	".\RWin32Exception.h"\
+	".\stdafx.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_MVSTA=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVThreadManager.cpp
+DEP_CPP_MVTHR=\
+	".\comm.h"\
+	".\imgdecmp.h"\
+	".\imgrendr.h"\
+	".\MVConfig.h"\
+	".\MVFileList.h"\
+	".\MVImagePreConvert.h"\
+	".\MVPageData.h"\
+	".\MVReaderThread.h"\
+	".\MVThreadManager.h"\
+	".\RAutoLibraryWithException.h"\
+	".\RConferException.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RImage.h"\
+	".\RImgdecmp.h"\
+	".\RIOCannotOpenException.h"\
+	".\RIOCannotReadException.h"\
+	".\RIOCannotWriteException.h"\
+	".\RIOException.h"\
+	".\RMessageBox.h"\
+	".\RNotSupportException.h"\
+	".\RStdioFile.h"\
+	".\RThread.h"\
+	".\RWaitCursor.h"\
+	".\RWin32Exception.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_MVTHR=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RAlreadyException.cpp
+DEP_CPP_RALRE=\
+	".\comm.h"\
+	".\RAlreadyException.h"\
+	".\RException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RALRE=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RAutoLibraryWithException.cpp
+DEP_CPP_RAUTO=\
+	".\comm.h"\
+	".\RAutoLibraryWithException.h"\
+	".\RConferException.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RNotSupportException.h"\
+	".\RWin32Exception.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RAUTO=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RComboBox.cpp
+DEP_CPP_RCOMB=\
+	".\comm.h"\
+	".\RComboBox.h"\
+	".\RWindowBase.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RCOMB=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RComInit.cpp
+DEP_CPP_RCOMI=\
+	".\RComInit.h"\
+	".\stdafx.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RConferException.cpp
+DEP_CPP_RCONF=\
+	".\comm.h"\
+	".\RConferException.h"\
+	".\RException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RCONF=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RConfigFile.cpp
+DEP_CPP_RCONFI=\
+	".\comm.h"\
+	".\RConfigFile.h"\
+	".\RConv.h"\
+	".\RMessageBox.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RCONFI=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RConv.cpp
+DEP_CPP_RCONV=\
+	".\comm.h"\
+	".\RConv.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RCONV=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RDialog.cpp
+DEP_CPP_RDIAL=\
+	".\comm.h"\
+	".\RConferException.h"\
+	".\RDialog.h"\
+	".\RException.h"\
+	".\RWin32Exception.h"\
+	".\RWindowBase.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RDIAL=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RDialogUtil.cpp
+DEP_CPP_RDIALO=\
+	".\comm.h"\
+	".\RAutoLibraryWithException.h"\
+	".\RConferException.h"\
+	".\RDialogUtil.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RMessageBox.h"\
+	".\RNotSupportException.h"\
+	".\RWin32Exception.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RDIALO=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RDIBBitmap.cpp
+DEP_CPP_RDIBB=\
+	".\comm.h"\
+	".\RConferException.h"\
+	".\RDIBBitmap.h"\
+	".\RException.h"\
+	".\RIOCannotOpenException.h"\
+	".\RIOCannotReadException.h"\
+	".\RIOCannotWriteException.h"\
+	".\RIOException.h"\
+	".\RMessageBox.h"\
+	".\RStdioFile.h"\
+	".\RWin32Exception.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RDIBB=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RDoNotInitaliseException.cpp
+DEP_CPP_RDONO=\
+	".\comm.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RDONO=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RException.cpp
+DEP_CPP_REXCE=\
+	".\comm.h"\
+	".\RException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_REXCE=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RFileNotFoundException.cpp
+DEP_CPP_RFILE=\
+	".\comm.h"\
+	".\RFileNotFoundException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RFILE=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RFModException.cpp
+DEP_CPP_RFMOD=\
+	".\comm.h"\
+	".\RConferException.h"\
+	".\RException.h"\
+	".\RFModException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RFMOD=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RImage.cpp
+DEP_CPP_RIMAG=\
+	".\comm.h"\
+	".\imgdecmp.h"\
+	".\imgrendr.h"\
+	".\RAutoLibraryWithException.h"\
+	".\RComInit.h"\
+	".\RConferException.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RImage.h"\
+	".\RImgdecmp.h"\
+	".\RMessageBox.h"\
+	".\RNotSupportException.h"\
+	".\RWin32Exception.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RIMAG=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RImgdecmp.cpp
+DEP_CPP_RIMGD=\
+	".\comm.h"\
+	".\imgdecmp.h"\
+	".\imgrendr.h"\
+	".\RAutoLibraryWithException.h"\
+	".\RConferException.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RImgdecmp.h"\
+	".\RNotSupportException.h"\
+	".\RWin32Exception.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RIMGD=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RIOCannotCloseException.cpp
+DEP_CPP_RIOCA=\
+	".\comm.h"\
+	".\RException.h"\
+	".\RIOCannotCloseException.h"\
+	".\RIOException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RIOCA=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RIOCannotOpenException.cpp
+DEP_CPP_RIOCAN=\
+	".\comm.h"\
+	".\RException.h"\
+	".\RIOCannotOpenException.h"\
+	".\RIOException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RIOCAN=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RIOCannotReadException.cpp
+DEP_CPP_RIOCANN=\
+	".\comm.h"\
+	".\RException.h"\
+	".\RIOCannotReadException.h"\
+	".\RIOException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RIOCANN=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RIOCannotWriteException.cpp
+DEP_CPP_RIOCANNO=\
+	".\comm.h"\
+	".\RException.h"\
+	".\RIOCannotWriteException.h"\
+	".\RIOException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RIOCANNO=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RIOException.cpp
+DEP_CPP_RIOEX=\
+	".\comm.h"\
+	".\RException.h"\
+	".\RIOException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RIOEX=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RMessageBox.cpp
+DEP_CPP_RMESS=\
+	".\comm.h"\
+	".\RMessageBox.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RMESS=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RNoComplateException.cpp
+DEP_CPP_RNOCO=\
+	".\comm.h"\
+	".\RException.h"\
+	".\RNoComplateException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RNOCO=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RNotFoundException.cpp
+DEP_CPP_RNOTF=\
+	".\comm.h"\
+	".\RException.h"\
+	".\RNotFoundException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RNOTF=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RNotSupportException.cpp
+DEP_CPP_RNOTS=\
+	".\comm.h"\
+	".\RException.h"\
+	".\RNotSupportException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RNOTS=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\ROutOfRangeException.cpp
+DEP_CPP_ROUTO=\
+	".\comm.h"\
+	".\RException.h"\
+	".\ROutOfRangeException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_ROUTO=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RParseException.cpp
+DEP_CPP_RPARS=\
+	".\comm.h"\
+	".\RException.h"\
+	".\RParseException.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RPARS=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RStdioFile.cpp
+DEP_CPP_RSTDI=\
+	".\comm.h"\
+	".\RException.h"\
+	".\RIOCannotOpenException.h"\
+	".\RIOCannotReadException.h"\
+	".\RIOCannotWriteException.h"\
+	".\RIOException.h"\
+	".\RMessageBox.h"\
+	".\RStdioFile.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RSTDI=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RStdioMemory.cpp
+DEP_CPP_RSTDIO=\
+	".\comm.h"\
+	".\RException.h"\
+	".\RIOCannotReadException.h"\
+	".\RIOCannotWriteException.h"\
+	".\RIOException.h"\
+	".\RStdioMemory.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RSTDIO=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RThread.cpp
+DEP_CPP_RTHRE=\
+	".\comm.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RThread.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RTHRE=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RWaitCursor.cpp
+DEP_CPP_RWAIT=\
+	".\comm.h"\
+	".\RWaitCursor.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RWAIT=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RWin32Exception.cpp
+DEP_CPP_RWIN3=\
+	".\comm.h"\
+	".\RConferException.h"\
+	".\RException.h"\
+	".\RWin32Exception.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RWIN3=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RWindow.cpp
+DEP_CPP_RWIND=\
+	".\comm.h"\
+	".\RConferException.h"\
+	".\RException.h"\
+	".\RWin32Exception.h"\
+	".\RWindow.h"\
+	".\RWindowBase.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RWIND=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\RWindowBase.cpp
+DEP_CPP_RWINDO=\
+	".\comm.h"\
+	".\RWindowBase.h"\
+	".\stdafx.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_RWINDO=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\Script1.rc
+# End Source File
+# Begin Source File
+
+SOURCE=.\WindowsMain.cpp
+DEP_CPP_WINDO=\
+	".\comm.h"\
+	".\imgdecmp.h"\
+	".\imgrendr.h"\
+	".\MVConfig.h"\
+	".\MVControl.h"\
+	".\MVFileList.h"\
+	".\MVImagePreConvert.h"\
+	".\MVMain.h"\
+	".\MVPageData.h"\
+	".\MVReaderThread.h"\
+	".\MVSettingDialog.h"\
+	".\MVThreadManager.h"\
+	".\RAutoLibraryWithException.h"\
+	".\RComboBox.h"\
+	".\RConferException.h"\
+	".\RDialog.h"\
+	".\RDoNotInitaliseException.h"\
+	".\RException.h"\
+	".\RImage.h"\
+	".\RImgdecmp.h"\
+	".\RIOCannotOpenException.h"\
+	".\RIOCannotReadException.h"\
+	".\RIOCannotWriteException.h"\
+	".\RIOException.h"\
+	".\RMessageBox.h"\
+	".\RNotSupportException.h"\
+	".\RStdioFile.h"\
+	".\RThread.h"\
+	".\RWaitCursor.h"\
+	".\RWin32Exception.h"\
+	".\RWindowBase.h"\
+	".\WindowsMain.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	{$(INCLUDE)}"winuserm.h"\
+	
+NODEP_CPP_WINDO=\
+	"..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\ARMV4\vibrate.h"\
+	
+# End Source File
+# End Group
+# Begin Group "Header Files"
+
+# PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=.\comm.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\imgdecmp.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\imgrendr.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVConfig.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVControl.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVFileList.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVImage.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVImagePreConvert.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVInputData.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVMain.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVPageData.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVReaderThread.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVSettingDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVStaticZLib.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MVThreadManager.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RAlreadyException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RAutoLibraryWithException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RComboBox.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RComInit.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RConferException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RConfigFile.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RConv.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RDialog.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RDialogUtil.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RDIBBitmap.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RDoNotInitaliseException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\resrc1.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RFileNotFoundException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RFModException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RImage.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RImgdecmp.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RIOCannotCloseException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RIOCannotOpenException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RIOCannotReadException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RIOCannotWriteException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RIOException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RMessageBox.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RNoComplateException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RNotFoundException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RNotSupportException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ROutOfRangeException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RParseException.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RStdioFile.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RStdioMemory.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RThread.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RWaitCursor.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RWin32Exception.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RWindow.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\RWindowBase.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\stdafx.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\WindowsMain.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\zconf.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\zlib.h
+# End Source File
+# End Group
+# Begin Group "Resource Files"
+
+# PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
+# Begin Source File
+
+SOURCE=.\ceux1.bin
+# End Source File
+# Begin Source File
+
+SOURCE=.\ico00001.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\icon1.ico
+# End Source File
+# End Group
+# End Target
+# End Project

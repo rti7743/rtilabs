@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="shift_jis"?>
+<omegachart-extension version="1.0">
+  <info title="標準" id="built-in" author="daisuke.okajima@nifty.ne.jp" expires="never" />
+
+  <!-- Template
+  <indicator
+    target=""
+    count=""
+    name=""
+    display="">
+    <expression></expression>
+    <title></title>
+    <header></header>
+    <param index="0" type="positiveInteger">
+      <daily  unit="日" default="25"/> 
+      <weekly unit="週" default="13"/>
+      <monthly unit="月" default="5"/>
+    </param>
+    <defaultappearance style="Dotted" color="DarkSlateBlue,DarkSalmon"/>
+  </indicator>
+
+  -->
+  <!-- 基本チャート -->
+
+  <indicator
+    target="price"
+    count="3"
+    name="MA"
+    format="F2"
+    display="normal">
+    <expression>avg(close({0}))</expression>
+    <title>移動平均線</title>
+    <header>{0}平均</header>
+    <description>過去の一定期間の終値を平均し、短期的な変動の影響を除去した線です。</description>
+    <param index="0" type="positiveInteger">
+      <daily   unit="日" default="25,75,200"/> 
+      <weekly  unit="週" default="13,26,52"/>
+      <monthly unit="月" default="13,26,52"/>
+    </param>
+    <defaultappearance style="Line,Line,Line" color="Khaki,DarkKhaki,DarkGoldenrod"/>
+  </indicator>
+
+  <indicator
+    target="price"
+    count="2"
+    name="bb_sdev"
+    display="explanation">
+    <expression>sdev(close({0}) - MA({0}))</expression>
+    <title>ボリンジャーバンド</title>
+    <header>{0}ボリンジャー</header>
+    <description>過去の一定期間の平均に対する標準偏差の２倍を上下に描画した線です。
+上に抜けた状態は買われすぎ、下に抜けた状態は売られすぎを示すとされています。</description>
+    <param index="0" type="positiveInteger">
+      <daily   unit="日" default="25"/> 
+      <weekly  unit="週" default="13"/>
+      <monthly unit="月" default="13"/>
+    </param>
+    <defaultappearance style="Dotted" color="Peru"/>
+  </indicator>
+
+  <indicator
+    target="price"
+    name="bb_u"
+    display="value+chart"
+    depends="bb_sdev">
+    <expression>MA({0})+2*bb_sdev({0})</expression>
+    <header>{0}MA+2σ</header>
+  </indicator>
+  <indicator
+    target="price"
+    name="bb_d"
+    display="value+chart"
+    depends="bb_sdev">
+    <expression>MA({0})- 2*bb_sdev({0})</expression>
+    <header>{0}MA-2σ</header>
+  </indicator>
+
+  <indicator
+    target="price"
+    name="ichimoku"
+    display="normal">
+    <description>売り買いの力のバランスに注目し、一方向に破れるタイミングを測るために指標です。</description>
+    <expression>(max(high({0}))+min(low({0})))/2</expression>
+    <title>一目均衡表/転換線</title>
+    <header>転換線</header>
+    <param index="0" type="positiveInteger">
+      <daily   unit="日" default="9"/> 
+      <weekly  unit="週" default="9"/>
+      <monthly unit="月" default="9"/>
+    </param>
+    <defaultappearance style="None" color="Blue"/>
+  </indicator>
+  <indicator
+    target="price"
+    name="ichimoku_kijun"
+    display="chart+value"
+    depends="ichimoku">
+    <expression>(max(high({1}))+min(low({1})))/2</expression>
+    <title>　　　　　 基準線</title>
+    <header>基準線</header>
+    <param index="1" type="positiveInteger">
+      <daily   unit="日" default="26"/> 
+      <weekly  unit="週" default="26"/>
+      <monthly unit="月" default="26"/>
+    </param>
+    <defaultappearance style="None" color="Green"/>
+  </indicator>
+  <indicator
+    target="price"
+    name="ichimoku_chikou"
+    display="chart+value"
+    depends="ichimoku_kijun">
+    <expression>value_at(0-{1},close())</expression>
+    <title>　　　　　 遅行線</title>
+    <header>遅行線</header>
+    <defaultappearance style="None" color="DarkGreen"/>
+  </indicator>
+  <indicator
+    target="price"
+    name="ichimoku_senkouA"
+    display="chart+value"
+    depends="ichimoku_kijun">
+    <expression>((max(high({1}+{0},{1}))+min(low({1}+{0},{1})))/2+(max(high({1}*2,{1}))+min(low({1}*2,{1})))/2)/2</expression>
+    <title>　　　　　 先行スパンＡ</title>
+    <header>先行スパンＡ</header>
+    <defaultappearance style="None" color="LightGray"/>
+  </indicator>
+  <indicator
+    target="price"
+    name="ichimoku_senkouB"
+    display="chart+value"
+    depends="ichimoku_kijun">
+    <expression>(max(high({2}+{1},{1}))+min(low({2}+{1},{1})))/2</expression>
+    <title>　　　　　 先行スパンＢ</title>
+    <header>先行スパンＢ</header>
+    <param index="2" type="positiveInteger">
+      <daily   unit="日" default="52"/> 
+      <weekly  unit="週" default="52"/>
+      <monthly unit="月" default="52"/>
+    </param>
+    <defaultappearance style="None" color="LightGray"/>
+  </indicator>
+
+  <indicator
+    target="price"
+    name="nikkei"
+    brand="!0101"
+    relativise="20050101"
+    display="normal">
+    <expression>refbrand(101, close())</expression>
+    <title>日経平均</title>
+    <header>日経平均</header>
+    <defaultappearance style="BoldLine" color="Green"/>
+  </indicator>
+
+  <indicator
+    target="volume"
+    count="2"
+    name="volume_ma"
+    display="normal">
+    <expression>avg(volume({0}))</expression>
+    <title>出来高移動平均線</title>
+    <description>過去の一定期間の出来高の平均です。</description>
+    <header>{0}出来高平均</header>
+    <param index="0" type="positiveInteger">
+      <daily   unit="日" default="25"/> 
+      <weekly  unit="週" default="13"/>
+      <monthly unit="月" default="13"/>
+    </param>
+    <defaultappearance style="Line" color="White"/>
+  </indicator>
+
+
+  <!-- オシレータグループ -->
+
+  <oscillatorGroup
+    name="RSI"
+    title="RSI"
+    type="percent0_1"/>
+  <oscillatorGroup
+    name="kairi"
+    title="乖離率"
+    type="origin0"/>
+  <oscillatorGroup
+    name="RCI"
+    title="RCI"
+    type="percent1_1"/>
+  <oscillatorGroup
+    name="stochastic"
+    title="ストキャスティック"
+    type="percent0_1"/>
+  <oscillatorGroup
+    name="MACD"
+    title="MACD"
+    type="default"/>
+  <oscillatorGroup
+    name="DMI"
+    title="DMI"
+    type="percent0_1"/>
+
+  <!-- オシレータ -->
+
+  <indicator
+    target="oscillator"
+    name="rsi"
+    count="2"
+    group="RSI"
+    format="F2,100">
+    <expression>sump(rsi_m({0}))/suma(rsi_m({0}))</expression>
+    <title>RSI</title>
+    <header>{0}RSI</header>
+    <description>終値の変動のうち上昇の割合を示す指標です。
+一般に80以上で買われすぎ、20以下で売られすぎを示すとされています。</description>
+    <param index="0" type="positiveInteger">
+      <daily   unit="日" default="14"/> 
+      <weekly  unit="週" default="13"/>
+      <monthly unit="月" default="13"/>
+    </param>
+    <defaultappearance style="Line" color="Lime"/>
+  </indicator>
+
+  <indicator
+    target="oscillator"
+    name="kairi"
+    count="2"
+    group="kairi"
+    format="F2,%">
+    <expression>close()/avg(close({0}))- 1</expression>
+    <title>移動平均乖離率</title>
+    <header>{0}MA乖離率</header>
+    <description>現在値が移動平均からどれだけの割合離れているかを示します。
+極端な値になったときは反転する確率が高いでしょう。</description>
+    <param index="0" type="positiveInteger">
+      <daily   unit="日" default="25"/> 
+      <weekly  unit="週" default="13"/>
+      <monthly unit="月" default="13"/>
+    </param>
+    <defaultappearance style="Line" color="Green"/>
+  </indicator>
+
+  <indicator
+    target="oscillator"
+    name="rci"
+    count="2"
+    group="RCI"
+    format="F2,100">
+    <expression>1-(rankcorrelation(close({0}))*6/({0}*({0}*{0}- 1)))</expression>
+    <title>RCI</title>
+    <header>{0}RCI</header>
+    <description>トレンドの強弱を示す指標です。正の値は上昇トレンド、負の値は下降トレンドを示します。</description>
+    <param index="0" type="positiveInteger">
+      <daily   unit="日" default="9"/> 
+      <weekly  unit="週" default="13"/>
+      <monthly unit="月" default="13"/>
+    </param>
+    <defaultappearance style="Line" color="DarkOliveGreen"/>
+  </indicator>
+
+  <indicator
+    target="oscillator"
+    name="stochastic"
+    group="stochastic">
+    <title>ストキャスティック</title>
+    <header>{0}/{1}ストキャスティック</header>
+    <expression>sum(each({1}, close()-min(low({0})))) / sum(each({1}, max(high({0}))-min(low({0}))))</expression>
+    <description>過去の一定期間の高値・安値の範囲に対して現在値がどの位置にあるかを示す指標です。</description>
+    <defaultappearance style="Line" color="MediumSeaGreen"/>
+    <param index="0" type="positiveInteger">
+      <name>K</name>
+      <daily   unit="日" default="5"/> 
+      <weekly  unit="週" default="5"/>
+      <monthly unit="月" default="5"/>
+    </param>
+    <param index="1" type="positiveInteger">
+      <name>D</name>
+      <daily   unit="日" default="3"/> 
+      <weekly  unit="週" default="3"/>
+      <monthly unit="月" default="3"/>
+    </param>
+  </indicator>
+
+  <indicator
+    target="oscillator"
+    name="MACD"
+    group="MACD">
+    <expression>MA({0})-MA({1})</expression>
+    <title>MACD</title>
+    <header>MACD</header>
+    <description>短期と長期の移動平均の差の変動に注目した指標です。
+シグナルがMACD本体を上に抜くと買いサインとされています。</description>
+    <defaultappearance style="Line" color="MediumSpringGreen"/>
+    <param index="0" type="positiveInteger">
+      <name>短期</name>
+      <daily   unit="日" default="12"/> 
+      <weekly  unit="週" default="12"/>
+      <monthly unit="月" default="12"/>
+    </param>
+    <param index="1" type="positiveInteger">
+      <name>長期</name>
+      <daily   unit="日" default="26"/> 
+      <weekly  unit="週" default="26"/>
+      <monthly unit="月" default="26"/>
+    </param>
+  </indicator>
+
+  <indicator
+    target="oscillator"
+    name="MACDsignal"
+    group="MACD"
+    depends="MACD">
+    <expression>avg(each({2}, MACD({0},{1})))</expression>
+    <title>MACDシグナル</title>
+    <header>MACDシグナル</header>
+    <defaultappearance style="Line" color="Red"/>
+    <param index="2" type="positiveInteger">
+      <name>シグナル</name>
+      <daily   unit="日" default="9"/> 
+      <weekly  unit="週" default="9"/>
+      <monthly unit="月" default="9"/>
+    </param>
+  </indicator>
+
+  <indicator
+    target="oscillator"
+    name="PDI"
+    format="F2,100"
+    group="DMI">
+    <expression>sum(each({0}, pdm(0))) / dmi_tr({0})</expression>
+    <title>+DI</title>
+    <header>+DI{0}</header>
+    <defaultappearance style="Line" color="Blue"/>
+    <param index="0" type="positiveInteger">
+      <daily   unit="日" default="14"/> 
+      <weekly  unit="週" default="14"/>
+      <monthly unit="月" default="14"/>
+    </param>
+  </indicator>
+  <indicator
+    target="oscillator"
+    name="MDI"
+    format="F2,100"
+    group="DMI"
+    depends="PDI">
+    <expression>sum(each({0}, mdm(0))) / dmi_tr({0})</expression>
+    <title>-DI</title>
+    <header>-DI{0}</header>
+    <defaultappearance style="Line" color="Red"/>
+  </indicator>
+  <indicator
+    target="oscillator"
+    name="ADX"
+    format="F2,100"
+    group="DMI"
+    depends="PDI">
+    <expression>avg(each({1}, abs(PDI({0})-MDI({0}))/(PDI({0})+MDI({0}))))</expression>
+    <title>ADX</title>
+    <header>ADX{1}</header>
+    <defaultappearance style="Dotted" color="Green"/>
+    <param index="1" type="positiveInteger">
+      <daily  unit="日" default="14"/> 
+      <weekly unit="週" default="14"/>
+      <monthly unit="月" default="14"/>
+    </param>
+  </indicator>
+
+
+  <!-- スクリーニング -->
+
+  <screening
+    name="rsi_s"
+    format="F2,100">
+    <expression>rsi({0})</expression>
+    <title>RSI</title>
+    <description>終値の変動のうち上昇の割合を示す指標です。
+一般に80以上で買われすぎ、20以下で売られすぎを示すとされています。</description>
+    <header>{0}RSI</header>
+    <param index="0" type="positiveInteger">
+      <name>期間</name>
+      <daily   unit="日" default="14"/> 
+      <weekly  unit="週" default="13"/>
+      <monthly unit="月" default="13"/>
+    </param>
+  </screening>
+
+  <screening
+    name="kairi_s"
+    format="F2,%">
+    <title>移動平均乖離率</title>
+    <description>現在値が移動平均からどれだけの割合離れているかを示します。
+極端な値になったときは反転する確率が高いでしょう。</description>
+    <header>{0}移動平均乖離率</header>
+    <expression>kairi({0})</expression>
+    <param index="0" type="positiveInteger">
+      <name>期間</name>
+      <daily   unit="日" default="25"/> 
+      <weekly  unit="週" default="13"/>
+      <monthly unit="月" default="13"/>
+    </param>
+  </screening>
+
+  <screening
+    name="rci_s"
+    format="F2,100">
+    <title>RCI</title>
+    <description>トレンドの強弱を示す指標です。正の値は上昇トレンド、負の値は下降トレンドを示します。</description>
+    <header>{0}RCI</header>
+    <expression>rci({0})</expression>
+    <param index="0" type="positiveInteger">
+      <name>期間</name>
+      <daily   unit="日" default="14"/> 
+      <weekly  unit="週" default="13"/>
+      <monthly unit="月" default="13"/>
+    </param>
+  </screening>
+
+  <screening
+    name="credit_s">
+    <title>信用残/出来高比</title>
+    <description>(信用買残－信用売残)が出来高の平均の何倍あるかに注目した指標です。
+通常の貸借倍率よりも信用残を効果的に捕らえることができます。</description>
+    <header>(信用買残 - 信用売残) / {0}出来高平均</header>
+    <expression>(cl()-cs())/avg(volume({0}))</expression>
+    <param index="0" type="positiveInteger">
+      <name>期間</name>
+      <daily   unit="日" default="5"/> 
+      <weekly  unit="週" default="5"/>
+      <monthly unit="月" default="5"/>
+    </param>
+  </screening>
+
+  <!-- Prediction -->
+  <auto-trading name="shitahige_p">
+    <title>下ひげ陽線の買い場検証</title>
+    <description>下ひげ（チャート上のひげの長さが終値の1%以上で判定しています）かつ陽線を出し、
+さらにその下ひげで安値を更新したときに買ったと想定して勝率を測定します。</description>
+    <header>下ひげ陽線かつ{0}安値更新をし、{1}動いたら利益確定/ロスカット</header>
+    <type>long</type>
+    <signal>shita_hige() and yosen() and (low()==min(low({0})))</signal>
+    <exit><![CDATA[close() > entry()*(1+{1}/100)]]></exit>
+    <losscut><![CDATA[limitorder(entry()*(1 - {1}/100))]]></losscut>
+    <param index="0" type="positiveInteger" unit="日" default="5"/>
+    <param index="1" type="positiveInteger" unit="%" default="5"/>
+  </auto-trading>
+  <auto-trading name="uehige_p">
+    <title>上ひげ陰線の売り場検証</title>
+    <description>上ひげ（チャート上のひげの長さが終値の1%以上で判定しています）かつ陰線を出し、
+さらにその上ひげで高値を更新したときに空売りをしたと想定して勝率を測定します。</description>
+    <header>上ひげ陰線かつ{0}高値更新で空売りをし、{1}動いたら利益確定/ロスカット</header>
+    <type>short</type>
+    <signal>ue_hige() and insen() and (high()==max(high({0})))</signal>
+    <exit><![CDATA[close() < entry()*(1-{1}/100)]]></exit>
+    <losscut><![CDATA[limitorder(entry()*(1 + {1}/100))]]></losscut>
+    <param index="0" type="positiveInteger" unit="日" default="5"/>
+    <param index="1" type="positiveInteger" unit="%" default="5"/>
+  </auto-trading>
+
+  <!-- Library -->
+  <library
+    name="ue_hige">
+    <expression><![CDATA[high()/max(open(),close()) > 1.01]]></expression>
+  </library>
+  <library
+    name="shita_hige">
+    <expression><![CDATA[low()/min(open(),close()) < 0.99]]></expression>
+  </library>
+  <library
+    name="yosen">
+    <expression><![CDATA[open() < close()]]></expression>
+  </library>
+  <library
+    name="insen">
+    <expression><![CDATA[open() > close()]]></expression>
+  </library>
+  <library
+    name="rsi_m">
+    <expression>diff(close({0}+1))</expression>
+  </library>
+  <library
+    name="dmi_tr">
+    <expression>sum(each({0}, max(high()-low(), high()-value_at(1,close()), value_at(1,close())-low())))</expression>
+  </library>
+
+  <!-- Custom Brands -->
+  <brand code="0401">
+    <name>日経平均ドル建て</name>
+    <expression>({0} / {1})*100</expression>
+    <priceScale>0.01</priceScale>
+    <format>F2</format>
+    <param index="0" code="0101"/>
+    <param index="1" code="0201"/>
+  </brand>
+
+</omegachart-extension>

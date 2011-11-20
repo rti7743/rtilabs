@@ -1,0 +1,26 @@
+// REdit.cpp: REdit クラスのインプリメンテーション
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "REdit.h"
+
+//////////////////////////////////////////////////////////////////////
+// 構築/消滅
+//////////////////////////////////////////////////////////////////////
+
+REdit::REdit()
+{
+
+}
+
+REdit::~REdit()
+{
+
+}
+void REdit::Create(HINSTANCE inINstance,
+					   HWND isParentWindow,int inID, DWORD inFlg) throw()
+{
+//	RWindowBase::Create(inINstance,WC_LISTVIEWA,isParentWindow,inID,inFlg,0);
+}
+

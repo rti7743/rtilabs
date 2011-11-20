@@ -1,0 +1,313 @@
+// Created by Microsoft (R) C/C++ Compiler Version 12.00.8447.0 (3d14ed45).
+//
+// Flash.tlh
+//
+// C++ source equivalent of Win32 type library C:\WINNT\system32\Macromed\Flash\Flash.ocx
+// compiler-generated file created 09/23/02 at 21:55:51 - DO NOT EDIT!
+
+#pragma once
+#pragma pack(push, 8)
+
+#include <comdef.h>
+
+namespace ShockwaveFlashObjects {
+
+//
+// Forward references and typedefs
+//
+
+struct __declspec(uuid("d27cdb6c-ae6d-11cf-96b8-444553540000"))
+/* dual interface */ IShockwaveFlash;
+struct __declspec(uuid("d27cdb6d-ae6d-11cf-96b8-444553540000"))
+/* dispinterface */ _IShockwaveFlashEvents;
+struct /* coclass */ ShockwaveFlash;
+struct /* coclass */ FlashProp;
+struct __declspec(uuid("d27cdb70-ae6d-11cf-96b8-444553540000"))
+/* interface */ IFlashFactory;
+struct __declspec(uuid("d27cdb72-ae6d-11cf-96b8-444553540000"))
+/* interface */ IFlashObjectInterface;
+struct __declspec(uuid("a6ef9860-c720-11d0-9337-00a0c90dcaa9"))
+/* interface */ IDispatchEx;
+struct /* coclass */ FlashObjectInterface;
+
+//
+// Smart pointer typedef declarations
+//
+
+_COM_SMARTPTR_TYPEDEF(IShockwaveFlash, __uuidof(IShockwaveFlash));
+_COM_SMARTPTR_TYPEDEF(_IShockwaveFlashEvents, __uuidof(IDispatch));
+_COM_SMARTPTR_TYPEDEF(IFlashFactory, __uuidof(IFlashFactory));
+_COM_SMARTPTR_TYPEDEF(IDispatchEx, __uuidof(IDispatchEx));
+_COM_SMARTPTR_TYPEDEF(IFlashObjectInterface, __uuidof(IFlashObjectInterface));
+
+//
+// Type library items
+//
+
+struct __declspec(uuid("d27cdb6c-ae6d-11cf-96b8-444553540000"))
+IShockwaveFlash : IDispatch
+{
+    //
+    // Raw methods provided by interface
+    //
+
+    virtual HRESULT __stdcall get_ReadyState (
+        long * pVal ) = 0;
+    virtual HRESULT __stdcall get_TotalFrames (
+        long * pVal ) = 0;
+    virtual HRESULT __stdcall get_Playing (
+        VARIANT_BOOL * pVal ) = 0;
+    virtual HRESULT __stdcall put_Playing (
+        VARIANT_BOOL pVal ) = 0;
+    virtual HRESULT __stdcall get_Quality (
+        int * pVal ) = 0;
+    virtual HRESULT __stdcall put_Quality (
+        int pVal ) = 0;
+    virtual HRESULT __stdcall get_ScaleMode (
+        int * pVal ) = 0;
+    virtual HRESULT __stdcall put_ScaleMode (
+        int pVal ) = 0;
+    virtual HRESULT __stdcall get_AlignMode (
+        int * pVal ) = 0;
+    virtual HRESULT __stdcall put_AlignMode (
+        int pVal ) = 0;
+    virtual HRESULT __stdcall get_BackgroundColor (
+        long * pVal ) = 0;
+    virtual HRESULT __stdcall put_BackgroundColor (
+        long pVal ) = 0;
+    virtual HRESULT __stdcall get_Loop (
+        VARIANT_BOOL * pVal ) = 0;
+    virtual HRESULT __stdcall put_Loop (
+        VARIANT_BOOL pVal ) = 0;
+    virtual HRESULT __stdcall get_Movie (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_Movie (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_FrameNum (
+        long * pVal ) = 0;
+    virtual HRESULT __stdcall put_FrameNum (
+        long pVal ) = 0;
+    virtual HRESULT __stdcall SetZoomRect (
+        long left,
+        long top,
+        long right,
+        long bottom ) = 0;
+    virtual HRESULT __stdcall Zoom (
+        int factor ) = 0;
+    virtual HRESULT __stdcall Pan (
+        long x,
+        long y,
+        int mode ) = 0;
+    virtual HRESULT __stdcall Play ( ) = 0;
+    virtual HRESULT __stdcall Stop ( ) = 0;
+    virtual HRESULT __stdcall Back ( ) = 0;
+    virtual HRESULT __stdcall Forward ( ) = 0;
+    virtual HRESULT __stdcall Rewind ( ) = 0;
+    virtual HRESULT __stdcall StopPlay ( ) = 0;
+    virtual HRESULT __stdcall GotoFrame (
+        long FrameNum ) = 0;
+    virtual HRESULT __stdcall CurrentFrame (
+        long * FrameNum ) = 0;
+    virtual HRESULT __stdcall IsPlaying (
+        VARIANT_BOOL * Playing ) = 0;
+    virtual HRESULT __stdcall PercentLoaded (
+        long * percent ) = 0;
+    virtual HRESULT __stdcall FrameLoaded (
+        long FrameNum,
+        VARIANT_BOOL * loaded ) = 0;
+    virtual HRESULT __stdcall FlashVersion (
+        long * version ) = 0;
+    virtual HRESULT __stdcall get_WMode (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_WMode (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_SAlign (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_SAlign (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_Menu (
+        VARIANT_BOOL * pVal ) = 0;
+    virtual HRESULT __stdcall put_Menu (
+        VARIANT_BOOL pVal ) = 0;
+    virtual HRESULT __stdcall get_Base (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_Base (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_Scale (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_Scale (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_DeviceFont (
+        VARIANT_BOOL * pVal ) = 0;
+    virtual HRESULT __stdcall put_DeviceFont (
+        VARIANT_BOOL pVal ) = 0;
+    virtual HRESULT __stdcall get_EmbedMovie (
+        VARIANT_BOOL * pVal ) = 0;
+    virtual HRESULT __stdcall put_EmbedMovie (
+        VARIANT_BOOL pVal ) = 0;
+    virtual HRESULT __stdcall get_BGColor (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_BGColor (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_Quality2 (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_Quality2 (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall LoadMovie (
+        int layer,
+        BSTR url ) = 0;
+    virtual HRESULT __stdcall TGotoFrame (
+        BSTR target,
+        long FrameNum ) = 0;
+    virtual HRESULT __stdcall TGotoLabel (
+        BSTR target,
+        BSTR label ) = 0;
+    virtual HRESULT __stdcall TCurrentFrame (
+        BSTR target,
+        long * FrameNum ) = 0;
+    virtual HRESULT __stdcall TCurrentLabel (
+        BSTR target,
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall TPlay (
+        BSTR target ) = 0;
+    virtual HRESULT __stdcall TStopPlay (
+        BSTR target ) = 0;
+    virtual HRESULT __stdcall SetVariable (
+        BSTR name,
+        BSTR value ) = 0;
+    virtual HRESULT __stdcall GetVariable (
+        BSTR name,
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall TSetProperty (
+        BSTR target,
+        int property,
+        BSTR value ) = 0;
+    virtual HRESULT __stdcall TGetProperty (
+        BSTR target,
+        int property,
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall TCallFrame (
+        BSTR target,
+        int FrameNum ) = 0;
+    virtual HRESULT __stdcall TCallLabel (
+        BSTR target,
+        BSTR label ) = 0;
+    virtual HRESULT __stdcall TSetPropertyNum (
+        BSTR target,
+        int property,
+        double value ) = 0;
+    virtual HRESULT __stdcall TGetPropertyNum (
+        BSTR target,
+        int property,
+        double * pVal ) = 0;
+    virtual HRESULT __stdcall TGetPropertyAsNumber (
+        BSTR target,
+        int property,
+        double * pVal ) = 0;
+    virtual HRESULT __stdcall get_SWRemote (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_SWRemote (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_FlashVars (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_FlashVars (
+        BSTR pVal ) = 0;
+    virtual HRESULT __stdcall get_AllowScriptAccess (
+        BSTR * pVal ) = 0;
+    virtual HRESULT __stdcall put_AllowScriptAccess (
+        BSTR pVal ) = 0;
+};
+
+struct __declspec(uuid("d27cdb6d-ae6d-11cf-96b8-444553540000"))
+_IShockwaveFlashEvents : IDispatch
+{};
+
+struct __declspec(uuid("d27cdb6e-ae6d-11cf-96b8-444553540000"))
+ShockwaveFlash;
+    // [ default ] interface IShockwaveFlash
+    // [ default, source ] dispinterface _IShockwaveFlashEvents
+
+struct __declspec(uuid("1171a62f-05d2-11d1-83fc-00a0c9089c5a"))
+FlashProp;
+    // [ default ] interface IUnknown
+
+struct __declspec(uuid("d27cdb70-ae6d-11cf-96b8-444553540000"))
+IFlashFactory : IUnknown
+{};
+
+struct __declspec(uuid("a6ef9860-c720-11d0-9337-00a0c90dcaa9"))
+IDispatchEx : IDispatch
+{
+    //
+    // Raw methods provided by interface
+    //
+
+    virtual HRESULT __stdcall GetDispID (
+        BSTR bstrName,
+        unsigned long grfdex,
+        long * pid ) = 0;
+    virtual HRESULT __stdcall RemoteInvokeEx (
+        long id,
+        unsigned long lcid,
+        unsigned long dwFlags,
+        struct DISPPARAMS * pdp,
+        VARIANT * pvarRes,
+        struct EXCEPINFO * pei,
+        struct IServiceProvider * pspCaller,
+        unsigned int cvarRefArg,
+        unsigned int * rgiRefArg,
+        VARIANT * rgvarRefArg ) = 0;
+    virtual HRESULT __stdcall DeleteMemberByName (
+        BSTR bstrName,
+        unsigned long grfdex ) = 0;
+    virtual HRESULT __stdcall DeleteMemberByDispID (
+        long id ) = 0;
+    virtual HRESULT __stdcall GetMemberProperties (
+        long id,
+        unsigned long grfdexFetch,
+        unsigned long * pgrfdex ) = 0;
+    virtual HRESULT __stdcall GetMemberName (
+        long id,
+        BSTR * pbstrName ) = 0;
+    virtual HRESULT __stdcall GetNextDispID (
+        unsigned long grfdex,
+        long id,
+        long * pid ) = 0;
+    virtual HRESULT __stdcall GetNameSpaceParent (
+        IUnknown * * ppunk ) = 0;
+};
+
+struct __declspec(uuid("d27cdb72-ae6d-11cf-96b8-444553540000"))
+IFlashObjectInterface : IDispatchEx
+{};
+
+struct __declspec(uuid("d27cdb71-ae6d-11cf-96b8-444553540000"))
+FlashObjectInterface;
+    // [ default ] interface IFlashObjectInterface
+
+//
+// Named GUID constants initializations
+//
+
+extern "C" const GUID __declspec(selectany) LIBID_ShockwaveFlashObjects =
+    {0xd27cdb6b,0xae6d,0x11cf,{0x96,0xb8,0x44,0x45,0x53,0x54,0x00,0x00}};
+extern "C" const GUID __declspec(selectany) IID_IShockwaveFlash =
+    {0xd27cdb6c,0xae6d,0x11cf,{0x96,0xb8,0x44,0x45,0x53,0x54,0x00,0x00}};
+extern "C" const GUID __declspec(selectany) DIID__IShockwaveFlashEvents =
+    {0xd27cdb6d,0xae6d,0x11cf,{0x96,0xb8,0x44,0x45,0x53,0x54,0x00,0x00}};
+extern "C" const GUID __declspec(selectany) CLSID_ShockwaveFlash =
+    {0xd27cdb6e,0xae6d,0x11cf,{0x96,0xb8,0x44,0x45,0x53,0x54,0x00,0x00}};
+extern "C" const GUID __declspec(selectany) CLSID_FlashProp =
+    {0x1171a62f,0x05d2,0x11d1,{0x83,0xfc,0x00,0xa0,0xc9,0x08,0x9c,0x5a}};
+extern "C" const GUID __declspec(selectany) IID_IFlashFactory =
+    {0xd27cdb70,0xae6d,0x11cf,{0x96,0xb8,0x44,0x45,0x53,0x54,0x00,0x00}};
+extern "C" const GUID __declspec(selectany) IID_IDispatchEx =
+    {0xa6ef9860,0xc720,0x11d0,{0x93,0x37,0x00,0xa0,0xc9,0x0d,0xca,0xa9}};
+extern "C" const GUID __declspec(selectany) IID_IFlashObjectInterface =
+    {0xd27cdb72,0xae6d,0x11cf,{0x96,0xb8,0x44,0x45,0x53,0x54,0x00,0x00}};
+extern "C" const GUID __declspec(selectany) CLSID_FlashObjectInterface =
+    {0xd27cdb71,0xae6d,0x11cf,{0x96,0xb8,0x44,0x45,0x53,0x54,0x00,0x00}};
+
+} // namespace ShockwaveFlashObjects
+
+#pragma pack(pop)

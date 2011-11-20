@@ -1,0 +1,14 @@
+修正履歴
+1.0a->1.0a1
+ChangeLog.txt:2003/01/23	Connection: close の最後の \r\nを忘れていて ネスケで見えなかったのを修正
+ChangeLog.txt:2003/01/23	クラッシュによりデータを失うのが怖いので 30分アクセスされていないファイルは自動的にディスクに書き戻すように修正
+ChangeLog.txt:2003/01/23	ガページコレクトする時間の指定を間違っていたので修正 60 * 1 = 1分 のところを 1000 * 1 = 1分 としていた(w
+ChangeLog.txt:2003/01/23	range を行ったときの Content-Range がおかしかったので修正.
+ChangeLog.txt:2003/01/23	新着レスの表示が 2- に固定されていたのを修正.
+ChangeLog.txt:2003/01/24	httpd.conf で ListenPort が指定されたとしても無視していたので修正.
+1.0a1->1.0a2
+ChangeLog.txt:2003/01/25	ヘッダの長さを加えていなかったので修正 >70 ｻﾝｸｽｺ
+ChangeLog.txt:2003/01/25	読み込んだ合計サイズではなくて、一回に読めこめたサイズを返していたので修正。 よく動いていたな(w
+ChangeLog.txt:2003/01/26	YoujyoKillerの終了処理に時間がかかっていたので修正
+ChangeLog.txt:2003/01/26	YYoujyoGCの終了処理に時間がかかっていたので修正
+ChangeLog.txt:2003/01/26	sageで subject.txt , subback.html を更新していなかったのを修正.

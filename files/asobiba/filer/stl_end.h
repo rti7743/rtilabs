@@ -1,0 +1,7 @@
+#pragma warning (error: 4786)
+#pragma warning (error: 4503)
+#pragma warning (error: 4100)
+#pragma warning (error: 4511)
+#pragma warning (error: 4512)
+#pragma warning (error: 4663)
+#pragma warning (error: 4018)

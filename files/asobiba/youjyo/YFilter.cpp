@@ -1,0 +1,34 @@
+// YFilter.cpp: YFilter クラスのインプリメンテーション
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "YFilter.h"
+#include "YHttpdConf.h"
+
+//////////////////////////////////////////////////////////////////////
+// 構築/消滅
+//////////////////////////////////////////////////////////////////////
+
+YFilter::YFilter()
+{
+
+}
+
+YFilter::~YFilter()
+{
+
+}
+
+void YFilter::Load()
+{
+	Japan.Load("japan.ip");
+	Deny.Load("deny.ip");
+}
+
+
+YFilter* YFilter::getInstance()
+{
+	static YFilter p;
+	return &p;
+}
+

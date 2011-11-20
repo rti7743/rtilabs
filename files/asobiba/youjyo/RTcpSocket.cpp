@@ -1,0 +1,29 @@
+// RTcpSocket.cpp: RTcpSocket クラスのインプリメンテーション
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "RTcpSocket.h"
+
+//////////////////////////////////////////////////////////////////////
+// 構築/消滅
+//////////////////////////////////////////////////////////////////////
+
+RTcpSocket::RTcpSocket()
+{
+
+}
+
+RTcpSocket::~RTcpSocket()
+{
+
+}
+
+/**
+ * Open:			TCP/IPのソケットを作成する.
+ *
+ * @throws			RIOCannotOpenException		開けなかったとき
+ */
+void RTcpSocket::Open( ) throw(RIOCannotOpenException)
+{
+	RSocket::Open(SOCK_STREAM,0);
+}

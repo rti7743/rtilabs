@@ -1,0 +1,99 @@
+設定ファイルだにょ
+意味のないテキストはコメントとして扱われますにょ
+
+
+ファイル一覧の時の設定.
+:FileView
+KEY		RET		0	&VIEW "$P$F"
+KEY		BACK	0	&UPDIR
+KEY		UP		4	&UPDIR
+KEY		LEFT	4	&BACK
+KEY		RIGH	4	&NEXT
+KEY		L		0	&VIEW "`&INPUT "移動するパスを入力してください"	PATH	"$P$F"`"
+KEY		H		0	&MENU Popup
+KEY		Z		0	&MASK "`&INPUT "マスクを入力してください"	MASK	"$Z"`" ; &VIEW "$P$F"
+KEY		LBUTTON	255	&VIEW "$P$F"
+KEY		ESCAPE	0	&STOPTASKS
+
+MENU	Popup2	★(&Open)		&VIEW "$P$F"
+MENU	Popup2	▲(&Open)		&VIEW "$P$F"
+
+MENU	Popup	開く(&Open)		&VIEW "$P$F"
+MENU	Popup	開く2(&Open)	&VIEW "$P$F"
+MENU	Popup	→(&Open)		@Popup2
+
+タブメニュー
+MENU	TabPopup	閉じる(&Close)			&TABCLOSE
+MENU	TabPopup	戻る(&Back)				&BACK
+MENU	TabPopup	進む(&Next)				&NEXT
+MENU	TabPopup	一つ上へ(&Up)			&UPDIR
+MENU	TabPopup	更新(&Reload)			&RELOAD
+MENU	TabPopup	中止(&Stop)				&STOP
+MENU	TabPopup	タイトルを取得(&TITLE)	&CLIP "$A"
+
+イメージの時の設定.
+:ImageView
+KEY	RET		0	&UPDIR
+KEY	BACK	0	&UPDIR
+KEY	UP		4	&UPDIR
+KEY	LEFT	4	&BACK
+KEY	RIGHT	4	&NEXT
+
+MENU	TabPopup	閉じる(&Close)			&TABCLOSE
+MENU	TabPopup	戻る(&Back)				&BACK
+MENU	TabPopup	進む(&Next)				&NEXT
+MENU	TabPopup	一つ上へ(&Up)			&UPDIR
+MENU	TabPopup	更新(&Reload)			&RELOAD
+MENU	TabPopup	中止(&Stop)				&STOP
+MENU	TabPopup	URLを取得(&URL)			&CLIP "$P$F"
+MENU	TabPopup	タイトルを取得(&TITLE)	&CLIP "$A"
+MENU	TabPopup	名前を付けて保存(&Save)	&SAVE
+
+音や絵の時の設定.
+:MediaView
+KEY	RET		0	&UPDIR
+KEY	BACK	0	&UPDIR
+KEY	UP		4	&UPDIR
+KEY	LEFT	4	&BACK
+KEY	RIGHT	4	&NEXT
+
+MENU	TabPopup	閉じる(&Close)			&TABCLOSE
+MENU	TabPopup	戻る(&Back)				&BACK
+MENU	TabPopup	進む(&Next)				&NEXT
+MENU	TabPopup	一つ上へ(&Up)			&UPDIR
+MENU	TabPopup	更新(&Reload)			&RELOAD
+MENU	TabPopup	中止(&Stop)				&STOP
+MENU	TabPopup	URLを取得(&URL)			&CLIP "$P$F"
+MENU	TabPopup	タイトルを取得(&TITLE)	&CLIP "$A"
+MENU	TabPopup	名前を付けて保存(&Save)	&SAVE
+
+RES	PLAY		100		&EXPR "$H - 50"			
+RES	STOP		150		&EXPR "$H - 50"			
+RES	FASTFORWARD	200		&EXPR "$H - 50"			
+RES	FASTREWIND	250		&EXPR "$H - 50"			
+RES	FORWARD		300		&EXPR "$H - 50"			
+RES	REWIND		350		&EXPR "$H - 50"			
+RES	SEEN		50		&EXPR "$H - 100"		350			10		0		255
+RES	VOLUMN		50		&EXPR "$H - 100+20"		10			50		0		255
+RES	PAN			100		&EXPR "$H - 100+40"		50			10		0		255
+RES	DISPLAY		10		10						300			300		
+
+
+Webブラウザの時の設定.
+:WebView
+KEY	RET		0	&UPDIR
+KEY	BACK	0	&UPDIR
+KEY	UP		4	&UPDIR
+KEY	LEFT	4	&BACK
+KEY	RIGHT	4	&NEXT
+
+MENU	TabPopup	閉じる(&Close)			&TABCLOSE
+MENU	TabPopup	戻る(&Back)				&BACK
+MENU	TabPopup	進む(&Next)				&NEXT
+MENU	TabPopup	一つ上へ(&Up)			&UPDIR
+MENU	TabPopup	更新(&Reload)			&RELOAD
+MENU	TabPopup	中止(&Stop)				&STOP
+MENU	TabPopup	URLを取得(&URL)			&CLIP "$P$F"
+MENU	TabPopup	タイトルを取得(&TITLE)	&CLIP "$A"
+MENU	TabPopup	名前を付けて保存(&Save)	&SAVE
+

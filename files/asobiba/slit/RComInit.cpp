@@ -1,0 +1,33 @@
+// RComInit.cpp: RComInit クラスのインプリメンテーション
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "RComInit.h"
+
+
+//////////////////////////////////////////////////////////////////////
+// 構築/消滅
+//////////////////////////////////////////////////////////////////////
+
+#ifndef _WIN32_WCE
+
+RComInit::RComInit()
+{
+	//COMの初期化
+	::CoInitialize(NULL);
+}
+
+RComInit::~RComInit()
+{
+	//COMの終了処理
+	CoUninitialize();
+}
+
+void RComInit::UseCom()
+{
+	static RComInit myself;
+}
+
+
+#endif

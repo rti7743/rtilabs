@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual C++ Express 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Banana", "Banana.vcproj", "{3A68DAF4-8271-4D4C-88BD-F47B387623B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+		ReleaseMakeMap|Win32 = ReleaseMakeMap|Win32
+		ReleaseViewOnly|Win32 = ReleaseViewOnly|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A68DAF4-8271-4D4C-88BD-F47B387623B4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3A68DAF4-8271-4D4C-88BD-F47B387623B4}.Debug|Win32.Build.0 = Debug|Win32
+		{3A68DAF4-8271-4D4C-88BD-F47B387623B4}.Release|Win32.ActiveCfg = Release|Win32
+		{3A68DAF4-8271-4D4C-88BD-F47B387623B4}.Release|Win32.Build.0 = Release|Win32
+		{3A68DAF4-8271-4D4C-88BD-F47B387623B4}.ReleaseMakeMap|Win32.ActiveCfg = ReleaseMakeMap|Win32
+		{3A68DAF4-8271-4D4C-88BD-F47B387623B4}.ReleaseMakeMap|Win32.Build.0 = ReleaseMakeMap|Win32
+		{3A68DAF4-8271-4D4C-88BD-F47B387623B4}.ReleaseViewOnly|Win32.ActiveCfg = ReleaseViewOnly|Win32
+		{3A68DAF4-8271-4D4C-88BD-F47B387623B4}.ReleaseViewOnly|Win32.Build.0 = ReleaseViewOnly|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

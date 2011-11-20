@@ -1,0 +1,5 @@
+abc=10
+xyz=20
+
+sister = kaho 
+ meid=mahoro

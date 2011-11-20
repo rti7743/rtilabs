@@ -1,0 +1,21 @@
+
+text/html						htm html
+text/plain						txt text
+image/bmp						bmp
+image/gif						gif
+image/jpeg						jpeg jpg jpe
+image/png						png
+image/tiff						tiff tif
+application/x-lzh				lzh
+application/x-gca				gca
+application/zip					zip
+audio/midi						mid midi
+audio/mpeg						mp3
+audio/ogg						ogg
+audio/wma						wma
+audio/x-realaudio				ra
+audio/wav						wav
+video/x-realplayer				rm
+video/avi						avi
+video/mpeg						mpeg
+video/wmv						wmv

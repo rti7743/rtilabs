@@ -1,0 +1,371 @@
+// Created by Microsoft (R) C/C++ Compiler Version 12.00.9782.0 (40efb259).
+//
+// msscript.tli
+//
+// Wrapper implementations for Win32 type library msscript.ocx
+// compiler-generated file created 11/30/08 at 05:00:38 - DO NOT EDIT!
+
+#pragma once
+
+//
+// interface IScriptProcedure wrapper method implementations
+//
+
+inline _bstr_t IScriptProcedure::GetName ( ) {
+    BSTR _result;
+    HRESULT _hr = get_Name(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline long IScriptProcedure::GetNumArgs ( ) {
+    long _result;
+    HRESULT _hr = get_NumArgs(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline VARIANT_BOOL IScriptProcedure::GetHasReturnValue ( ) {
+    VARIANT_BOOL _result;
+    HRESULT _hr = get_HasReturnValue(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+//
+// interface IScriptProcedureCollection wrapper method implementations
+//
+
+inline IUnknownPtr IScriptProcedureCollection::Get_NewEnum ( ) {
+    IUnknown * _result;
+    HRESULT _hr = get__NewEnum(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IUnknownPtr(_result, false);
+}
+
+inline IScriptProcedurePtr IScriptProcedureCollection::GetItem ( const _variant_t & Index ) {
+    struct IScriptProcedure * _result;
+    HRESULT _hr = get_Item(Index, &_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IScriptProcedurePtr(_result, false);
+}
+
+inline long IScriptProcedureCollection::GetCount ( ) {
+    long _result;
+    HRESULT _hr = get_Count(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+//
+// interface IScriptModule wrapper method implementations
+//
+
+inline _bstr_t IScriptModule::GetName ( ) {
+    BSTR _result;
+    HRESULT _hr = get_Name(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline IDispatchPtr IScriptModule::GetCodeObject ( ) {
+    IDispatch * _result;
+    HRESULT _hr = get_CodeObject(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IDispatchPtr(_result, false);
+}
+
+inline IScriptProcedureCollectionPtr IScriptModule::GetProcedures ( ) {
+    struct IScriptProcedureCollection * _result;
+    HRESULT _hr = get_Procedures(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IScriptProcedureCollectionPtr(_result, false);
+}
+
+inline HRESULT IScriptModule::AddCode ( _bstr_t Code ) {
+    HRESULT _hr = raw_AddCode(Code);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline _variant_t IScriptModule::Eval ( _bstr_t Expression ) {
+    VARIANT _result;
+    VariantInit(&_result);
+    HRESULT _hr = raw_Eval(Expression, &_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _variant_t(_result, false);
+}
+
+inline HRESULT IScriptModule::ExecuteStatement ( _bstr_t Statement ) {
+    HRESULT _hr = raw_ExecuteStatement(Statement);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline _variant_t IScriptModule::Run ( _bstr_t ProcedureName, SAFEARRAY * * Parameters ) {
+    VARIANT _result;
+    VariantInit(&_result);
+    HRESULT _hr = raw_Run(ProcedureName, Parameters, &_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _variant_t(_result, false);
+}
+
+//
+// interface IScriptModuleCollection wrapper method implementations
+//
+
+inline IUnknownPtr IScriptModuleCollection::Get_NewEnum ( ) {
+    IUnknown * _result;
+    HRESULT _hr = get__NewEnum(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IUnknownPtr(_result, false);
+}
+
+inline IScriptModulePtr IScriptModuleCollection::GetItem ( const _variant_t & Index ) {
+    struct IScriptModule * _result;
+    HRESULT _hr = get_Item(Index, &_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IScriptModulePtr(_result, false);
+}
+
+inline long IScriptModuleCollection::GetCount ( ) {
+    long _result;
+    HRESULT _hr = get_Count(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline IScriptModulePtr IScriptModuleCollection::Add ( _bstr_t Name, VARIANT * Object ) {
+    struct IScriptModule * _result;
+    HRESULT _hr = raw_Add(Name, Object, &_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IScriptModulePtr(_result, false);
+}
+
+//
+// interface IScriptError wrapper method implementations
+//
+
+inline long IScriptError::GetNumber ( ) {
+    long _result;
+    HRESULT _hr = get_Number(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline _bstr_t IScriptError::GetSource ( ) {
+    BSTR _result;
+    HRESULT _hr = get_Source(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline _bstr_t IScriptError::GetDescription ( ) {
+    BSTR _result;
+    HRESULT _hr = get_Description(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline _bstr_t IScriptError::GetHelpFile ( ) {
+    BSTR _result;
+    HRESULT _hr = get_HelpFile(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline long IScriptError::GetHelpContext ( ) {
+    long _result;
+    HRESULT _hr = get_HelpContext(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline _bstr_t IScriptError::GetText ( ) {
+    BSTR _result;
+    HRESULT _hr = get_Text(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline long IScriptError::GetLine ( ) {
+    long _result;
+    HRESULT _hr = get_Line(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline long IScriptError::GetColumn ( ) {
+    long _result;
+    HRESULT _hr = get_Column(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline HRESULT IScriptError::Clear ( ) {
+    HRESULT _hr = raw_Clear();
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+//
+// interface IScriptControl wrapper method implementations
+//
+
+inline _bstr_t IScriptControl::GetLanguage ( ) {
+    BSTR _result;
+    HRESULT _hr = get_Language(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _bstr_t(_result, false);
+}
+
+inline void IScriptControl::PutLanguage ( _bstr_t pbstrLanguage ) {
+    HRESULT _hr = put_Language(pbstrLanguage);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline enum ScriptControlStates IScriptControl::GetState ( ) {
+    enum ScriptControlStates _result;
+    HRESULT _hr = get_State(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline void IScriptControl::PutState ( enum ScriptControlStates pssState ) {
+    HRESULT _hr = put_State(pssState);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline void IScriptControl::PutSitehWnd ( long phwnd ) {
+    HRESULT _hr = put_SitehWnd(phwnd);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline long IScriptControl::GetSitehWnd ( ) {
+    long _result;
+    HRESULT _hr = get_SitehWnd(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline long IScriptControl::GetTimeout ( ) {
+    long _result;
+    HRESULT _hr = get_Timeout(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline void IScriptControl::PutTimeout ( long plMilleseconds ) {
+    HRESULT _hr = put_Timeout(plMilleseconds);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline VARIANT_BOOL IScriptControl::GetAllowUI ( ) {
+    VARIANT_BOOL _result;
+    HRESULT _hr = get_AllowUI(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline void IScriptControl::PutAllowUI ( VARIANT_BOOL pfAllowUI ) {
+    HRESULT _hr = put_AllowUI(pfAllowUI);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline VARIANT_BOOL IScriptControl::GetUseSafeSubset ( ) {
+    VARIANT_BOOL _result;
+    HRESULT _hr = get_UseSafeSubset(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}
+
+inline void IScriptControl::PutUseSafeSubset ( VARIANT_BOOL pfUseSafeSubset ) {
+    HRESULT _hr = put_UseSafeSubset(pfUseSafeSubset);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+}
+
+inline IScriptModuleCollectionPtr IScriptControl::GetModules ( ) {
+    struct IScriptModuleCollection * _result;
+    HRESULT _hr = get_Modules(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IScriptModuleCollectionPtr(_result, false);
+}
+
+inline IScriptErrorPtr IScriptControl::GetError ( ) {
+    struct IScriptError * _result;
+    HRESULT _hr = get_Error(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IScriptErrorPtr(_result, false);
+}
+
+inline IDispatchPtr IScriptControl::GetCodeObject ( ) {
+    IDispatch * _result;
+    HRESULT _hr = get_CodeObject(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IDispatchPtr(_result, false);
+}
+
+inline IScriptProcedureCollectionPtr IScriptControl::GetProcedures ( ) {
+    struct IScriptProcedureCollection * _result;
+    HRESULT _hr = get_Procedures(&_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return IScriptProcedureCollectionPtr(_result, false);
+}
+
+inline HRESULT IScriptControl::_AboutBox ( ) {
+    HRESULT _hr = raw__AboutBox();
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline HRESULT IScriptControl::AddObject ( _bstr_t Name, IDispatch * Object, VARIANT_BOOL AddMembers ) {
+    HRESULT _hr = raw_AddObject(Name, Object, AddMembers);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline HRESULT IScriptControl::Reset ( ) {
+    HRESULT _hr = raw_Reset();
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline HRESULT IScriptControl::AddCode ( _bstr_t Code ) {
+    HRESULT _hr = raw_AddCode(Code);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline _variant_t IScriptControl::Eval ( _bstr_t Expression ) {
+    VARIANT _result;
+    VariantInit(&_result);
+    HRESULT _hr = raw_Eval(Expression, &_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _variant_t(_result, false);
+}
+
+inline HRESULT IScriptControl::ExecuteStatement ( _bstr_t Statement ) {
+    HRESULT _hr = raw_ExecuteStatement(Statement);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _hr;
+}
+
+inline _variant_t IScriptControl::Run ( _bstr_t ProcedureName, SAFEARRAY * * Parameters ) {
+    VARIANT _result;
+    VariantInit(&_result);
+    HRESULT _hr = raw_Run(ProcedureName, Parameters, &_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _variant_t(_result, false);
+}
+
+//
+// dispinterface DScriptControlSource wrapper method implementations
+//
+
+inline HRESULT DScriptControlSource::Error ( ) {
+    return _com_dispatch_method(this, 0xbb8, DISPATCH_METHOD, VT_EMPTY, NULL, NULL);
+}
+
+inline HRESULT DScriptControlSource::Timeout ( ) {
+    return _com_dispatch_method(this, 0xbb9, DISPATCH_METHOD, VT_EMPTY, NULL, NULL);
+}

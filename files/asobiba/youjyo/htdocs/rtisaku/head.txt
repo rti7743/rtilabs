@@ -1,0 +1,6 @@
+<p>
+ここは<a href="/rti/">テスト板</a>の<font color="#FF0000">削除依頼板</font>です。<br>
+ この板は<b><font size="+3" color="#FF0000">すべて IP公開</font></b> なので注意してください。<br>
+<br>
+カエントダウンシステムについては<a href="http://www.bq--3ayiomcfao4tbgzqq4.to/www/project/youjyo/countdown/">こちら</a>をご覧ください<br>
+</p>
