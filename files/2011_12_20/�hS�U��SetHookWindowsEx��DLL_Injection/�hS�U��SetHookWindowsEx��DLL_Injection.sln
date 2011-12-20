@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ドS攻撃SetHookWindowsExでDLL_Injection", "ドS攻撃SetHookWindowsExでDLL_Injection\ドS攻撃SetHookWindowsExでDLL_Injection.vcxproj", "{288AA7FC-2B4D-4985-A8E6-8A95B130FB87}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ドS攻撃用DLL", "ドS攻撃用DLL\ドS攻撃用DLL.vcxproj", "{5E86A1F7-B658-4158-8FAC-55F9EF0EA45B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{288AA7FC-2B4D-4985-A8E6-8A95B130FB87}.Debug|Win32.ActiveCfg = Debug|Win32
+		{288AA7FC-2B4D-4985-A8E6-8A95B130FB87}.Debug|Win32.Build.0 = Debug|Win32
+		{288AA7FC-2B4D-4985-A8E6-8A95B130FB87}.Release|Win32.ActiveCfg = Release|Win32
+		{288AA7FC-2B4D-4985-A8E6-8A95B130FB87}.Release|Win32.Build.0 = Release|Win32
+		{5E86A1F7-B658-4158-8FAC-55F9EF0EA45B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5E86A1F7-B658-4158-8FAC-55F9EF0EA45B}.Debug|Win32.Build.0 = Debug|Win32
+		{5E86A1F7-B658-4158-8FAC-55F9EF0EA45B}.Release|Win32.ActiveCfg = Release|Win32
+		{5E86A1F7-B658-4158-8FAC-55F9EF0EA45B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

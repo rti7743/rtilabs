@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ドMやられ役_Anti_RemoteThread", "ドMやられ役_Anti_RemoteThread\ドMやられ役_Anti_RemoteThread.vcxproj", "{CAAF7D25-64A6-4DA2-91A7-3791F8E92ECC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAAF7D25-64A6-4DA2-91A7-3791F8E92ECC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CAAF7D25-64A6-4DA2-91A7-3791F8E92ECC}.Debug|Win32.Build.0 = Debug|Win32
+		{CAAF7D25-64A6-4DA2-91A7-3791F8E92ECC}.Release|Win32.ActiveCfg = Release|Win32
+		{CAAF7D25-64A6-4DA2-91A7-3791F8E92ECC}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

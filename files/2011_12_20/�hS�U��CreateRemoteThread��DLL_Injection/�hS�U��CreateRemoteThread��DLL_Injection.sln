@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ドS攻撃CreateRemoteThreadとDLL_Injection", "ドS攻撃CreateRemoteThreadとDLL_Injection\ドS攻撃CreateRemoteThreadとDLL_Injection.vcxproj", "{32AB6D59-2B5F-4AD2-B248-D932420453CF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ドS攻撃用DLL_CreateRemoteThread", "ドS攻撃用DLL_CreateRemoteThread\ドS攻撃用DLL_CreateRemoteThread.vcxproj", "{224E0DA4-4F19-4613-9D92-280BB6E84B48}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32AB6D59-2B5F-4AD2-B248-D932420453CF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{32AB6D59-2B5F-4AD2-B248-D932420453CF}.Debug|Win32.Build.0 = Debug|Win32
+		{32AB6D59-2B5F-4AD2-B248-D932420453CF}.Release|Win32.ActiveCfg = Release|Win32
+		{32AB6D59-2B5F-4AD2-B248-D932420453CF}.Release|Win32.Build.0 = Release|Win32
+		{224E0DA4-4F19-4613-9D92-280BB6E84B48}.Debug|Win32.ActiveCfg = Debug|Win32
+		{224E0DA4-4F19-4613-9D92-280BB6E84B48}.Debug|Win32.Build.0 = Debug|Win32
+		{224E0DA4-4F19-4613-9D92-280BB6E84B48}.Release|Win32.ActiveCfg = Release|Win32
+		{224E0DA4-4F19-4613-9D92-280BB6E84B48}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
