@@ -27,7 +27,7 @@ function h($text)
 	return htmlspecialchars($text,ENT_QUOTES,'UTF-8');
 }
 
-//_POSTの値をそのままユーザーに返せるように変換します.
+//_REQUESTの値をそのままユーザーに返せるように変換します.
 function hh(&$array)
 {
 	if (!is_array($array))
@@ -76,11 +76,11 @@ function _cleaningMojoCode($str) {
    return $str;
 }
 
-if ( isset($_POST['gen']) ) {
+if ( isset($_REQUEST['gen']) ) {
    //文字コードを洗う.
-   $_POST['wordlist'] = _cleaningMojoCode($_POST['wordlist']);
+   $_REQUEST['wordlist'] = _cleaningMojoCode($_REQUEST['wordlist']);
    $list = array();
-   foreach(explode("\n" ,$_POST['wordlist'] ) as $_) {
+   foreach(explode("\n" ,$_REQUEST['wordlist'] ) as $_) {
        $_ = rtrim($_);
        if ($_ === '') continue;
        $list[] = $_;
@@ -127,9 +127,16 @@ if ( isset($_POST['gen']) ) {
    $out['code'].= "\n";
    $out['code'].= 'echo $str;'."\n";
 
-   $out['wordlist'] = $_POST['wordlist'];
+   $out['wordlist'] = $_REQUEST['wordlist'];
 
    $out['bad'].= $bad;
+
+   if($_REQUEST['method'] == "GET-JSON") {
+        header("Content-Type: text/javascript; charset=utf-8");
+        echo json_encode($out);
+        die;
+   }
+
 
    $out = hh($out);
    include("index.tpl");

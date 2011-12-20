@@ -16,10 +16,16 @@
 <h1>正規表現を自動生成します。</h1>
 改行区切りで単語を入れると、すべての単語にマッチする正規表現を自動的に作成します。<br />
 <br />
-<form action="index.php" method="POST">
+<form action="index.php" id="form" method="POST">
    <textarea id="wordlist" name="wordlist" cols="200" rows="20"><?php echo $out['wordlist']; ?></textarea>
    <br />
    <input type="submit" name="gen" value="正規表現を作成してみる" /><br />
+　
+   <select name="methodchange" id="methodchange">
+      <option value="POST">POST</option>
+      <option value="GET">GET</option>
+      <option value="GET-JSON">GET-JSON</option>
+   </select>
 </form>
 <br />
 <br />
@@ -152,6 +158,25 @@ function OnMenuClick(type) {
 		$('#wordlist').val("ヒャド\nヒャダルコ\nヒャダイン\nマヒャド\nマヒャデドス");
 	}
 }
+
+function OnMethodchange()
+{
+$('#methodchange').change(function(){
+    if ( this.val() == "POST" )
+    {
+         $("#form").attribute("method","POST");
+    }
+    else if ( this.val() == "GET" )
+    {
+          $("#form").attribute("method","GET");
+   }
+    else if ( this.val() == "GET-JSON" )
+    {
+         $("#form").attribute("method","GET");
+    }
+});
+}
+
 
 </script>
 </body>
