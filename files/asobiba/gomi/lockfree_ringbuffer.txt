@@ -1,0 +1,111 @@
+//失敗作
+//ロックフリーで、リングバッファにすれば ABA問題って発生しなくね？
+//と、思って、ロックフリーリングバッファを実装してみたら、結局ロックと同等のことになってしまい、
+//まったく無意味になったという。
+
+#define compare_and_swap(a, b, c)  (::InterlockedCompareExchange((uintptr_t*)(a), (uintptr_t)(c), (uintptr_t)(b))== (uintptr_t)(b))
+
+template<typename _T> class lockfreeringbuffer	
+{
+public:
+	lockfreeringbuffer(unsigned int size = 1024)
+	{
+		this->Buffer = new _T[size];
+		this->ReadPos = &Buffer[0];
+		this->WritePos = &Buffer[0];
+		this->LastPos = &Buffer[size-1];
+	}
+	virtual ~lockfreeringbuffer()
+	{
+		delete [] this->Buffer;
+		this->Buffer = NULL;
+	}
+	bool Push(_T p)
+	{
+		while(1)
+		{
+			volatile _T* read = this->ReadPos;
+			volatile _T* write = this->WritePos;
+			if (read == NULL || write == NULL)
+			{
+				//現在データの更新中!!
+				continue;
+			}
+
+			volatile _T* next = (write == this->LastPos ? &Buffer[0] : write+1);
+			if ( next == read)
+			{
+				return false;
+			}
+			if ( compare_and_swap( &this->WritePos , write ,  NULL ) )
+			{
+				//一度 NULLを代入しているのは、 WritePos を CAS したあとでデータを *write = p するまでにスレッドが割り込んで
+				//まだ書いていないデータを読んでしまう可能性があるため
+
+				*write = p;
+				RTHREAD_ASSERT(this->WritePos == NULL );
+				this->WritePos = (_T*)next; //この書き換えは、 直前の NULLに書き換えるCASにより担保する.
+				break;
+			}
+
+			continue;
+		}
+		return true;
+	}
+
+	bool Pop(_T* p)
+	{
+		while(1)
+		{
+			volatile _T * read = this->ReadPos;
+			volatile _T * write = this->WritePos;
+			if (read == NULL || write == NULL)
+			{
+				//現在データの更新中!!
+				continue;
+			}
+			if (read == write)
+			{
+				//読み込むデータがない
+				return false;
+			}
+			
+			volatile _T* next = (read == this->LastPos ? &Buffer[0] : read+1);
+			if ( compare_and_swap( &this->ReadPos , read , NULL) )
+			{
+				//一度 NULLを代入しているのは、 ReadPos を CAS したあとでデータを *read するまでにリングキューがあふれてしまって
+				//WritePos がリングキューを一周して 書き込んでしまう可能性があるため。 
+				//このようなことは、デバッグ用に短いリングキューを作らない限りおきえないが念のためチェックする。
+				*p = *read;
+				RTHREAD_ASSERT(this->ReadPos == NULL );
+				this->ReadPos = (_T*)next; //この書き換えは、 直前の NULLに書き換えるCASにより担保する.
+				break;
+			}
+
+			continue;
+		}
+
+		return true;
+	}
+
+	unsigned int size() const
+	{
+		_T* read = this->ReadPos;
+		_T* write =this->WritePos;
+
+		if (write >= read)
+		{
+			return (int)(write - read);
+		}
+		else 
+		{
+			return (int)(read - write);
+		}
+	}
+
+//private:
+	_T*  ReadPos;
+	_T*  WritePos;
+	_T*  LastPos;
+	_T*  Buffer;
+};
