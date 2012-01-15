@@ -24,15 +24,15 @@ public:
 	{
 		while(1)
 		{
-			volatile _T* read = this->ReadPos;
-			volatile _T* write = this->WritePos;
+			_T* read = this->ReadPos;
+			_T* write = this->WritePos;
 			if (read == NULL || write == NULL)
 			{
 				//現在データの更新中!!
 				continue;
 			}
 
-			volatile _T* next = (write == this->LastPos ? &Buffer[0] : write+1);
+			_T* next = (write == this->LastPos ? this->Buffer : write+1);
 			if ( next == read)
 			{
 				return false;
@@ -57,8 +57,8 @@ public:
 	{
 		while(1)
 		{
-			volatile _T * read = this->ReadPos;
-			volatile _T * write = this->WritePos;
+			_T * read = this->ReadPos;
+			_T * write = this->WritePos;
 			if (read == NULL || write == NULL)
 			{
 				//現在データの更新中!!
@@ -70,7 +70,7 @@ public:
 				return false;
 			}
 			
-			volatile _T* next = (read == this->LastPos ? &Buffer[0] : read+1);
+			_T* next = (read == this->LastPos ? this->Buffer : read+1);
 			if ( compare_and_swap( &this->ReadPos , read , NULL) )
 			{
 				//一度 NULLを代入しているのは、 ReadPos を CAS したあとでデータを *read するまでにリングキューがあふれてしまって
