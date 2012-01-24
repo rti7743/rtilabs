@@ -1,17 +1,17 @@
-#include <iostream>
+ï»¿#include <iostream>
 
-//ŠÖ”ƒIƒuƒWƒFƒNƒg‚âƒƒ\ƒbƒh‚ğŠÖ”ƒ|ƒCƒ“ƒ^‚É•ÏŠ·‚·‚éB
-//c_function.hpp‚ğŒ³‚É©•ª‚Å‚àì‚Á‚Ä‚İ‚½B
-//ˆá‚¢  1.ŠÖ”ƒIƒuƒWƒFƒNƒg‚¾‚¯‚Å‚Í‚È‚­Aƒƒ\ƒbƒh‚à“n‚¹‚é
-//      2.boost•s—v :p)
-//      3.stdcall ‚É‚à‘Î‰‚Å‚«‚éB
+//é–¢æ•°ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚„ãƒ¡ã‚½ãƒƒãƒ‰ã‚’é–¢æ•°ãƒã‚¤ãƒ³ã‚¿ã«å¤‰æ›ã™ã‚‹ã€‚
+//c_function.hppã‚’å…ƒã«è‡ªåˆ†ã§ã‚‚ä½œã£ã¦ã¿ãŸã€‚
+//é•ã„  1.é–¢æ•°ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã ã‘ã§ã¯ãªãã€ãƒ¡ã‚½ãƒƒãƒ‰ã‚‚æ¸¡ã›ã‚‹
+//      2.boostä¸è¦ :p)
+//      3.stdcall ã«ã‚‚å¯¾å¿œã§ãã‚‹ã€‚
 //
-//“®ìŠm”F VS2010
+//å‹•ä½œç¢ºèª VS2010
 
-//ƒƒ\ƒbƒh‚É‘Î‚·‚éƒR[ƒ‹ƒoƒbƒN
+//ãƒ¡ã‚½ãƒƒãƒ‰ã«å¯¾ã™ã‚‹ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 namespace methodcallback
 {
-	//•W€ŒÄ‚Ño‚µ
+	//æ¨™æº–å‘¼ã³å‡ºã—
 	namespace detail
 	{
 		template<typename _GUID,typename FUNC_FUNC,typename _CLASS,typename _METHOD>
@@ -24,11 +24,17 @@ namespace methodcallback
 			template<typename _RET,typename _P1,typename _P2,typename _P3> static _RET callback(_P1 p1,_P2 p2,_P3 p3){	return (_class->*_method)(p1,p2,p3);	}
 			template<typename _RET,typename _P1,typename _P2,typename _P3,typename _P4> static _RET callback(_P1 p1,_P2 p2,_P3 p3,_P4 p4){	return (_class->*_method)(p1,p2,p3,p4);	}
 			template<typename _RET,typename _P1,typename _P2,typename _P3,typename _P4,typename _P5> static _RET callback(_P1 p1,_P2 p2,_P3 p3,_P4 p4,_P5 p5){	return (_class->*_method)(p1,p2,p3,p4,p5);	}
+
+			template<typename _P1> static void callback(_P1 p1){	(_class->*_method)(p1);	}
+			template<typename _P1,typename _P2> static void callback(_P1 p1,_P2 p2){	(_class->*_method)(p1,p2);	}
+			template<typename _P1,typename _P2,typename _P3> static void callback(_P1 p1,_P2 p2,_P3 p3){	(_class->*_method)(p1,p2,p3);	}
+			template<typename _P1,typename _P2,typename _P3,typename _P4> static void callback(_P1 p1,_P2 p2,_P3 p3,_P4 p4){	(_class->*_method)(p1,p2,p3,p4);	}
+			template<typename _P1,typename _P2,typename _P3,typename _P4,typename _P5> static void callback(_P1 p1,_P2 p2,_P3 p3,_P4 p4,_P5 p5){	(_class->*_method)(p1,p2,p3,p4,p5);	}
 		};
 		template <typename _GUID,typename FUNC_FUNC,typename _CLASS,typename _METHOD> _CLASS* callcdecl<_GUID,FUNC_FUNC,_CLASS,_METHOD>::_class = NULL;
 		template <typename _GUID,typename FUNC_FUNC,typename _CLASS,typename _METHOD> _METHOD callcdecl<_GUID,FUNC_FUNC,_CLASS,_METHOD>::_method = NULL;
 	}
-	//ƒR[ƒ‹ƒoƒbƒN“o˜^
+	//ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ç™»éŒ²
 	template<typename _GUID,typename FUNC_FUNC,typename _CLASS,typename _METHOD>
 	FUNC_FUNC regist(_CLASS* _class,_METHOD _method)
 	{
@@ -37,7 +43,7 @@ namespace methodcallback
 		DETAIL::_method = _method;
 		return (FUNC_FUNC)(DETAIL::callback);
 	}
-	//METHOD‚ğÈ—ª‚µ‚½ê‡‚Í operator() ‚ªŒÄ‚Î‚ê‚é.
+	//METHODã‚’çœç•¥ã—ãŸå ´åˆã¯ operator() ãŒå‘¼ã°ã‚Œã‚‹.
 	template<typename _GUID,typename FUNC_FUNC,typename _CLASS>
 	FUNC_FUNC regist(_CLASS* _class)
 	{
@@ -57,11 +63,17 @@ namespace methodcallback
 			template<typename _RET,typename _P1,typename _P2,typename _P3> static _RET __stdcall callback(_P1 p1,_P2 p2,_P3 p3){	return (_class->*_method)(p1,p2,p3);	}
 			template<typename _RET,typename _P1,typename _P2,typename _P3,typename _P4> static _RET __stdcall callback(_P1 p1,_P2 p2,_P3 p3,_P4 p4){	return (_class->*_method)(p1,p2,p3,p4);	}
 			template<typename _RET,typename _P1,typename _P2,typename _P3,typename _P4,typename _P5> static _RET __stdcall callback(_P1 p1,_P2 p2,_P3 p3,_P4 p4,_P5 p5){	return (_class->*_method)(p1,p2,p3,p4,p5);	}
+
+			template<typename _P1> static void __stdcall callback(_P1 p1){ (_class->*_method)(p1);	}
+			template<typename _P1,typename _P2> static void __stdcall callback(_P1 p1,_P2 p2){	(_class->*_method)(p1,p2);	}
+			template<typename _P1,typename _P2,typename _P3> static void __stdcall callback(_P1 p1,_P2 p2,_P3 p3){	(_class->*_method)(p1,p2,p3);	}
+			template<typename _P1,typename _P2,typename _P3,typename _P4> static void __stdcall callback(_P1 p1,_P2 p2,_P3 p3,_P4 p4){	(_class->*_method)(p1,p2,p3,p4);	}
+			template<typename _P1,typename _P2,typename _P3,typename _P4,typename _P5> static void __stdcall callback(_P1 p1,_P2 p2,_P3 p3,_P4 p4,_P5 p5){	(_class->*_method)(p1,p2,p3,p4,p5);	}
 		};
 		template <typename _GUID,typename FUNC_FUNC,typename _CLASS,typename _METHOD> _CLASS* callstdcall<_GUID,FUNC_FUNC,_CLASS,_METHOD>::_class = NULL;
 		template <typename _GUID,typename FUNC_FUNC,typename _CLASS,typename _METHOD> _METHOD callstdcall<_GUID,FUNC_FUNC,_CLASS,_METHOD>::_method = NULL;
 	}
-	//ƒR[ƒ‹ƒoƒbƒN“o˜^
+	//ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ç™»éŒ²
 	template<typename _GUID,typename FUNC_FUNC,typename _CLASS,typename _METHOD>
 	FUNC_FUNC registstdcall(_CLASS* _class,_METHOD _method)
 	{
@@ -70,14 +82,14 @@ namespace methodcallback
 		DETAIL::_method = _method;
 		return (FUNC_FUNC)(DETAIL::callback);
 	}
-	//METHOD‚ğÈ—ª‚µ‚½ê‡‚Í operator() ‚ªŒÄ‚Î‚ê‚é.
+	//METHODã‚’çœç•¥ã—ãŸå ´åˆã¯ operator() ãŒå‘¼ã°ã‚Œã‚‹.
 	template<typename _GUID,typename FUNC_FUNC,typename _CLASS>
 	FUNC_FUNC registstdcall(_CLASS* _class)
 	{
 		return registstdcall<_GUID,FUNC_FUNC>(_class,&_CLASS::operator());
 	}
 };
-
+/*
 struct AAA
 {
 	int Method(int ccc)
@@ -98,18 +110,19 @@ int main()
 {
 	int ans;
 
-	//ƒNƒ‰ƒXƒƒ\ƒbƒh AAA:Method
+	//ã‚¯ãƒ©ã‚¹ãƒ¡ã‚½ãƒƒãƒ‰ AAA:Method
 	AAA aaa;
 	FUNC f = methodcallback::regist<struct a123,FUNC>(&aaa , &AAA::Method);
 	ans = f(22);
 	std::cout << "12+22=" << ans << std::endl;
 
-	//ŠÖ”ƒIƒuƒWƒFƒNƒg operator() 
+	//é–¢æ•°ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ operator() 
 	BBB bbb;
 	FUNC f2 = methodcallback::regist<struct a123,FUNC>(&bbb);
 	ans = f2(33);
 	std::cout << "12+23=" << ans << std::endl;
 
-	//stdcall ‚ğŒÄ‚Ô‚É‚ÍA registstdcall ‚ğg‚Á‚Ä‚­‚¾‚³‚¢B
+	//stdcall ã‚’å‘¼ã¶ã«ã¯ã€ registstdcall ã‚’ä½¿ã£ã¦ãã ã•ã„ã€‚
 }
 
+*/
