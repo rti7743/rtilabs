@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="mkfa">
+      <UniqueIdentifier>{e21bceac-03e4-4914-8578-80fa8bc6b808}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dfa_minimize">
+      <UniqueIdentifier>{f45f75f8-5405-497c-81d0-3a29be067ef0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dfa_minimize\libsent">
+      <UniqueIdentifier>{a408e785-b719-498c-b15e-a75bd2cc52cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libsent">
+      <UniqueIdentifier>{13430d24-575a-4f64-8c9b-0b3599e3176e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="mkfa\nfa.c">
+      <Filter>mkfa</Filter>
+    </ClCompile>
+    <ClCompile Include="mkfa\triplet.c">
+      <Filter>mkfa</Filter>
+    </ClCompile>
+    <ClCompile Include="mkfa\voca.c">
+      <Filter>mkfa</Filter>
+    </ClCompile>
+    <ClCompile Include="mkfa\gram.tab.c">
+      <Filter>mkfa</Filter>
+    </ClCompile>
+    <ClCompile Include="mkfa\dfa.c">
+      <Filter>mkfa</Filter>
+    </ClCompile>
+    <ClCompile Include="mkfa\gram_main.c">
+      <Filter>mkfa</Filter>
+    </ClCompile>
+    <ClCompile Include="dfa_minimize\dfa_minimize.c">
+      <Filter>dfa_minimize</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\addlog.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\adin\adin_file.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\util\aptree.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\calc_mix.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\calc_tied_mix.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\cdhmm.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\cdset.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\check_hmm_restriction.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\check_hmmtype.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\chkhmmlist.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\util\confout.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\dfa\cpair.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\dfa\dfa_lookup.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\dfa\dfa_malloc.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\dfa\dfa_util.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\adin\ds48to16.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\util\endian.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\gms.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\gms_gprune.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\gprune_beam.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\gprune_common.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\gprune_heu.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\gprune_none.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\gprune_safe.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\guess_cdHMM.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\util\gzfile.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\hmm_lookup.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\dfa\init_dfa.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\ngram\init_ngram.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\init_phmm.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\voca\init_voca.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\util\jlog.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\wav2mfcc\mfcc-core.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\dfa\mkcpair.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\dfa\mkterminfo.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\mkwhmm.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\util\mybmalloc.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\util\mymalloc.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\util\mystrtok.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\ngram\ngram_access.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\ngram\ngram_compact_context.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\ngram\ngram_lookup.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\ngram\ngram_malloc.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\ngram\ngram_read_arpa.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\ngram\ngram_read_bin.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\ngram\ngram_util.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\ngram\ngram_write_bin.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\outprob.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\outprob_init.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\wav2mfcc\para.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\anlz\param_malloc.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\anlz\paramselect.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\anlz\paramtypes.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\util\ptree.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\put_htkdata_info.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\util\qsort.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\dfa\rddfa.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\rdhmmdef.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\rdhmmdef_data.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\rdhmmdef_dens.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\rdhmmdef_mpdf.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\rdhmmdef_options.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\rdhmmdef_regtree.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\rdhmmdef_state.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\rdhmmdef_streamweight.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\rdhmmdef_tiedmix.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\rdhmmdef_trans.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\rdhmmdef_var.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\rdhmmlist.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\anlz\rdparam.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\read_binhmm.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\read_binhmmlist.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\util\readfile.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\wav2mfcc\ss.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\util\strcasecmp.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\anlz\strip.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\anlz\strip_mfcc.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="msvc\config\version.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\voca\voca_load_htkdict.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\voca\voca_load_wordlist.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\voca\voca_lookup.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\voca\voca_malloc.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\voca\voca_util.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\phmm\vsegment.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\wav2mfcc\wav2mfcc-buffer.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\wav2mfcc\wav2mfcc-pipe.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\write_binhmm.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\hmminfo\write_binhmmlist.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\anlz\wrsamp.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\anlz\wrwav.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\adin\zc-e.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="libsent\src\adin\zmean.c">
+      <Filter>libsent</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="julius-plus\mkdfa.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mkfa\nfa.h">
+      <Filter>mkfa</Filter>
+    </ClInclude>
+    <ClInclude Include="mkfa\triplet.h">
+      <Filter>mkfa</Filter>
+    </ClInclude>
+    <ClInclude Include="mkfa\mkfa.h">
+      <Filter>mkfa</Filter>
+    </ClInclude>
+    <ClInclude Include="mkfa\dfa.h">
+      <Filter>mkfa</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\adin.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="msvc\config\config-msvc-libjulius.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="msvc\config\config-msvc-libsent.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\dfa.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\hmm.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\hmm_calc.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\htk_defs.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\htk_hmm.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\htk_param.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\src\adin\lpfcoef_2to1.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\src\adin\lpfcoef_3to4.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\machines.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\mfcc.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\ngram2.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\ptree.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\speech.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\stddefs.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\tcpip.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\util.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="libsent\include\sent\vocabulary.h">
+      <Filter>libsent</Filter>
+    </ClInclude>
+    <ClInclude Include="julius-plus\mkdfa.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
