@@ -1,30 +1,28 @@
-�����F���G���W�� julius ���n�b�N���ėV�ڂ��B
-julius�u�}�i�̖{���̗͂��v���m��!!�v
+音声認識エンジン julius をハックして遊ぼう。
+julius「マナの本当の力を思い知れ!!」
+
+
+=== juliustest__mkdfa ===
+mkdfa.pl ではなく、直接 dfa と dict ファイルを生成します。
+mkdfa.pl の内容と dfaコンパイラ mkfa と 最適化ツール dfa_minimize をく・ﾂけてみました。
+perl を使わず共に、 grammar voca から dfa  dict を作り出せます。
+
+が、
+VC++の検出ツールにかけてみると、mkfa のソースに大量のメモリリークがあるようですw
+dfa_minimize にもありました。
+
+出来る範囲で修正しておきましたが、 mkfa のリークは結構深刻な部分で発生していて、直すには時間がかかりそうです。
+また、mkfa の内部では static 変数を使いまく・ﾄいるので、関数化したとしても、2度目は上弱・ｮ作しません。
+
+以上の理由により、プロジェクトは凍結しました。
 
 
 
+=== juliustest__regexp ===
+正規表現で、 dfa voca を作り出します。
+julius の  grammar voca は作るのが一苦労です。
+や・ﾏり、 "テスト(なのは|さくら)たん" とかと、正規表現で書きたいですよね？
+正規表現から、直接 dfa と voca ファイルを生成してみらｷとにしました。
 
-= juliustest__mkdfa =
-mkdfa.pl �ł͂Ȃ��A���� dfa �� dict �t�@�C���𐶐����܂��B
-mkdfa.pl �̓��e�� dfa�R���p�C�� mkfa �� �œK���c�[�� dfa_minimize ���������Ă݂܂����B
-perl ���g�킸���ɁA grammar voca ���� dfa  dict �����o���܂��B
-
-���A
-VC++�̌��o�c�[���ɂ����Ă݂�ƁAmkfa �̃\�[�X�ɑ�ʂ̃��������[�N������悤�ł�w
-dfa_minimize �ɂ�����܂����B
-
-�o����͈͂ŏC�����Ă����܂������A mkfa �̃��[�N�͌��\�[���ȕ����Ŕ������Ă��āA�����ɂ͎��Ԃ������肻���ł��B
-�܂��Amkfa �̓����ł� static �ϐ����g���܂����Ă���̂ŁA�֐��������Ƃ��Ă��A2�x�ڂ͏�肭���삵�܂���B
-
-�ȏ�̗��R�ɂ��A�v���W�F�N�g�͓������܂����B
-
-
-
-= juliustest__regexp =
-���K�\���ŁA dfa voca �����o���܂��B
-julius ��  grammar voca �͍��̂����J�ł��B
-����ς�A "�e�X�g(�Ȃ̂�|������)����" �Ƃ��ƁA���K�\���ŏ��������ł���ˁH
-���K�\������A���� dfa �� voca �t�@�C���𐶐����Ă݂邱�Ƃɂ��܂����B
-
-��������� dfa �̓`���[�j���O����Ă��Ȃ��̂Œ��ӂ��Ă��������B
-�����I�ɁAregexp assemble �ł��ڐA���č�����悤�Ƃ��l���Ă��܂��B
+生成される dfa はチューニングされていないので注意してください。
+将来的に、regexp assemble でも移植して作・ﾂけようとか考えています。
