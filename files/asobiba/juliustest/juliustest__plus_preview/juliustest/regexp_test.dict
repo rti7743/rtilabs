@@ -1,0 +1,52 @@
+0	[</s>]	 silE
+1	[<s>]	 silB
+2	[gomi_N]	N
+2	[gomi_a]	a
+2	[gomi_a:]	a:
+2	[gomi_b]	b
+2	[gomi_by]	by
+2	[gomi_ch]	ch
+2	[gomi_d]	d
+2	[gomi_dy]	dy
+2	[gomi_e]	e
+2	[gomi_e:]	e:
+2	[gomi_f]	f
+2	[gomi_g]	g
+2	[gomi_gy]	gy
+2	[gomi_h]	h
+2	[gomi_hy]	hy
+2	[gomi_i]	i
+2	[gomi_i:]	i:
+2	[gomi_j]	j
+2	[gomi_k]	k
+2	[gomi_ky]	ky
+2	[gomi_m]	m
+2	[gomi_my]	my
+2	[gomi_n]	n
+2	[gomi_ny]	ny
+2	[gomi_o]	o
+2	[gomi_o:]	o:
+2	[gomi_p]	p
+2	[gomi_py]	py
+2	[gomi_q]	q
+2	[gomi_r]	r
+2	[gomi_ry]	ry
+2	[gomi_s]	s
+2	[gomi_sh]	sh
+2	[gomi_t]	t
+2	[gomi_ts]	ts
+2	[gomi_u]	u
+2	[gomi_u:]	u:
+2	[gomi_w]	w
+2	[gomi_y]	y
+2	[gomi_z]	z
+3	[なのー]	 n a n o:
+4	[でんきつけて]	 d e N k i ts u k e t e
+5	[でんきけして]	 d e N k i k e sh i t e
+6	[エアコンつけて]	 e a k o N ts u k e t e
+7	[エアコンけして]	 e a k o N k e sh i t e
+8	[エアコンまっくす]	 e a k o N m a q k u s u
+9	[エアコンおふ]	 e a k o N o f u
+10	[おんがくかけて]	 o N g a k u k a k e t e
+11	[どいつむら]	 d o i ts u m u r a
+12	[えどむら]	 e d o m u r a
