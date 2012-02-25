@@ -1,0 +1,711 @@
+﻿/*
+std::thread とか VS2010で使い方なー
+
+誰か移植して。。。といっても誰も移植してくれない。
+文句があるなら自分で作れとママから教わらなかったかい？
+
+よく、こんなまずい飯はいらないとぶーたれて、文句があるなら食わないでいいと怒られたものだ。
+やっぱ、いいものは自分でつくるしかないね。
+
+まだ、テスト段階のコードがたくさんあるので転んでも泣かないこと!!
+*/
+#include <windows.h>
+#include <process.h>
+#include <functional>
+#include <sstream>
+#include <iostream>
+//#include <chrono> うーん
+
+//----- namespace rti で仕様 ----
+#include <list>
+#include <assert.h>
+//--------------------------------
+
+
+//VSだとけっこう前から実は使える thread_local
+#define thread_local __declspec( thread )
+
+//stdの中にねじこんだる
+namespace std
+{
+
+class thread;
+
+	namespace this_thread
+	{
+		//--独自仕様-------------------------------------------
+		//内部で使う現在のスレッドハンドルw
+		static thread_local thread* _native_handle = NULL;
+		//------------------------------------------------------
+	};
+
+class thread
+{
+public:
+	typedef HANDLE native_handle_type;
+	typedef DWORD id;
+
+//VS2010でうごかぬ
+//	thread(thread&) = delete;
+//	thread(const thread&) = delete;
+//	thread& operator=(const thread&) = delete;
+
+	thread()
+	{
+		this->ThreadHandle = NULL;
+		this->ThreadID = 0;
+		this->_InterruptHandle = NULL;
+	}
+	template<typename _Callable>
+	thread(_Callable& func)
+	{
+		struct _callback
+		{
+			static	unsigned int __stdcall  Start(void* p)
+			{
+				_Callable* f = ((_callback*)p)->func;
+				((_callback*)p)->func = NULL; //これで起動完了とする。
+				(*f)();
+				return 0;
+			}
+			_Callable* func;
+		} call;
+		this->ThreadID = 0;
+		this_thread::_native_handle = this;
+		this->_InterruptHandle = ::CreateEvent(NULL , TRUE , FALSE , NULL);
+
+		call.func = &func;
+		this->ThreadHandle = 
+			(HANDLE)_beginthreadex(NULL , 0 , _callback::Start , (void*)&call ,  0 ,(unsigned int*) &this->ThreadID);
+
+		//スレッドが起動しきるまで待ちます。
+		while(call.func)
+		{
+			::Sleep(0);
+		}
+	}
+	thread& operator=(thread&& t)
+	{
+		if (joinable())
+		{//自分が動いているのをコピーするとエラーる まず止めるべし
+			std::terminate();
+		}
+		swap(t);
+		return *this;
+	}
+
+	virtual ~thread()
+	{
+		if (joinable())
+		{//まだスレッドが生きていたら term するらしい
+			std::terminate();
+		}
+		detach();
+	}
+	void swap(thread& t)
+	{
+		std::swap(this->ThreadID,t.ThreadID);
+		std::swap(this->ThreadHandle,t.ThreadHandle);
+		std::swap(this->_InterruptHandle,t._InterruptHandle);
+	}
+
+	bool joinable()
+	{
+		if (this->ThreadHandle == NULL) return false;
+		return ::WaitForSingleObject( this->ThreadHandle  , 0) == WAIT_TIMEOUT;
+	}
+	void join()
+	{
+		::WaitForSingleObject( this->ThreadHandle  , INFINITE);
+	}
+	void detach()
+	{
+		//何すればいいの？消せばいいのかな。
+		if (this->ThreadHandle)
+		{
+			::_endthreadex( (unsigned int) this->ThreadHandle );
+			this->ThreadHandle = NULL;
+		}
+		if (this->_InterruptHandle)
+		{
+			::CloseHandle(this->_InterruptHandle);
+			this->_InterruptHandle = NULL;
+		}
+	}
+	thread::id get_id()
+	{
+		return this->ThreadID;
+	}
+	native_handle_type native_handle()
+	{
+		return this->ThreadHandle;
+	}
+	static unsigned int hardware_concurrency()
+	{
+		return 0;
+	}
+
+	//--独自規格--------------------------------------------//
+	//C++11の規格にない部分を勝手に作るよw
+	void _interup()
+	{
+		::SetEvent(this->_InterruptHandle);
+	}
+	bool _interrupted() const
+	{
+		return ::WaitForSingleObject( this->_InterruptHandle  , 0) == WAIT_TIMEOUT;
+	}
+
+	void _sleep(int sleepMS) const
+	{
+		::WaitForSingleObject(this->_InterruptHandle ,sleepMS);
+	}
+
+	//-------------------------------------------------------//
+private:
+	native_handle_type			ThreadHandle;
+	id							ThreadID;
+	//--独自規格用
+	//終了用通知系
+	HANDLE						_InterruptHandle;
+	//--
+};
+
+namespace this_thread
+{
+	inline thread::id get_id()
+	{
+		return ::GetCurrentThreadId();
+	}
+	inline void sleep_for( int timeMS ) //そのうち chrone にしたいね
+	{
+		if (_native_handle == NULL)
+		{//メインスレッド
+			::Sleep(timeMS);
+		}
+		else
+		{
+			_native_handle->_sleep(timeMS);
+		}
+	}
+	inline void yield()
+	{
+		::YieldProcessor();
+	}
+	//--独自規格---------------------------------------------------//
+	//アトミックな足し算
+	inline long _atomic_add(long* taget,long add)
+	{
+		return ::InterlockedExchangeAdd(taget, add);
+	}
+	//CAS
+	inline long _compare_and_swap(long* taget,long comperand,long exchange)
+	{
+		return ::InterlockedCompareExchange(taget, exchange , comperand);
+	}
+	//-------------------------------------------------------------//
+};
+
+
+
+//このクラスはロックだ!
+//そして、これを読んでいるキミ達もロックだ!
+//by キユ(w
+class mutex
+{
+public:
+	typedef long* native_handle_type;
+
+	mutex()
+	{
+		this->Lock = 0;
+	}
+	virtual ~mutex()
+	{
+	}
+	void lock()
+	{
+		while ( this_thread::_compare_and_swap(&this->Lock,0,1) == 1 )
+		{
+			this_thread::yield();
+		}
+	}
+
+	bool try_lock()
+	{
+		return this->Lock == 1;
+	}
+
+	void unlock()
+	{
+		this->Lock = 0;
+	}
+
+	native_handle_type native_handle()
+	{
+		return &this->Lock;
+	}
+private:
+	HANDLE eventObject;
+	long Lock;
+};
+
+class recursive_mutex
+{
+public:
+	typedef CRITICAL_SECTION* native_handle_type;
+
+	recursive_mutex()
+	{
+		InitializeCriticalSection(&CriticalSection);
+	}
+	virtual ~recursive_mutex()
+	{
+		DeleteCriticalSection(&CriticalSection);
+	}
+	void lock()
+	{
+		EnterCriticalSection(&CriticalSection);
+	}
+
+	bool try_lock()
+	{
+		//9xはだめぽだけどもう誰も使っていないでしょ。
+		return TryEnterCriticalSection(&CriticalSection) == TRUE;
+	}
+
+	void unlock()
+	{
+		LeaveCriticalSection(&CriticalSection);
+	}
+
+	native_handle_type native_handle()
+	{
+		return &this->CriticalSection;
+	}
+private:
+	CRITICAL_SECTION CriticalSection;
+};
+
+
+template<typename _M>
+class lock_guard
+{
+public:
+	typedef _M mutex_type;
+	lock_guard(_M& mutex)
+	{
+		this->mutex = &mutex;
+		this->mutex->lock();
+	}
+	~lock_guard()
+	{
+		this->mutex->unlock();
+	}
+private:
+	_M* mutex;
+};
+
+//ごめん。 仕様が複雑すぎて把握できない。
+#define unique_lock lock_guard
+
+
+typedef DWORD once_flag;
+template<typename _Callable>
+void call_once(once_flag *flag, _Callable& func)
+{
+	if ( this_thread::_compare_and_swap(flag,0,1) == 0 )
+	{
+		func();
+	}
+}
+
+
+//---独自規格-----------------------------------------------------------
+//リードライトロック
+class _read_write_mutex
+{
+public:
+	_read_write_mutex()
+	{
+		readCount = 0;
+		writeCount = 0;
+	}
+	~_read_write_mutex()
+	{
+	}
+	void read_lock()
+	{
+		while(1)
+		{
+			while(this->writeCount >= 1)
+			{
+				this_thread::yield();
+			}
+			this_thread::_atomic_add(&this->readCount,1);
+			if (this->writeCount >= 1)
+			{//ここで書き込みに割り込まれたら、最初からやり直す
+				this_thread::_atomic_add(&this->readCount,-1);
+				continue;
+			}
+			break;
+		}
+	}
+
+	bool read_try_lock()
+	{
+		return this->writeCount == 0;
+	}
+
+	void read_unlock()
+	{
+		this_thread::_atomic_add(&this->readCount,-1);
+	}
+
+	void write_lock()
+	{
+		//まず書き込みロックを取る
+		while ( this_thread::_compare_and_swap(&this->writeCount,0,1) == 1 )
+		{
+			this_thread::yield();
+		}
+		//既存の読み込みがすべて終わるまでまつ
+		while ( this->readCount >= 1 )
+		{
+			this_thread::yield();
+		}
+		//これでリソースは俺のもの
+	}
+
+	bool write_try_lock()
+	{
+		return this->writeCount == 0;
+	}
+
+	void write_unlock()
+	{
+		this->writeCount = 0;
+	}
+private:
+	long		readCount;
+	long		writeCount;
+};
+
+class _read_lock_guard
+{
+public:
+	typedef _read_write_mutex mutex_type;
+	_read_lock_guard(_read_write_mutex& mutex)
+	{
+		this->mutex = &mutex;
+		this->mutex->read_lock();
+	}
+
+	~_read_lock_guard()
+	{
+		this->mutex->read_unlock();
+	}
+private:
+	mutex_type* mutex;
+};
+
+class _write_lock_guard
+{
+public:
+	typedef _read_write_mutex mutex_type;
+	_write_lock_guard(_read_write_mutex& mutex)
+	{
+		this->mutex = &mutex;
+		this->mutex->write_lock();
+	}
+
+	~_write_lock_guard()
+	{
+		this->mutex->write_unlock();
+	}
+private:
+	mutex_type* mutex;
+};
+
+//--------------------------------------------------------------
+
+}; //namespace std
+
+
+//あんまりstdに独自規格を入れると、市ねといわれそうなので、大きいものはこっちでやるわw
+namespace rti
+{
+//全自動ロック  //こーゆーのはどうよ
+#define auto_lock(A) lock_guard<decltype(A)> _mutex##__LINE__##(A)
+
+//ワーカースレッドの仕事キュー みんなで走って、一人だけがフラグ(仕事)をとれる。
+class task_beach_flags
+{
+	task_beach_flags()
+	{
+	}
+	virtual ~task_beach_flags()
+	{
+		stop();
+	}
+
+	void stop()
+	{
+		std::lock_guard<std::mutex> al(this->mutex);
+		{
+			this->tasklist.clear();
+		}
+	}
+
+	//メッセージを一方的に送り付け、結果を確認しません。
+	template<typename _Callable>
+	void post(_Callable& func)
+	{
+		std::_write_lock_guard(this->mutex);
+		{
+			tasklist.push_back( [](){ func(); } );
+		}
+	}
+
+	//メッセージを送りつけて、処理されるまで待ちます。
+	//run()しているスレッドでやってはいけません。やったら、スレッドが一つだけだと間違いなく死にます。
+	template<typename _Callable>
+	void send(_Callable& func)
+	{
+		bool comp = false;
+		std::_write_lock_guard(this->mutex);
+		{
+			tasklist.push_back( [](){ func(); comp = true; } );
+		}
+		while(!comp)
+		{
+			this_thread::yield();
+		}
+	}
+
+	//スレッドで実行します。
+	//一つ仕事を実行します。
+	bool run_once()
+	{
+		list_type::iterator it;
+		{
+			if ( this->tasklist.empty() )
+			{//仕事がありません
+				return false;
+			}
+
+			//ここからロック
+			std::lock_guard<std::mutex> al(this->mutex);
+			{
+				if ( this->tasklist.empty() )
+				{//もう一度確認してもだめならないんだろう。
+					return false;
+				}
+				//仕事を取得して、仕事を消します。
+				it = this->tasklist.begin();
+				this->tasklist.erase(it);
+			}
+			//ここまでロック
+		}
+		(*it)();
+		return true;
+	}
+
+	//スレッドで実行します。
+	//メッセージがあるか確認します。
+	bool check()
+	{
+		return !this->tasklist.empty();
+	}
+
+	typedef std::list<std::function<void (void)> > list_type;
+private:
+	std::mutex mutex;
+	list_type tasklist;
+};
+
+//スレッドに仕事を依頼する
+class task_invole
+{
+public:
+	task_invole()
+	{
+		this->thread_id = ::std::this_thread::get_id();
+	}
+	virtual ~task_invole()
+	{
+		stop();
+	}
+
+	void stop()
+	{
+		std::lock_guard<std::mutex> al(this->mutex);
+		{
+			this->tasklist.clear();
+		}
+	}
+
+	//メッセージを一方的に送り付け、結果を確認しません。
+	template<typename _Callable>
+	void post(_Callable& func)
+	{
+		std::_write_lock_guard(this->mutex);
+		{
+			tasklist.push_back( [](){ func(); } );
+		}
+
+		//もし、windowを保持していたら、だめなのでメッセージループを稼働させておこします。
+		::PostThreadMessage(this->thread_id , WM_NULL, 0 , 0 );
+	}
+
+	//メッセージを送りつけて、処理されるまで待ちます。
+	template<typename _Callable>
+	void send(_Callable& func)
+	{
+		if (this->thread_id == ::std::this_thread::get_id())
+		{//現在のスレッドでネスとして呼び出していた場合、即実行する。
+			func();
+			return ;
+		}
+
+		bool comp = false;
+		std::_write_lock_guard(this->mutex);
+		{
+			tasklist.push_back( [](){ func(); comp = true; } );
+		}
+
+		//もし、windowを保持していたら、だめなのでメッセージループを稼働させておこします。
+		::PostThreadMessage(this->thread_id , WM_NULL, 0 , 0 );
+
+		while(!comp)
+		{
+			this_thread::yield();
+		}
+	}
+
+	//スレッドで実行します。
+	//一つ仕事を実行します。
+	bool run_once()
+	{
+		//作ったスレッドで動かす必要がある。
+		assert( this->thread_id = ::std::this_thread::get_id() );
+
+		if ( this->tasklist.empty() )
+		{//仕事がありません
+			return false;
+		}
+
+		list_type::iterator it;
+		{
+			//ここからロック
+			std::lock_guard<std::mutex> al(this->mutex);
+			{
+				if ( this->tasklist.empty() )
+				{//もう一度確認してもだめならないんだろう。
+					return false;
+				}
+				//仕事を取得して、仕事を消します。
+				it = this->tasklist.begin();
+				this->tasklist.erase(it);
+			}
+			//ここまでロック
+		}
+		(*it)();
+		return true;
+	}
+
+	//スレッドで実行します。
+	//メッセージがあるか確認します。
+	bool check()
+	{
+		return !this->tasklist.empty();
+	}
+
+	typedef std::list<std::function<void (void)> > list_type;
+private:
+	std::thread::id thread_id;
+	std::mutex mutex;
+	list_type tasklist;
+};
+
+//メインスレッドでなんかやらせたいときに使います。
+namespace main_thread
+{
+	static task_invole main_thread_invoke;
+
+	//メッセージを一方的に送り付け、結果を確認しません。
+	template<typename _Callable>
+	void post(_Callable& func)
+	{
+		main_thread_invoke.post(func);
+	}
+
+	//メッセージを送りつけて、処理されるまで待ちます。
+	template<typename _Callable>
+	void send(_Callable& func)
+	{
+		main_thread_invoke.send(func);
+	}
+
+
+	//メインスレッド自身がどこかで動かします。
+	bool run_once()
+	{
+		return main_thread_invoke.run_once();
+	}
+
+}; //main_thread
+
+};	//rti
+
+/*
+int args = 0;
+bool stopflg = false;
+std::recursive_mutex mutex;
+
+void callerB()
+{
+	rti::auto_lock(mutex);
+	{
+		printf("%d -> callerB\r\n", std::this_thread::get_id() );
+	}
+}
+
+
+void caller()
+{
+	while(!stopflg)
+	{
+		rti::auto_lock(mutex);
+		{
+			args ++;
+			printf("%d -> %d\r\n", std::this_thread::get_id() ,args);
+
+//			Sleep(10000);
+			callerB();
+		}
+	}
+}
+
+int main()
+{
+	const int thread_count = 1;
+	std::thread* threads[thread_count];
+	for(int i = 0 ; i < thread_count ; ++i )
+	{
+		threads[i] = new std::thread(caller);
+	}
+
+	std::string line;
+	getline( std::cin, line );
+
+	stopflg = true;
+	for(int i = 0 ; i < thread_count ; ++i )
+	{
+		threads[i]->join();
+		delete threads[i];
+	}
+
+	return 0;
+}
+*/
