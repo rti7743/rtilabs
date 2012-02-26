@@ -1,5 +1,5 @@
 ﻿/*
-std::thread とか VS2010で使い方なー
+誰か移植して。。。といっても誰も移植してくれない。
 
 まだ、テスト段階のコードがたくさんあるので転んでも泣かないこと!!
 */
@@ -13,6 +13,7 @@ std::thread とか VS2010で使い方なー
 //----- namespace rti で仕様 ----
 #include <list>
 #include <assert.h>
+#include <utility>
 //--------------------------------
 
 
@@ -55,25 +56,33 @@ public:
 	{
 		struct _callback
 		{
+			_callback(thread* _this,_Callable* func)
+			{
+				this->_threadthis = _this;
+				this->func = func;
+				this->bootflg = false;
+			}
 			static	unsigned int __stdcall  Start(void* p)
 			{
-				_Callable* f = ((_callback*)p)->func;
-				((_callback*)p)->func = NULL; //これで起動完了とする。
+				_callback* _this = ((_callback*)p);
+				this_thread::_native_handle = _this->_threadthis;
+				_Callable* f = _this->func;
+				_this->bootflg = true; //これで起動完了とする。
 				(*f)();
 				return 0;
 			}
+			volatile bool bootflg;
 			_Callable* func;
-		} call;
+			thread* _threadthis;
+		} call(this,&func);
 		this->ThreadID = 0;
-		this_thread::_native_handle = this;
 		this->_InterruptHandle = ::CreateEvent(NULL , TRUE , FALSE , NULL);
 
-		call.func = &func;
 		this->ThreadHandle = 
 			(HANDLE)_beginthreadex(NULL , 0 , _callback::Start , (void*)&call ,  0 ,(unsigned int*) &this->ThreadID);
 
 		//スレッドが起動しきるまで待ちます。
-		while(call.func)
+		while( ! call.bootflg )
 		{
 			::Sleep(0);
 		}
@@ -117,7 +126,6 @@ public:
 		//何すればいいの？消せばいいのかな。
 		if (this->ThreadHandle)
 		{
-			::_endthreadex( (unsigned int) this->ThreadHandle );
 			this->ThreadHandle = NULL;
 		}
 		if (this->_InterruptHandle)
@@ -225,10 +233,10 @@ public:
 		}
 	}
 
-	bool try_lock()
-	{
-		return this->Lock == 1;
-	}
+//	bool try_lock()
+//	{
+//		return this->Lock == 1;
+//	}
 
 	void unlock()
 	{
@@ -257,16 +265,26 @@ public:
 	{
 		DeleteCriticalSection(&CriticalSection);
 	}
+	recursive_mutex(recursive_mutex& )
+	{
+		InitializeCriticalSection(&CriticalSection);
+	}
+	recursive_mutex& operator=(recursive_mutex& t)
+	{
+		//nop 禁止にしたほうがいいかな・・・ どうしよう
+		return *this;
+	}
+
 	void lock()
 	{
 		EnterCriticalSection(&CriticalSection);
 	}
 
-	bool try_lock()
-	{
-		//9xはだめぽだけどもう誰も使っていないでしょ。
-		return TryEnterCriticalSection(&CriticalSection) == TRUE;
-	}
+//	bool try_lock()
+//	{
+//		//9xはだめぽだけどもう誰も使っていないでしょ。
+//		return TryEnterCriticalSection(&CriticalSection) == TRUE;
+//	}
 
 	void unlock()
 	{
@@ -346,10 +364,10 @@ public:
 		}
 	}
 
-	bool read_try_lock()
-	{
-		return this->writeCount == 0;
-	}
+//	bool read_try_lock()
+//	{
+//		return this->writeCount == 0;
+//	}
 
 	void read_unlock()
 	{
@@ -371,10 +389,10 @@ public:
 		//これでリソースは俺のもの
 	}
 
-	bool write_try_lock()
-	{
-		return this->writeCount == 0;
-	}
+//	bool write_try_lock()
+//	{
+//		return this->writeCount == 0;
+//	}
 
 	void write_unlock()
 	{
