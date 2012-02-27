@@ -38,6 +38,15 @@ int main()
 		//		正規表現  (aaa|bbb)
 		//                 ? や * . などは今は使えません。
 		//
+		julius.AddCommandRegexp("でんたく(きどう|じっこう)",CallbackDataStruct([=](){
+			//電卓を起動するコマンドをココに書く
+			std::cout << "###RUN>電卓起動するよ!!" << std::endl;
+#ifdef _WINDOWS_
+			ShellExecute(NULL,NULL,"calc.exe",NULL,NULL,0);
+#else
+			system("xcalc >/dev/null 2>&1 &");
+#endif
+		}));
 		julius.AddCommandRegexp("エアコン(つけて|オン)",CallbackDataStruct([=](){
 			//エアコンをつける処理をここに書きます。
 			std::cout << "###RUN>エアコンつけるよ!!" << std::endl;
@@ -64,15 +73,6 @@ int main()
 		julius.AddCommandRegexp("おんがくかけて",CallbackDataStruct([=](){
 			//音楽をかける処理をここに書きます。
 			std::cout << "###RUN>おんがくかけるよ" << std::endl;
-		}));
-		julius.AddCommandRegexp("でんたくきどう",CallbackDataStruct([=](){
-			//電卓を起動するコマンドをココに書く
-			std::cout << "###RUN>電卓起動するよ!!" << std::endl;
-#ifdef _WINDOWS_
-			system("calc.exe");
-#else
-			system("xcalc");
-#endif
 		}));
 		julius.AddCommandRegexp("どいつむら",CallbackDataStruct([=](){
 			//日本で一番有名なテーマパークに関する処理をここに書きます。

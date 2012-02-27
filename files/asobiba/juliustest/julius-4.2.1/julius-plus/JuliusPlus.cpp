@@ -392,6 +392,9 @@ int JuliusPlus::countHypothesisPenalty(const Recog *recog) const
 		{
 			continue;
 		}
+		//同一文章かどうかチェックする
+		std::list<int> checkDict;
+
 		auto winfo = r->lm->winfo;
 		for(auto n = 0; n < r->result.sentnum; n++) 
 		{ // for all sentences
@@ -402,23 +405,52 @@ int JuliusPlus::countHypothesisPenalty(const Recog *recog) const
 			//開始が取れないものはごみ
 			if ( strcmp(winfo->woutput[seq[0]]  , "<s>") != 0 )
 			{
-				gomiCount +=1;
+				gomiCount +=1.0f;
 				continue;
 			}
 			if (seqnum <= 2)
 			{//start word end 
-				gomiCount +=1;
+				gomiCount +=1.0f;
 				continue;
 			}
+			//ゴミ文章ならペナルティ
 			if ( strcmp(winfo->woutput[seq[0]]  , "gomi") == 0 )
 			{
-				gomiCount +=1;
+				gomiCount +=1.0f;
 				continue;
 			}
-			gomiCount += 0.5;
+			//ふつーのコマンドは スタート符号 呼びかけ コマンド スタート符号終わり の4以上になるよ。
+			//コマンドに エアコン(つけて|けして) のように、正規表現が入ると コマンド1 コマンド2 と分割される。
+			int dict;
+			if ( seqnum >= 4  )
+			{
+				//同一文章ならペナルティは少なくする  エアコン(つけて|けして) など同一文章
+				dict = atoi(winfo->wname[seq[2]]);
+			}
+			else
+			{
+				//デモでは使わないがテンポラリルールの場合には、呼びかけが無いのでその分短くなる。
+				dict = atoi(winfo->wname[seq[1]]);
+			}
+			if (dict <= 3)
+			{//ゴミルール
+				gomiCount +=1.0f;
+				continue;
+			}
+
+			//すでに登場したノードかどうかしらべる
+			if (std::find(checkDict.begin(),checkDict.end() , dict) != checkDict.end()	)
+			{
+				gomiCount += 0.2f;
+				continue;
+			}
+
+			//新規の文章なら多少のペナルティ
+			gomiCount += 0.5f;
+			checkDict.push_back(dict);
 		}
 	}
-	return (int)(gomiCount + 1.5);
+	return (int)(gomiCount + 1.5f);
 }
 
 //読みを取得する
@@ -1279,6 +1311,8 @@ xreturn::r<bool> JuliusPlus::JuliusFileStart()
 	{
 		return xreturn::error("Error in startup(j_create_instance_from_jconf)\n");
 	}
+
+
 	struct _ref{
 		static void output_result(Recog *recog, void *_this)
 		{
