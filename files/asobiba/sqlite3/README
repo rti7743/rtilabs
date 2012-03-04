@@ -1,0 +1,36 @@
+sqlite3 の  bigramを実装してみるテスト
+
+
+sqlite3 は、なぜか bigramのindexをサポートしていないので、対応させてみた。
+
+日本語indexを ユーザサイドで bigramで作る必要はなくなった。
+
+ただし、ひらがな カタカナ変換などの正規化は、このバージョンでは実装していないので、
+結局は、本データと、サーチ用の正規化データの2つをもつことになるだろう。
+あんまり嬉しくない？
+
+仮に、ひらがなカタカナ変換をやったとしても、漢字のよみや表記の揺れなど課題は多い。
+
+"CREATE VIRTUAL TABLE media  USING FTS3  ( "
+"               id           INTEGER PRIMARY KEY"
+"              ,search       TEXT    NOT NULL"
+"              ,TOKENIZE     bigram 'sjis'"  //sjisで作ります。 うごいたよ
+"             )";
+
+"CREATE VIRTUAL TABLE media  USING FTS3  ( "
+"               id           INTEGER PRIMARY KEY"
+"              ,search       TEXT    NOT NULL"
+"              ,TOKENIZE     bigram 'utf8'"  //utf8で作ります。 作ったけどテストしてないw
+"             )";
+
+"CREATE VIRTUAL TABLE media  USING FTS3  ( "
+"               id           INTEGER PRIMARY KEY"
+"              ,search       TEXT    NOT NULL"
+"              ,TOKENIZE     bigram 'utf16'"  //utf16で作ります。 作ったけどテストしてないw
+"             )";
+
+"CREATE VIRTUAL TABLE media  USING FTS3  ( "
+"               id           INTEGER PRIMARY KEY"
+"              ,search       TEXT    NOT NULL"
+"              ,TOKENIZE     bigram "  //ディフォルトは utf8 あれ、テストしていないんじゃないの・・・
+"             )";
