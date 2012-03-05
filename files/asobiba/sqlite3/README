@@ -20,7 +20,7 @@ sqlite3 は、なぜか bigramのindexをサポートしていないので、対
 "CREATE VIRTUAL TABLE media  USING FTS3  ( "
 "               id           INTEGER PRIMARY KEY"
 "              ,search       TEXT    NOT NULL"
-"              ,TOKENIZE     bigram 'utf8'"  //utf8で作ります。 作ったけどテストしてないw
+"              ,TOKENIZE     bigram 'utf8'"  //utf8で作ります。 うごいたよ
 "             )";
 
 "CREATE VIRTUAL TABLE media  USING FTS3  ( "
@@ -32,5 +32,5 @@ sqlite3 は、なぜか bigramのindexをサポートしていないので、対
 "CREATE VIRTUAL TABLE media  USING FTS3  ( "
 "               id           INTEGER PRIMARY KEY"
 "              ,search       TEXT    NOT NULL"
-"              ,TOKENIZE     bigram "  //ディフォルトは utf8 あれ、テストしていないんじゃないの・・・
+"              ,TOKENIZE     bigram "  //ディフォルトは utf8 
 "             )";
