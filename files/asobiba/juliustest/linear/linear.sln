@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "linear", "linear\linear.vcxproj", "{F5A4441D-F571-4927-B121-397D642A5A80}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "julius", "julius\julius.vcxproj", "{56DB4E5D-BA0A-4DB1-AADC-45DFC5660202}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5A4441D-F571-4927-B121-397D642A5A80}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F5A4441D-F571-4927-B121-397D642A5A80}.Debug|Win32.Build.0 = Debug|Win32
+		{F5A4441D-F571-4927-B121-397D642A5A80}.Release|Win32.ActiveCfg = Release|Win32
+		{F5A4441D-F571-4927-B121-397D642A5A80}.Release|Win32.Build.0 = Release|Win32
+		{56DB4E5D-BA0A-4DB1-AADC-45DFC5660202}.Debug|Win32.ActiveCfg = Debug|Win32
+		{56DB4E5D-BA0A-4DB1-AADC-45DFC5660202}.Debug|Win32.Build.0 = Debug|Win32
+		{56DB4E5D-BA0A-4DB1-AADC-45DFC5660202}.Release|Win32.ActiveCfg = Release|Win32
+		{56DB4E5D-BA0A-4DB1-AADC-45DFC5660202}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
