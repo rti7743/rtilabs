@@ -257,6 +257,22 @@ void g_output_result(Recog *recog, void *dummy)
 			auto plus_sentence_score = computePlusScore(cmscore,s->score,hypothesisPenalty,mseclen);
 			//素性6 plusスコア
 			*g_TrainFile << " 6:" << plus_sentence_score;
+
+			//素性7 サンプル数？
+			*g_TrainFile << " 7:" << r->lm->am->mfcc->param->header.samplenum;
+			//素性8 なにこれ
+//			*g_TrainFile << " 8:" << r->lm->am->mfcc->param->header.wshift;
+			//素性9 なにこれ
+//			*g_TrainFile << " 9:" << r->lm->am->mfcc->param->veclen;
+			//素性10～ これがきめてになった。
+			int feature = 10;
+			for(int vecI = 0 ; vecI < r->lm->am->mfcc->param->header.samplenum ;vecI++ )
+			{
+				for(int vecN = 0 ; vecN < r->lm->am->mfcc->param->veclen ;vecN++ )
+				{
+					*g_TrainFile << " " << feature++ << ":" << r->lm->am->mfcc->param->parvec[vecI][vecN];
+				}
+			}
 			*g_TrainFile << std::endl;
 
 			return ;
@@ -766,9 +782,9 @@ int main()
 	//テストする
 	int all,match;
 	liblinear.DebugPredict("train.txt" , "log_train.txt" , &all,&match);
-	printf("学習したデータを再テスト: Accuracy = %lf%% (%d/%d)   詳細はlog_train.txt\r\n" , ((double)match) * 100 / all  , match , all);
+	printf("学習したデータを再テスト: Accuracy = %.3lf%% (%d/%d)   詳細はlog_train.txt\r\n" , ((double)match) * 100 / all  , match , all);
 	liblinear.DebugPredict("test.txt" , "log_test.txt" , &all,&match);
-	printf("未知のデータでのテスト  : Accuracy = %lf%% (%d/%d)   詳細はlog_test.txt \r\n" , ((double)match) * 100 / all  , match , all);
+	printf("未知のデータでのテスト  : Accuracy = %.3lf%% (%d/%d)   詳細はlog_test.txt \r\n" , ((double)match) * 100 / all  , match , all);
 
 
 	//学習モデルを保存する
