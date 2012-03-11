@@ -11,9 +11,9 @@ julius「マナの本当の力を思い知れ!!」
 int main()
 {
 	//i-remoconのIPアドレス
-	const std::string iremocnoIP = "192.168.10.2";
+	const std::string iremoconIP = "192.168.10.2";
 	//i-remoconのport番号
-	const std::string iremocnoPort = "51013";
+	const std::string iremoconPort = "51013";
 	//i-remoconに送信するコマンド
 	const std::string aircon_on  = "*is;18\r\n"; //エアコンを付けるコマンド
 	const std::string aircon_off = "*is;14\r\n"; //エアコンを消すコマンド
@@ -52,7 +52,7 @@ int main()
 			std::cout << "###RUN>エアコンつけるよ!!" << std::endl;
 
 			//example
-			ActionImplement::Telnet(iremocnoIP,iremocnoPort,"",aircon_on,"");
+			ActionImplement::Telnet(iremoconIP,iremoconPort,"",aircon_on,"");
 
 		}));
 		julius.AddCommandRegexp("エアコン(けして|オフ)",CallbackDataStruct([=](){
@@ -60,7 +60,7 @@ int main()
 			std::cout << "###RUN>エアコン消すよ!!" << std::endl;
 
 			//example
-			ActionImplement::Telnet(iremocnoIP,iremocnoPort,"",aircon_off,"");
+			ActionImplement::Telnet(iremoconIP,iremoconPort,"",aircon_off,"");
 		}));
 		julius.AddCommandRegexp("でんき(つけて|オン)",CallbackDataStruct([=](){
 			//電気をつける処理をここに書きます。

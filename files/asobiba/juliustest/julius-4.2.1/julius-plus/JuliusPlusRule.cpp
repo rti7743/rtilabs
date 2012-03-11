@@ -130,6 +130,11 @@ std::string JuliusPlusRule::convertYomi(const std::string& word)
 	boost::algorithm::replace_all(w , "ユ","ゆ");
 	boost::algorithm::replace_all(w , "ヨ","よ");
 	boost::algorithm::replace_all(w , "ヲ","を");
+	boost::algorithm::replace_all(w , "ラ","ら");
+	boost::algorithm::replace_all(w , "リ","り");
+	boost::algorithm::replace_all(w , "ル","る");
+	boost::algorithm::replace_all(w , "レ","れ");
+	boost::algorithm::replace_all(w , "ロ","ろ");
 	boost::algorithm::replace_all(w , "ン","ん");
 	boost::algorithm::replace_all(w , "ヴ","う゛");
 	boost::algorithm::replace_all(w , "ァ","ぁ");
@@ -148,10 +153,10 @@ std::string JuliusPlusRule::convertYomi(const std::string& word)
 	boost::algorithm::replace_all(w , "ゼ","ぜ");
 	boost::algorithm::replace_all(w , "ゾ","ぞ");
 	boost::algorithm::replace_all(w , "ダ","だ");
-	boost::algorithm::replace_all(w , "ジ","じ");
-	boost::algorithm::replace_all(w , "ズ","ず");
-	boost::algorithm::replace_all(w , "ゼ","ぜ");
-	boost::algorithm::replace_all(w , "ゾ","ぞ");
+	boost::algorithm::replace_all(w , "ヂ","ぢ");
+	boost::algorithm::replace_all(w , "ヅ","づ");
+	boost::algorithm::replace_all(w , "デ","で");
+	boost::algorithm::replace_all(w , "ド","ど");
 	boost::algorithm::replace_all(w , "バ","ば");
 	boost::algorithm::replace_all(w , "ビ","び");
 	boost::algorithm::replace_all(w , "ブ","ぶ");
