@@ -115,6 +115,7 @@ std::string XLStringUtil::mb_convert_kana(const std::string &inTarget,const std:
 		,"－","-"
 		,"÷","/"
 		,"＊","*"
+		,"～","~" //UTF-8だと別の～もあるから判断が難しい・・・
 		,NULL,NULL
 	};
 //r	 「全角」英字を「半角」に変換します。
