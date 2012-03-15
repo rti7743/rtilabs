@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <string>
 #include <list>
+#include <map>
 #include <vector>
 #include <algorithm>
 #include <assert.h>
@@ -260,12 +261,9 @@ void g_output_result(Recog *recog, void *dummy)
 
 			//素性7 サンプル数？
 			*g_TrainFile << " 7:" << r->lm->am->mfcc->param->header.samplenum;
-			//素性8 なにこれ
-//			*g_TrainFile << " 8:" << r->lm->am->mfcc->param->header.wshift;
-			//素性9 なにこれ
-//			*g_TrainFile << " 9:" << r->lm->am->mfcc->param->veclen;
-			//素性10～ これがきめてになった。
-			int feature = 10;
+
+			//素性8～ これがきめてになった。
+			int feature = 8;
 			for(int vecI = 0 ; vecI < r->lm->am->mfcc->param->header.samplenum ;vecI++ )
 			{
 				for(int vecN = 0 ; vecN < r->lm->am->mfcc->param->veclen ;vecN++ )
@@ -273,6 +271,7 @@ void g_output_result(Recog *recog, void *dummy)
 					*g_TrainFile << " " << feature++ << ":" << r->lm->am->mfcc->param->parvec[vecI][vecN];
 				}
 			}
+
 			*g_TrainFile << std::endl;
 
 			return ;
@@ -660,6 +659,28 @@ public:
 		}
 	}
 	//学習したモデルからクラス番号を取得します。
+	int Predict(const std::map<int,double>& params)
+	{
+		if (params.empty())
+		{
+			return 0;
+		}
+
+		std::vector<feature_node> nodes;
+		nodes.resize(params.size() + 1 );
+
+		feature_node * p = &nodes[0];
+		for(std::map<int,double>::const_iterator it = params.begin() ; it != params.end() ; ++it , ++p)
+		{
+			p->index = it->first;
+			p->value = it->second;
+		}
+		p->index = -1;
+		p->value = 0;
+
+		return func_predict(this->Model , &nodes[0]);
+	}
+	//学習したモデルからクラス番号を取得します。
 	int Predict(const feature_node* params)
 	{
 		return func_predict(this->Model , params);
@@ -788,7 +809,7 @@ int main()
 
 
 	//学習モデルを保存する
-	liblinear.SaveModel("train.dat");
+	liblinear.SaveModel("__svm_model.dat");
 #ifdef _MSC_VER
 	printf("エンターキーで終了します。");
 	//キー入力待ち
