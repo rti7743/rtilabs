@@ -117,3 +117,55 @@ test_ok_wav
 	学習したモデルのテスト用に利用します。
 
 
+=========================================================
+julius-4.2.1 with svm
+=========================================================
+julius-4.2.1 に SVMによる判別ルーチンを組み込んだものです。
+開発はwindowsでやってます。
+
+
+
+windows
+VS2010 で julius-4.2.1\msvc\julius-plus.sln を開いてください。
+
+
+
+linux
+sudo apt-get install flex g++ 'libboost*-dev' libboost-thread-dev binutils-dev  libboost-system-dev libasound2-dev
+
+./configure --with-mictype=alsa
+make
+
+cd julius-plus
+make
+
+./julius-plus
+
+
+
+学習について
+今までスコアによるフィルタリングをしていましたが、それをやめて、SVMによる判別にしました。
+
+コンピュータという「呼びかけ」が検出されれば、それは正しい命令であると判別します。
+その呼びかけの判別に、SVMモデルを用いました。
+
+学習済みモデル __svm_model.dat を使います。
+今は、私の声で110個ぐらいのサンプルから学習させています。
+今回素性には、r->lm->am->mfcc->param->parvec のデータを入れています。
+もしかしたら、他の人の声だと上手く動かないかもしれません。
+そこは、ちょっと試してみてくださいww
+
+
+自分で学習モデルを作りたい人
+linearをダウンロードして使ってください。
+https://github.com/rti7743/rtilabs/tree/master/files/asobiba/juliustest/linear
+
+linearを動かすと、__svm_model.dat がカレントディレクトリに出来ますから、それをコピります。
+
+
+windowsの人
+julius-4.2.1_with_svm\msvc\julius-plus\__svm_model.dat としてコピってください。
+
+
+linuxの人
+julius-4.2.1_with_svm/julius-plus/__svm_model.dat としてコピってください。

@@ -1,0 +1,24 @@
+﻿This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:551: checking host system type
+configure:572: checking host-specific optimization flag
+configure:587: checking for gcc
+configure:700: checking whether the C compiler (gcc  ) works
+configure:716: gcc -o conftest    conftest.c  1>&5
+configure:742: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:747: checking whether we are using GNU C
+configure:775: checking whether gcc accepts -g
+configure:807: checking how to run the C preprocessor
+configure:898: checking for a BSD compatible install
+configure:951: checking for Cygwin environment
+configure:984: checking for mingw32 environment
+configure:1015: checking for executable suffix
+configure:1047: checking host specific optimization flag
+configure:1063: checking for rm
+configure:1098: checking for perl
+configure:1135: checking for yywrap in -lfl
+configure:1185: checking for iconv
+configure:1221: checking for Jcode module in perl
+configure:1232: checking for readline/readline.h
+configure:1394: checking for malloc.h
