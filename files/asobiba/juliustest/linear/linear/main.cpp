@@ -410,7 +410,7 @@ public:
 		}
 
 		std::vector<char> buffer;
-		buffer.resize(65535);
+		buffer.resize(125535);
 		while (! feof(fp) )
 		{
 			char * p = &buffer[0];
@@ -490,7 +490,7 @@ public:
 		int match = 0;
 
 		std::vector<char> buffer;
-		buffer.resize(65535);
+		buffer.resize(125535);
 		while (! feof(fp) )
 		{
 			char * p = &buffer[0];
@@ -695,8 +695,7 @@ public:
 	{
 		if (this->Model)
 		{
-			func_free_model_content(this->Model);
-//			free_model_content(this->Model);
+			func_free_and_destroy_model(&this->Model);
 			this->Model = NULL;
 		}
 	}
