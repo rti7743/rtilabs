@@ -21,10 +21,10 @@ function add(x,y) {
 //階乗
 function factorial_while(n) {
     //whileで階乗してみる
-    sum = 0
+    sum = 1
     i = 1
     while(i <= n){
-       sum = sum + i
+       sum = sum * i
        i = i + 1
     }
     return sum
@@ -34,9 +34,9 @@ function factorial_while(n) {
 function factorial_for(n) {
     //forで階乗してみる
     //すまないが、 lua のforを 完全にc-likeにしきれていないんだ
-    sum = 0
+    sum = 1
     for (i = 1 , n , 1 ) { //or for (i = 1 , n ) {
-       sum = sum + i;
+       sum = sum * i;
     }
     return sum
 }

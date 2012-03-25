@@ -6,10 +6,10 @@ function add(x,y) {
 //ŠKæ
 function factorial_while(n) {
     //while‚ÅŠKæ‚µ‚Ä‚İ‚é
-    sum = 0
+    sum = 1
     i = 1
     while(i <= n){
-       sum = sum + i
+       sum = sum * i
        i = i + 1
     }
     return sum
@@ -19,9 +19,9 @@ function factorial_while(n) {
 function factorial_for(n) {
     //for‚ÅŠKæ‚µ‚Ä‚İ‚é
     //‚·‚Ü‚È‚¢‚ªA lua ‚Ìfor‚ğ Š®‘S‚Éc-like‚É‚µ‚«‚ê‚Ä‚¢‚È‚¢‚ñ‚¾
-    sum = 0
+    sum = 1
     for (i = 1 , n , 1 ) { //or for (i = 1 , n ) {
-       sum = sum + i;
+       sum = sum * i;
     }
     return sum
 }
