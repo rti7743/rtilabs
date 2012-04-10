@@ -177,15 +177,6 @@ void g_output_result(Recog *recog, void *dummy)
 	//仮説の数によるペナルティ
 	const int hypothesisPenalty = countHypothesisPenalty(recog);
 
-	//1:成功 2:失敗 
-	if (g_OKorBAD)
-	{
-		*g_TrainFile << "1";
-	}
-	else
-	{
-		*g_TrainFile << "2";
-	}
 	for(const RecogProcess* r = recog->process_list; r ; r=r->next) 
 	{
 		//ゴミを消します。
@@ -223,6 +214,17 @@ void g_output_result(Recog *recog, void *dummy)
 			{
 				continue;
 			}
+
+			//1:成功 2:失敗 
+			if (g_OKorBAD)
+			{
+				*g_TrainFile << "1";
+			}
+			else
+			{
+				*g_TrainFile << "2";
+			}
+
 			//dict から plus側のrule を求める
 			int dict = atoi(winfo->wname[i_seq]);
 
@@ -350,6 +352,11 @@ bool ScanDir(const std::string & dir)
 		{
 			continue;
 		}
+
+		//どれがどのファイル化わからなくなるので、ファイル名をコメントで入れる。
+		*g_TrainFile << "# " << filename << std::endl;
+
+		//juliusスタート
 		bool r = JuliusReco(filename);
 		if (!r)
 		{
@@ -495,7 +502,11 @@ public:
 		{
 			char * p = &buffer[0];
 			fgets(p,buffer.size(), fp);
-			if (*p == '#' || *p == '\n' || *p == '\0') continue; //コメントとか
+			if (*p == '#' || *p == '\n' || *p == '\0')
+			{//コメントはそのまま出力する.
+				fprintf(logfp,"%s" , p);
+				continue;
+			}
 
 			char * startN = p;
 
